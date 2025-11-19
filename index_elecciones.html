@@ -553,18 +553,23 @@
                     <img src="https://edwinhsvcl14-maker.github.io/asistencias/logo_hermandad.png" alt="Logo de la Hermandad">
                 </div>
                 <div class="header-texto">
-                    <h1>COMITÉ ELECTORAL</h1>
+                    <h1>DECIMO CUARTA CUADRILLA HSVCL</h1>
                     <h2>Elecciones Generales Trienio 2026-2028: Proceso en Curso</h2>
                 </div>
                 <div class="logo-header">
-                    <img src="https://edwinhsvcl14-maker.github.io/asistencias/logo_hermandad.png" alt="Logo de la Hermandad">
+                    <img src="https://14CuadrillaHSVCL.github.io/Proceso/14c.png" alt="Logo de la Hermandad">
                 </div>
             </div>
         </div>
 
         <div class="seccion">
-            <h3>Bienvenida y Llamado a la Participación</h3>
-            <p>El Comité Electoral General 2026-2028 se complacen en dar la más cordial bienvenida a nuestros hermanos y hermanas al <strong>Proceso de Elecciones Generales</strong>. Este ejercicio de transparencia y participación es fundamental para asegurar una gestión comprometida con nuestra Institucion y por el servicio a nuestra Santísima Virgen del Carmen de Lima. Exhortamos a todos los nuestros hermanos a informarse, participar activamente y ejercer su derecho al voto con discernimiento.</p>
+            <h3>Llamado a la Participación</h3>
+            <p>La Décimo Cuarta Cuadrilla HSVCL damos a conocer a nuestros hermanos sobre el 
+<strong>Proceso de Elecciones Generales</strong>. 
+Este ejercicio de transparencia y participación es fundamental para asegurar una gestión 
+comprometida con nuestra Institucion y por el servicio a nuestra Santísima Virgen del Carmen de Lima. 
+Exhortamos a todos nuestros hermanos a informarse, participar activamente y ejercer su derecho al voto 
+con discernimiento.</p>
         </div>
         
         <div class="seccion">
@@ -658,11 +663,11 @@
             </div>
         </div>
         <div class="btn-container">
-            <a href="https://comiteelectoral.github.io/Proceso/Elecciones_Candidatos.html" class="btn-main">Ver Listas, Planes de Trabajo y Perfiles</a>
+            <a href="https://comiteelectoral.github.io/Proceso/Elecciones_Candidatos.html" class="btn-main">Ver Listas y Planes de Trabajo</a>
         </div>
 
         <div class="pie-pagina">
-            <p style="font-size: 0.85em; color: var(--color-acento-oscuro);">Comité Electoral General Trienio 2026-2028 |</p>
+            <p style="font-size: 0.85em; color: var(--color-acento-oscuro);">Decimo Cuarta Cuadrilla HSVCL - Proceso Electoral General Trienio 2026-2028 |</p>
         </div>
     </div>
 
@@ -673,16 +678,22 @@
     
     // La fecha actual para testing es: Lunes, 10 de noviembre de 2025
     // ¡Ojo! He actualizado la fecha de prueba a la fecha de hoy para una mejor visualización.
-    const TODAY = new Date('November 10, 2025 16:27:44'); 
+     // ==========================================================
+    // Lógica para la Barra de Progreso del Cronograma (CORREGIDA)
+    // ==========================================================
     
-    // Fechas de inicio/fin de cada hito
+    // La fecha actual para testing es: Miércoles, 19 de noviembre de 2025 6:24 PM
+    // (Usando la hora actual de tu ubicación)
+    const TODAY = new Date('November 19, 2025 18:24:20');
+    
+    // Fechas de inicio/fin de cada hito (SIN CAMBIOS)
     const milestones = [
-        { start: new Date('October 23, 2025 00:00:00'), end: new Date('October 27, 2025 23:59:59') }, // 0: Inscripción (COMPLETADO)
-        { start: new Date('October 29, 2025 00:00:00'), end: new Date('November 3, 2025 23:59:59') }, // 1: Revisión (COMPLETADO)
-        { start: new Date('November 5, 2025 00:00:00'), end: new Date('November 10, 2025 23:59:59') }, // 2: Tachas (ACTIVO - Termina hoy)
-        { start: new Date('November 12, 2025 00:00:00'), end: new Date('November 17, 2025 23:59:59') },// 3: Subsanación (PENDIENTE)
-        { start: new Date('November 18, 2025 00:00:00'), end: new Date('November 19, 2025 23:59:59') },// 4: Confirmación (PENDIENTE)
-        { start: new Date('November 23, 2025 00:00:00'), end: new Date('November 23, 2025 23:59:59') }  // 5: Elección (PENDIENTE)
+        { name: "Inscripción", start: new Date('October 23, 2025 00:00:00'), end: new Date('October 27, 2025 23:59:59') }, 
+        { name: "Revisión", start: new Date('October 29, 2025 00:00:00'), end: new Date('November 3, 2025 23:59:59') }, 
+        { name: "Tachas", start: new Date('November 5, 2025 00:00:00'), end: new Date('November 10, 2025 23:59:59') }, 
+        { name: "Subsanación", start: new Date('November 12, 2025 00:00:00'), end: new Date('November 17, 2025 23:59:59') },
+        { name: "Confirmación", start: new Date('November 18, 2025 00:00:00'), end: new Date('November 19, 2025 23:59:59') },
+        { name: "Elección", start: new Date('November 23, 2025 00:00:00'), end: new Date('November 23, 2025 23:59:59') } 
     ];
 
     const PROGRESS_BAR = document.getElementById('timelineProgress');
@@ -697,69 +708,73 @@
             const milestone = milestones[i];
             item.classList.remove('completed', 'active');
             
+            // Si la fecha actual es posterior al fin de la etapa
             if (TODAY > milestone.end) {
-                // Etapa Completada
                 item.classList.add('completed');
+            // Si la fecha actual está dentro del rango de la etapa
             } else if (TODAY >= milestone.start && TODAY <= milestone.end) {
-                // Etapa Activa (ESTO ENCIENDE EL PULSO)
                 item.classList.add('active');
                 activeIndex = i;
-            } 
+            } else {
+                // Etapa Pendiente (no se agrega ninguna clase especial)
+            }
         });
         
         // 2. Calcular y actualizar el progreso de la barra
         let totalProgress = 0;
-        const segmentShare = 100 / totalItems; 
-        
+        const segmentShare = 100 / (totalItems - 1); // El progreso se calcula entre los espacios (totalItems - 1)
+
+        // Contar etapas completadas ANTES del hito activo/actual
+        let completedCount = 0;
+        milestones.forEach(m => { 
+            if (TODAY > m.end) completedCount++; 
+        });
+
+        // El progreso base es el total de segmentos completados
+        totalProgress = completedCount * segmentShare;
+
         if (activeIndex !== -1) {
             // Caso: Hay una etapa activa
             const activeMilestone = milestones[activeIndex];
             
-            // Calculamos el punto central del hito activo (donde debería detenerse la barra)
-            let progressToActivePoint = (activeIndex * segmentShare) + (segmentShare / 2);
-
-            // Calculamos el progreso temporal dentro de la etapa activa (0 a 1)
+            // Calcular el progreso dentro de la duración de la etapa activa (0 a 1)
             const totalDuration = activeMilestone.end.getTime() - activeMilestone.start.getTime();
             const elapsedDuration = TODAY.getTime() - activeMilestone.start.getTime();
+            
+            // Aseguramos que el progreso esté entre 0 y 1
             let currentSegmentProgress = Math.min(1, Math.max(0, elapsedDuration / totalDuration));
             
-            // La barra avanza si ya estamos en la etapa activa
-            if(currentSegmentProgress > 0) {
-                 totalProgress = progressToActivePoint;
-            } else {
-                 // Si la etapa no ha iniciado (currentSegmentProgress=0), el progreso es solo de las completadas
-                 totalProgress = activeIndex * segmentShare;
-            }
+            // El progreso total ahora incluye el porcentaje de avance dentro del segmento activo
+            totalProgress = (activeIndex * segmentShare) + (currentSegmentProgress * segmentShare);
         
-        } else {
-            // Caso: No hay hito activo (ej. si ya terminó la elección)
-            let completedCount = 0;
-            milestones.forEach(m => { if (TODAY > m.end) completedCount++; });
-            totalProgress = completedCount * segmentShare;
-
-            // Si todos están completados, va al 100%
-            if (completedCount === totalItems) {
-                totalProgress = 100;
-            }
+        } else if (TODAY > milestones[totalItems - 1].end) {
+            // Caso: Todas las etapas han terminado (incluida la última)
+            totalProgress = 100;
         }
 
         // 3. Aplicar progreso a la barra
-        const progressValue = Math.min(100, totalProgress); 
+        const progressValue = Math.min(100, totalProgress);
         
-        if (window.innerWidth <= 768) {
-            // Móvil (Vertical)
-            const timelineElement = document.querySelector('.timeline');
-            // Nota: Se debe calcular la altura del contenedor principal de la línea para evitar errores.
-            if(timelineElement) {
-                const totalVerticalHeight = timelineElement.offsetHeight;
-                const progressHeight = (progressValue / 100) * totalVerticalHeight;
-                PROGRESS_BAR.style.height = `${progressHeight}px`; 
+        if (PROGRESS_BAR) {
+             if (window.innerWidth <= 768) {
+                // Móvil (Vertical)
+                const timelineElement = document.querySelector('.timeline');
+                if(timelineElement) {
+                    // Calculamos la altura total de la línea (o el contenedor)
+                    const totalVerticalHeight = timelineElement.offsetHeight;
+                    const progressHeight = (progressValue / 100) * totalVerticalHeight;
+                    PROGRESS_BAR.style.height = `${progressHeight}px`; 
+                }
+            } else {
+                // Escritorio (Horizontal)
+                PROGRESS_BAR.style.width = `${progressValue}%`; 
             }
-        } else {
-            // Escritorio (Horizontal)
-            PROGRESS_BAR.style.width = `${progressValue}%`; 
         }
     }
+    
+    // Llamar a la función una vez al inicio y luego cada segundo (si es necesario)
+    updateTimeline(); 
+    // setInterval(updateTimeline, 1000); // Descomenta si quieres que la barra se actualice en tiempo real
 
     // ==========================================================
     // NUEVA LÓGICA: Control de Preloader y Carga del Contenido
