@@ -20,7 +20,6 @@
             --sombra-sutil: 0 4px 6px rgba(0, 0, 0, 0.1);
             --sombra-profunda: 0 12px 24px rgba(0, 0, 0, 0.2);
             --color-hover-fondo: rgba(160, 82, 45, 0.08); /* Fondo suave para hover */
-            --color-btn-plan: #708090; /* Slate Gray para los botones de plan */
         }
 
         body {
@@ -33,55 +32,7 @@
         }
 
         /* ---------------------------------------------------------- */
-        /* ESTILOS DE CARGA (PRELOADER) */
-        /* ---------------------------------------------------------- */
-        #preloader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: var(--color-principal);
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            opacity: 1;
-            visibility: visible;
-            transition: opacity 3s ease-out, visibility 3s ease-out;
-        }
-
-        #preloader.hidden {
-            opacity: 0;
-            visibility: hidden;
-        }
-
-        .loader {
-            width: 120px;
-            height: 120px;
-            border: 10px solid var(--color-secundario);
-            border-top: 10px solid var(--color-acento);
-            border-radius: 50%;
-            animation: spin 1.2s linear infinite;
-            margin-bottom: 20px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15), 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        
-        .loader-text {
-            color: var(--color-acento);
-            font-size: 1.2em;
-            font-weight: 600;
-            letter-spacing: 1px;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        /* ---------------------------------------------------------- */
-        /* ESTILOS DE CONTENEDOR PRINCIPAL */
+        /* ESTILOS DE CONTENEDOR PRINCIPAL (Visibilidad Inmediata) */
         /* ---------------------------------------------------------- */
         .contenedor {
             width: 95%;
@@ -91,12 +42,7 @@
             box-shadow: var(--sombra-profunda);
             border-radius: 15px;
             padding: 30px;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 1s ease-in, transform 1s ease-in;
-        }
-        
-        .contenedor.visible {
+            /* La visibilidad es total e inmediata */
             opacity: 1;
             transform: translateY(0);
         }
@@ -116,13 +62,13 @@
 
         /* Logotipos */
         .logo-header {
-        width: 200px !important;
-        height: 200px !important;
-        margin: 0 20px !important;
-        flex-shrink: 0 !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
+            width: 200px !important;
+            height: 200px !important;
+            margin: 0 20px !important;
+            flex-shrink: 0 !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
         }
 
         .logo-header img {
@@ -152,9 +98,6 @@
             margin: 0 !important;
             color: var(--color-texto-oscuro) !important;
             font-weight: 500 !important;
-        }
-        .header-texto p {
-            display: none;
         }
 
         /* ---------------------------------------------------------- */
@@ -236,7 +179,7 @@
         .floating-pdf-icon {
             position: fixed;
             font-size: 2.5em;
-            color: var(--color-acento); /* Usamos el color de acento */
+            color: var(--color-acento);
             opacity: 1;
             z-index: 9999;
             pointer-events: none;
@@ -399,8 +342,6 @@
 </head>
 <body>
 
-  
-
     <div class="contenedor" id="main-content">
         
         <header class="main-header">
@@ -530,10 +471,6 @@
     </div>
 
     <script>
-        // Ocultar el preloader después de 3 segundos
-       
-
-
         // Función para simular la descarga y el efecto visual del botón
         function simularDescarga(event) {
             event.preventDefault();
