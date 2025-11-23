@@ -3,146 +3,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ubicación de Mesas - COLOR AL MIL POR CIENTO (NEUMORFISMO Y ALTO CONTRASTE)</title>
+    <title>Ubicación de Mesas</title>
     <style>
-        /* Paleta de Colores de Máximo Impacto */
-        :root {
-            /* Colores Base */
-            --color-marrondark: #3C2A1C;   /* Marrón Chocolate Profundo para Texto y Bordes */
-            --color-crema: #FCF9F5;        /* Fondo Base Cálido */
-            --color-blanco: #FFFFFF;       /* Blanco Puro para Contrastes */
-            
-            /* Color Primario VIVO (Salón Carrasco) */
-            --color-primary-base: #AF710E;
-            --color-primary-light: #D49D46; 
-            --color-primary-dark: #8C5B0A;  
-            --color-primary-mid: #BF872F; 
-            
-            /* Tonos Tostados Medios y Claros (Para Mesas y Áreas Secundarias) */
-            --color-mesa-base: #E8E8E8;        /* Gris Claro/Beige para Mesas Secundarias */
-            --color-mesa-tostada: #BCAAA4;     /* Tostado Medio para Oratorio/Contraste */
-            
-            /* Colores de Funcionalidad (Se mantienen) */
-            --color-ingreso: #4CAF50;
-            --color-salida: #F44336;
-            
-            --gap: 4px; 
-            
-            /* DIMENSIONES CLAVE (ESTRUCTURA 100% INTACTA) */
-            --plano-width-container: 470px;
-            --plano-height: 510px;
-            --area-top-height: 50px;
-            --area-bottom-top: 300px; 
-            --mesa-height: 48px; 
-            --bottom-strip-available-height: calc(var(--plano-height) - var(--area-bottom-top));
-            --bottom-strip-usable-height: calc(var(--bottom-strip-available-height) - 10px);
-            --stacked-top-height: 75px; 
-            --stacked-bottom-height: calc(var(--bottom-strip-usable-height) - var(--stacked-top-height) - var(--gap));
-        }
-
         body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: var(--color-crema);
+            font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            background-color: #f0f0f0;
             margin: 0;
-            padding: 20px;
         }
 
         .croquis-container {
-            width: var(--plano-width-container);
+            width: 470px; /* Ancho fijo para el contenedor */
             padding: 20px;
-            border-radius: 18px;
-            background: linear-gradient(135deg, var(--color-blanco) 0%, #F5F5F5 100%);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4); 
-            border: 6px solid var(--color-marrondark);
+            border: 2px solid #333;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
         .titulo {
             text-align: center;
-            font-size: 1.6em;
-            font-weight: 800;
-            color: var(--color-marrondark);
+            font-size: 1.5em;
             margin-bottom: 15px;
-            /* Sombra sutil de texto */
-            text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5);
+            color: #333;
         }
 
         .plano {
-            width: calc(100% - var(--gap) * 2); 
-            height: var(--plano-height);
+            width: 100%;
+            height: 510px; /* Altura fija para el plano */
+            border: 1px solid #ccc;
             position: relative;
-            /* Degradado de "papel limpio" */
-            background: linear-gradient(180deg, #F9F9F9 0%, var(--color-blanco) 100%); 
-            border: 1px solid #D0D0D0; 
-            margin: var(--gap);
-            overflow: hidden; 
+            background-color: #fff;
         }
 
-        /* --- LIMPIEZA DE BORDES Y SOMBRAS --- */
-        .area, .mesa, .recuadro {
-            border: none !important; 
-            box-shadow: none !important; 
-        }
-        
-        /* --- ESTILO GENERAL (Solo color/relieve) --- */
-        .area, .mesa, .recuadro {
+        .area {
+            position: absolute;
             text-align: center;
-            font-size: 0.65em;
-            font-weight: 600;
+            font-size: 0.7em;
+            font-weight: bold;
             display: flex;
             justify-content: center;
             align-items: center;
             box-sizing: border-box;
-            border-radius: 8px; 
-            padding: 3px;
-            /* Color de texto principal */
-            color: var(--color-marrondark); 
-            /* Sombra suave para efecto neumórfico */
-            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1), -2px -2px 5px var(--color-blanco);
+            border: 1px solid #999;
+            border-radius: 4px;
+            color: #fff;
+            padding: 5px;
         }
 
-        /* === 1. FRANJA SUPERIOR: VIVO Y ALTAMENTE SATURADO === */
-        .sshh, .bar-cafe { 
-            height: var(--area-top-height); 
-            top: 5px; 
-            color: var(--color-blanco) !important; 
-            /* Sombra más intensa para definir la cabecera */
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4), inset 0 0 10px rgba(0, 0, 0, 0.3);
+        /* Franja Superior */
+        .sshh {
+            height: 50px;
+            top: 5px;
         }
-        
-        /* Degradados VIVOS (Colores más intensos) */
-        .sshh-cab { background: linear-gradient(to right, var(--color-primary-dark), var(--color-primary-mid)); left: 0; }
-        .bar { background: linear-gradient(to right, var(--color-primary-mid), var(--color-primary-light)); left: calc(18% + var(--gap)); }
-        .cafeteria { background: linear-gradient(to right, var(--color-primary-light), var(--color-primary-mid)); left: calc(18% + 30% + var(--gap) * 2); }
-        .sshh-damas { background: linear-gradient(to right, var(--color-primary-mid), var(--color-primary-dark)); right: 0; }
 
-        /* --- POSICIONAMIENTO SUPERIOR (INTACTO) --- */
+        .bar-cafe {
+            height: 50px;
+            top: 5px;
+        }
+
         .w-sshh { width: 18%; }
         .w-bar-cafe { width: 30%; }
 
+        .sshh-cab {
+            left: 0;
+            background-color: #f44336; /* Rojo */
+        }
 
-        /* === 2. MESAS: RELIEVE SUAVE Y CONTRASTE INTENSO === */
-        .mesa { 
-            z-index: 10; 
-            padding: 6px 8px; 
-            font-size: 0.55em; 
-            border-radius: 4px; 
-            width: 130px; 
-            height: var(--mesa-height); 
+        .bar {
+            left: calc(18% + 4px);
+            background-color: #2196f3; /* Azul */
+        }
+
+        .cafeteria {
+            left: calc(18% + 30% + 8px);
+            background-color: #ff9800; /* Naranja */
+        }
+
+        .sshh-damas {
+            right: 0;
+            background-color: #9c27b0; /* Morado */
+        }
+
+        /* Mesas */
+        .mesa {
+            position: absolute;
+            text-align: center;
+            font-size: 0.6em;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+            border: 1px solid #777;
+            border-radius: 4px;
+            padding: 6px 8px;
+            width: 130px; /* Ancho fijo para las mesas */
+            height: 48px; /* Altura fija para las mesas */
             line-height: 1.2;
+            color: #333;
+        }
+
+        .mesa-4 {
+            top: 81px;
+            left: 0;
+            background-color: #8bc34a; /* Verde */
+        }
+
+        .mesa-5 {
+            top: 81px;
+            right: 0;
+            background-color: #ffeb3b; /* Amarillo */
+        }
+
+        .mesa-3 {
+            top: 155px;
+            left: 0;
+            background-color: #e91e63; /* Rosa */
+        }
+
+        .mesa-2 {
+            top: 229px;
+            left: 0;
+            background-color: #2196f3; /* Azul */
+        }
+
+        .mesa-1 {
+            top: 229px;
+            right: 0;
+            background-color: #009688; /* Verde azulado */
         }
         
-        /* Posiciones Verticales (INTACTAS) */
-        .mesa-4 { top: 81px; left: 0; } 
-        .mesa-5 { top: 81px; right: 0; }
-        .mesa-3 { top: 155px; left: 0; } 
-        .mesa-2 { top: 229px; left: 0; } 
-        .mesa-1 { top: 229px; right: 0; }
-        
-        /* Estilo de la flecha (INTACTO) */
+        /* Flechas en las mesas */
         .mesa::after {
             content: '';
             position: absolute;
@@ -154,82 +149,107 @@
             border-bottom: 10px solid transparent;
         }
 
-        .mesa-derecha::after { right: -15px; border-left: 15px solid; } 
-        .mesa-izquierda::after { left: -15px; border-right: 15px solid; } 
-
-        /* Mesas Secundarias (4, 5, 2): Tono casi blanco/Crema limpio */
-        .mesa-4, .mesa-5, .mesa-2 { 
-            background: var(--color-mesa-base); 
-            color: var(--color-marrondark); 
-        }
-        .mesa-4::after { border-right-color: var(--color-mesa-base); }
-        .mesa-5::after { border-left-color: var(--color-mesa-base); }
-        .mesa-2::after { border-right-color: var(--color-mesa-base); }
-
-
-        /* Mesas Primarias (3 y 1): Marrón Chocolate Intenso */
-        .mesa-3 { 
-            background: linear-gradient(135deg, var(--color-marrondark), #211A1A); 
-            color: var(--color-blanco); 
-        }
-        .mesa-3::after { border-right-color: #211A1A; }
-        
-        .mesa-1 { 
-            background: linear-gradient(135deg, #211A1A, var(--color-marrondark)); 
-            color: var(--color-blanco); 
-        }
-        .mesa-1::after { border-left-color: var(--color-marrondark); }
-
-
-        /* === 3. FRANJA INFERIOR: COHESIÓN Y LIMPIEZA === */
-        
-        /* Salón Carrasco/Virgen: Tono Primary de Alta Jerarquía */
-        .color-salon { 
-            background: linear-gradient(to bottom right, var(--color-primary-light), var(--color-primary-dark)); 
-            color: var(--color-blanco); 
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Sombra para levantar el salón */
-        }
-        
-        /* Oratorio: Tostado Medio */
-        .color-oratorio { 
-            background-color: var(--color-mesa-tostada);
-            color: var(--color-marrondark);
-        } 
-        
-        /* Oficinas (Fiscalía / Jurado Electoral): Gris Limpio y Claro */
-        .color-office { 
-            background-color: var(--color-mesa-base); 
-            color: var(--color-marrondark);
+        .mesa-derecha::after {
+            right: -15px;
+            border-left: 15px solid;
+            border-left-color: inherit; /* Hereda el color de fondo de la mesa */
         }
 
-        /* Contenedores de Columna (INTACTOS - ESTRUCTURA) */
+        .mesa-izquierda::after {
+            left: -15px;
+            border-right: 15px solid;
+            border-right-color: inherit; /* Hereda el color de fondo de la mesa */
+        }
+
+
+        /* Franja Inferior */
         .franja-inferior {
             position: absolute;
-            top: var(--area-bottom-top); 
+            top: 300px; /* Posición vertical de la franja inferior */
             width: 100%;
-            height: var(--bottom-strip-available-height);
+            height: calc(510px - 300px); /* Altura restante del plano */
             display: flex;
-            justify-content: space-between; 
-            align-items: flex-end; 
-            padding: 10px var(--gap); 
+            justify-content: space-between;
+            align-items: flex-end; /* Alinea los elementos a la parte inferior de la franja */
+            padding: 10px 4px; /* Relleno a los lados y abajo */
             box-sizing: border-box;
-            gap: var(--gap);
+            gap: 4px; /* Espacio entre columnas */
         }
 
-        .columna { height: 100%; box-sizing: border-box; display: flex; flex-direction: column; gap: var(--gap); }
-        .columna-1 { flex-basis: 25%; } 
-        .columna-2 { flex-basis: 20%; } 
-        .columna-3 { flex-grow: 1; }   
-        .columna-4 { flex-basis: 18%; } 
+        .columna {
+            height: 100%; /* Las columnas ocupan toda la altura disponible */
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column; /* Apila elementos verticalmente */
+            gap: 4px; /* Espacio entre recuadros apilados */
+        }
 
-        .recuadro-full { height: 100%; } 
-        .recuadro-top { height: var(--stacked-top-height); } 
-        .recuadro-bottom { flex-grow: 1; } 
+        .columna-1 { flex-basis: 25%; } /* Ancho de la primera columna */
+        .columna-2 { flex-basis: 20%; } /* Ancho de la segunda columna */
+        .columna-3 { flex-grow: 1; }   /* La tercera columna toma el espacio restante */
+        .columna-4 { flex-basis: 18%; } /* Ancho de la cuarta columna */
+
+        .recuadro {
+            text-align: center;
+            font-size: 0.65em;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+            border: 1px solid #777;
+            border-radius: 4px;
+            padding: 3px;
+            color: #333;
+        }
+
+        .recuadro-full {
+            height: 100%; /* Ocupa toda la altura de la columna */
+        }
+
+        .recuadro-top {
+            height: 75px; /* Altura fija para el recuadro superior */
+        }
+
+        .recuadro-bottom {
+            flex-grow: 1; /* Ocupa el espacio restante en la columna */
+        }
+
+        .color-salon { background-color: #8bc34a; /* Verde */ color: #fff; }
+        .color-office { background-color: #cddc39; /* Verde lima */ }
+        .color-oratorio { background-color: #ffc107; /* Ámbar */ }
+
+
+        /* Ingreso y Salida */
+        .ingreso-salida-box {
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+            padding: 0;
+        }
+
+        .ingreso-salida-box .label-io {
+            display: flex;
+            width: 100%;
+            justify-content: space-around;
+            align-items: center;
+            text-align: center;
+            padding: 5px 0;
+            margin-top: 5px;
+        }
         
-        /* INGRESO Y SALIDA BOX (INTACTO) */
-        .ingreso-salida-box { display: flex; flex-direction: column; align-items: center; justify-content: space-around; padding: 0; background-color: var(--color-blanco); border: 2px dashed var(--color-marrondark); }
-        .flecha { font-size: 1.8em; font-weight: 900; text-shadow: 0 0 5px rgba(0,0,0,0.2); line-height: 1; }
-        .ingreso-salida-box .label-io { display: flex; width: 100%; justify-content: space-around; align-items: center; text-align: center; padding: 5px 0; margin-top: 5px; }
+        .flecha {
+            font-size: 1.8em;
+            font-weight: 900;
+            line-height: 1;
+        }
+        .flecha-ingreso { color: #4CAF50; }
+        .flecha-salida { color: #F44336; }
+
     </style>
 </head>
 <body>
@@ -244,9 +264,9 @@
         <div class="area sshh sshh-damas w-sshh">SS. HH. DAMAS</div>
         
         <div class="mesa mesa-izquierda mesa-4">MESA N° 4 <br> CUADRILLAS 13 - 14 - 15 - 16</div>
+        <div class="mesa mesa-derecha mesa-5">MESA N° 5 <br> CUADRILLAS 17 - 18 - 19 - 20 <br> **CANTORAS**</div>
         <div class="mesa mesa-izquierda mesa-3">MESA N° 3 <br> CUADRILLAS 9 - 10 - 11 - 12</div>
         <div class="mesa mesa-izquierda mesa-2">MESA N° 2 <br> CUADRILLAS 5 - 6 - 7 - 8</div>
-        <div class="mesa mesa-derecha mesa-5">MESA N° 5 <br> CUADRILLAS 17 - 18 - 19 - 20 <br> **CANTORAS**</div>
         <div class="mesa mesa-derecha mesa-1">MESA N° 1 <br> CUADRILLA 1 <br> **SAHUMADORAS**</div>
 
         <div class="franja-inferior">
@@ -263,12 +283,12 @@
             <div class="columna columna-3">
                 <div class="recuadro recuadro-full ingreso-salida-box">
                     <div class="label-io">
-                        <div class="flecha flecha-salida" style="color: var(--color-salida);">&darr;</div>
-                        <div style="color: var(--color-marrondark); font-weight: 700;">SALIDA</div>
+                        <div class="flecha flecha-salida" style="color: #F44336;">&darr;</div>
+                        <div style="color: #333; font-weight: bold;">SALIDA</div>
                     </div>
                     <div class="label-io">
-                        <div style="color: var(--color-marrondark); font-weight: 700;">INGRESO</div>
-                        <div class="flecha flecha-ingreso" style="color: var(--color-ingreso);">&uarr;</div>
+                        <div style="color: #333; font-weight: bold;">INGRESO</div>
+                        <div class="flecha flecha-ingreso" style="color: #4CAF50;">&uarr;</div>
                     </div>
                 </div>
             </div>
