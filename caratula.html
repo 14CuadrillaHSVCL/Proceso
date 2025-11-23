@@ -10,7 +10,8 @@
            VARIABLES DE PALETA Y ESTILOS PREMIUM
         --------------------------------- */
         :root {
-            --color-marrondark: #4A3C2F;     /* Fondo de la Columna de Texto */
+            --color-marrondark: #4A3C2F;     /* Marrón chocolate profundo (PARA TEXTOS DE FONDO CLARO) */
+            --color-marron-claro-degradado: #6E5F52; /* Marrón más claro para el degradado */
             --color-dorado-accent: #B8860B; /* Dorado para Títulos y Acentos */
             --color-blanco-main: #FFFFFF;    /* Texto de Contraste */
             --color-crema-bg: #FAF8F5;       /* Color base sutil */
@@ -26,7 +27,7 @@
             padding: 0;
             display: flex;
             min-height: 100vh;
-            background-color: var(--color-marrondark); /* El color marrón cubre el body */
+            /* El body ya no necesita background-color, lo tendrá la columna */
             color: var(--color-blanco-main);
             overflow-x: hidden; 
         }
@@ -34,24 +35,25 @@
         .main-container {
             display: flex;
             width: 100%;
-            height: 100vh; /* Ocupa el 100% de la altura de la ventana */
+            height: 100vh; 
             position: relative;
         }
 
-        /* COLUMNA IZQUIERDA: CONTENIDO Y TEXTO */
+        /* COLUMNA IZQUIERDA: CONTENIDO Y TEXTO (AHORA CON DEGRADADO) */
         .content-column {
             width: 50%;
             padding: 50px;
-            background-color: var(--color-marrondark);
+            /* CAMBIO CLAVE 1: FONDO DEGRADADO EN LA COLUMNA DE CONTENIDO */
+            background: linear-gradient(to bottom, var(--color-marrondark) 0%, var(--color-marron-claro-degradado) 100%);
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: flex-start; /* Alinea el texto a la izquierda, como el ejemplo */
+            align-items: flex-start; 
             text-align: left;
-            z-index: 2; /* Asegura que el texto esté por encima de la imagen */
+            z-index: 2; 
         }
 
-        /* COLUMNA DERECHA: IMAGEN DE LA VIRGEN */
+        /* COLUMNA DERECHA: IMAGEN DE LA VIRGEN (AHORA CON CAPA DE OPACIDAD/DEGRADADO) */
         .image-column {
             width: 50%;
             height: 100%;
@@ -64,8 +66,22 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            /* La imagen se muestra sin filtro/opacidad, ya que no hay texto encima */
         }
+
+        /* CAMBIO CLAVE 2: CAPA DE OPACIDAD/DEGRADADO SOBRE LA VIRGEN */
+        .image-column::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Degradado de negro a transparente para un efecto más místico */
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.1) 50%, rgba(0, 0, 0, 0.0) 100%);
+            opacity: 0.8; /* Ajusta esta opacidad para más o menos "velo" */
+            z-index: 1; /* Asegura que esté sobre la imagen pero debajo del contenido si lo hubiera */
+        }
+
 
         /* ---------------------------------
            ESTILOS DE CONTENIDO
@@ -74,12 +90,11 @@
             display: flex;
             align-items: center;
             margin-bottom: 20px;
-            /* Justify-content se desactiva para alinear todo a la izquierda */
             gap: 15px; 
         }
 
         .logo {
-            width: 70px; /* Tamaño más pequeño y profesional */
+            width: 70px; 
             height: auto;
             flex-shrink: 0; 
         }
@@ -87,7 +102,7 @@
         .main-title {
             font-family: 'Playfair Display', serif; 
             font-size: 3em; 
-            color: var(--color-blanco-main); /* Blanco para máximo contraste */
+            color: var(--color-blanco-main); 
             margin: 0;
             line-height: 1.2;
             text-shadow: 0 0 10px rgba(0, 0, 0, 0.5); 
@@ -125,7 +140,7 @@
         .location-info {
             margin-bottom: 40px;
             padding: 15px;
-            background-color: rgba(255, 255, 255, 0.1); /* Recuadro sutil tipo "correo electrónico" */
+            background-color: rgba(255, 255, 255, 0.1); 
             border-radius: 5px;
         }
 
@@ -143,11 +158,12 @@
 
         /* Footer */
         .footer {
-            position: absolute; /* Fijo en la esquina */
+            position: absolute; 
             bottom: 30px;
-            left: 50px;
+            left: 50px; /* Alineado con la columna de contenido */
             font-size: 0.8em;
-            color: #8C7B6A; /* Gris claro sobre el marrón */
+            color: #8C7B6A; 
+            z-index: 3; /* Para asegurar que esté sobre ambas columnas si se superpone */
         }
 
         /* ---------------------------------
@@ -165,10 +181,10 @@
             }
             .content-column {
                 padding: 30px;
-                order: 1; /* El contenido arriba en móvil */
+                order: 1; 
             }
             .image-column {
-                order: 2; /* La imagen abajo en móvil */
+                order: 2; 
             }
             .main-title { font-size: 2.5em; }
             .footer {
@@ -176,6 +192,10 @@
                 text-align: center;
                 margin-top: 20px;
                 padding-left: 0;
+            }
+            /* La capa de la imagen también debe adaptarse a la columna vertical */
+            .image-column::before {
+                background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.1) 50%, rgba(0, 0, 0, 0.0) 100%);
             }
         }
 
