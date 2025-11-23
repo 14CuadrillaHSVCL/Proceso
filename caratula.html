@@ -50,37 +50,41 @@
             z-index: 2; 
         }
 
-        /* COLUMNA DERECHA: IMAGEN DE LA VIRGEN */
+        /* COLUMNA DERECHA: IMAGEN DE LA VIRGEN Y VELO */
         .image-column {
             width: 50%;
             height: 100%;
             position: relative;
             overflow: hidden;
             z-index: 1;
-            /* Aplicamos un degradado en la columna de la Virgen, superponiendo el marrón */
+            /* Degradado de la columna para la transición suave */
             background: linear-gradient(to right, rgba(74, 60, 47, 0.4) 0%, rgba(74, 60, 47, 0.0) 100%);
-            /* Esto crea el efecto de que el marrón de la izquierda se extiende suavemente sobre la imagen */
         }
 
         .image-column img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            /* Opacidad muy baja para que la imagen se vea fuerte, pero sin perder el efecto de la capa marrón */
             opacity: 1; 
-            /* Filtro de brillo y escala de grises para suavizar la imagen y unificarla con el marrón */
             filter: grayscale(20%) brightness(0.9);
-            z-index: -1; /* Mantiene la imagen debajo del degradado de la columna si lo hubiera */
-        }
-        /* Corregimos la posición de la imagen para que se vea a través del degradado */
-        .image-column {
-            position: relative;
-        }
-        .image-column img {
             position: absolute;
             top: 0;
             left: 0;
-            /* El degradado de la columna será el que suavice el contraste brusco */
+        }
+
+        /* CAPA EXTRA DE VELO (EFECTO DE NEBLINA/OPACIDAD) */
+        .image-column::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Velo Marrón: Un degradado muy sutil de marrón, semi-transparente */
+            background: linear-gradient(to right, 
+                rgba(74, 60, 47, 0.2) 0%, /* Más opaco cerca de la columna de texto */
+                rgba(74, 60, 47, 0.05) 100%); /* Casi transparente al final */
+            z-index: 2; /* Sobre la imagen y el degradado de la columna */
         }
 
 
@@ -191,9 +195,14 @@
                 margin-top: 20px;
                 padding-left: 0;
             }
-            /* Adaptamos el degradado en móvil para ir de arriba abajo */
-            .image-column {
+             .image-column {
                 background: linear-gradient(to top, rgba(74, 60, 47, 0.4) 0%, rgba(74, 60, 47, 0.0) 100%);
+            }
+            /* Adaptamos el velo para móvil */
+            .image-column::after {
+                 background: linear-gradient(to top, 
+                    rgba(74, 60, 47, 0.2) 0%, 
+                    rgba(74, 60, 47, 0.05) 100%); 
             }
         }
 
