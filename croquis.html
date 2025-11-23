@@ -3,40 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ubicación de Mesas</title>
+    <title>Ubicación de Mesas - VERSIÓN PROFESIONAL MARRÓN/CREMA/BLANCO</title>
     <style>
+        /* ---------------------------------
+           PALETA PROFESIONAL
+        --------------------------------- */
+        :root {
+            /* Colores de Jerarquía */
+            --color-marrondark: #3C2A1C;   /* Chocolate Oscuro (Texto, Bordes) */
+            --color-crema: #F7F4F0;        /* Crema Suave (Fondo del Body) */
+            --color-blanco: #FFFFFF;       /* Blanco Puro (Fondo del Plano, Contraste) */
+            
+            /* Color Primario VIVO (Cobre/Caramelo) */
+            --color-primary-base: #AF710E;
+            --color-primary-light: #D49D46; 
+            --color-primary-dark: #8C5B0A;  
+            --color-primary-mid: #BF872F; 
+            
+            /* Marrón Medio (Para Mesas y Oficinas) */
+            --color-tostado-medio: #BCAAA4;
+            --color-tostado-claro: #E0E0E0;
+            
+            /* Colores de Funcionalidad (Se mantienen) */
+            --color-ingreso: #4CAF50;
+            --color-salida: #F44336;
+        }
+
+        /* ---------------------------------
+           ESTRUCTURA Y POSICIÓN (NO TOCADA)
+        --------------------------------- */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Montserrat', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background-color: #f0f0f0;
+            /* CAMBIO DE COLOR */
+            background-color: var(--color-crema); 
             margin: 0;
         }
 
         .croquis-container {
-            width: 470px; /* Ancho fijo para el contenedor */
+            width: 470px;
             padding: 20px;
-            border: 2px solid #333;
+            border: 2px solid var(--color-marrondark);
             border-radius: 8px;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            /* CAMBIO DE COLOR */
+            background-color: var(--color-blanco);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
         }
 
         .titulo {
             text-align: center;
             font-size: 1.5em;
             margin-bottom: 15px;
-            color: #333;
+            /* CAMBIO DE COLOR */
+            color: var(--color-marrondark);
+            font-weight: 800;
         }
 
         .plano {
             width: 100%;
-            height: 510px; /* Altura fija para el plano */
+            height: 510px;
             border: 1px solid #ccc;
             position: relative;
-            background-color: #fff;
+            /* CAMBIO DE COLOR */
+            background-color: var(--color-blanco);
         }
 
         .area {
@@ -48,45 +80,25 @@
             justify-content: center;
             align-items: center;
             box-sizing: border-box;
-            border: 1px solid #999;
+            border: 1px solid var(--color-marrondark);
             border-radius: 4px;
-            color: #fff;
+            /* CAMBIO DE COLOR */
+            color: var(--color-blanco);
             padding: 5px;
+            box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.2); /* Detalle de degradado/profundidad */
         }
 
-        /* Franja Superior */
-        .sshh {
-            height: 50px;
-            top: 5px;
-        }
-
-        .bar-cafe {
-            height: 50px;
-            top: 5px;
-        }
-
+        /* Franja Superior (POSICIÓN INTACTA) */
+        .sshh { height: 50px; top: 5px; }
+        .bar-cafe { height: 50px; top: 5px; }
         .w-sshh { width: 18%; }
         .w-bar-cafe { width: 30%; }
 
-        .sshh-cab {
-            left: 0;
-            background-color: #f44336; /* Rojo */
-        }
-
-        .bar {
-            left: calc(18% + 4px);
-            background-color: #2196f3; /* Azul */
-        }
-
-        .cafeteria {
-            left: calc(18% + 30% + 8px);
-            background-color: #ff9800; /* Naranja */
-        }
-
-        .sshh-damas {
-            right: 0;
-            background-color: #9c27b0; /* Morado */
-        }
+        /* APLICACIÓN DE DEGRADADOS VIVOS (#AF710E) */
+        .sshh-cab { left: 0; background: linear-gradient(to right, var(--color-primary-dark), var(--color-primary-mid)); }
+        .bar { left: calc(18% + 4px); background: linear-gradient(to right, var(--color-primary-mid), var(--color-primary-light)); }
+        .cafeteria { left: calc(18% + 30% + 8px); background: linear-gradient(to right, var(--color-primary-light), var(--color-primary-mid)); }
+        .sshh-damas { right: 0; background: linear-gradient(to right, var(--color-primary-mid), var(--color-primary-dark)); }
 
         /* Mesas */
         .mesa {
@@ -98,46 +110,25 @@
             justify-content: center;
             align-items: center;
             box-sizing: border-box;
-            border: 1px solid #777;
+            border: 1px solid var(--color-marrondark);
             border-radius: 4px;
             padding: 6px 8px;
-            width: 130px; /* Ancho fijo para las mesas */
-            height: 48px; /* Altura fija para las mesas */
+            width: 130px; 
+            height: 48px; 
             line-height: 1.2;
-            color: #333;
+            /* TEXTO PREDETERMINADO */
+            color: var(--color-marrondark); 
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Sombra suave para relieve */
         }
 
-        .mesa-4 {
-            top: 81px;
-            left: 0;
-            background-color: #8bc34a; /* Verde */
-        }
-
-        .mesa-5 {
-            top: 81px;
-            right: 0;
-            background-color: #ffeb3b; /* Amarillo */
-        }
-
-        .mesa-3 {
-            top: 155px;
-            left: 0;
-            background-color: #e91e63; /* Rosa */
-        }
-
-        .mesa-2 {
-            top: 229px;
-            left: 0;
-            background-color: #2196f3; /* Azul */
-        }
-
-        .mesa-1 {
-            top: 229px;
-            right: 0;
-            background-color: #009688; /* Verde azulado */
-        }
+        /* POSICIÓN INTACTA */
+        .mesa-4 { top: 81px; left: 0; }
+        .mesa-5 { top: 81px; right: 0; }
+        .mesa-3 { top: 155px; left: 0; }
+        .mesa-2 { top: 229px; left: 0; }
+        .mesa-1 { top: 229px; right: 0; }
         
-        /* Flechas en las mesas */
+        /* Flechas en las mesas (INTACTAS) */
         .mesa::after {
             content: '';
             position: absolute;
@@ -152,42 +143,54 @@
         .mesa-derecha::after {
             right: -15px;
             border-left: 15px solid;
-            border-left-color: inherit; /* Hereda el color de fondo de la mesa */
+            border-left-color: inherit;
         }
 
         .mesa-izquierda::after {
             left: -15px;
             border-right: 15px solid;
-            border-right-color: inherit; /* Hereda el color de fondo de la mesa */
+            border-right-color: inherit;
         }
 
+        /* APLICACIÓN DE COLORES DE MESAS (JERARQUÍA VISUAL) */
 
-        /* Franja Inferior */
+        /* Mesas Secundarias (4, 5, 2): Tostado Medio, Texto Marrón Oscuro */
+        .mesa-4, .mesa-5, .mesa-2 { 
+            background: linear-gradient(135deg, var(--color-tostado-claro), var(--color-tostado-medio));
+            color: var(--color-marrondark);
+        }
+        .mesa-4::after { border-right-color: var(--color-tostado-medio); }
+        .mesa-5::after { border-left-color: var(--color-tostado-medio); }
+        .mesa-2::after { border-right-color: var(--color-tostado-medio); }
+
+        /* Mesas Primarias (3, 1): Marrón Profundo (Máximo Contraste), Texto Blanco */
+        .mesa-3, .mesa-1 { 
+            background: linear-gradient(135deg, var(--color-marrondark), #211A1A); 
+            color: var(--color-blanco); 
+        }
+        .mesa-3::after { border-right-color: #211A1A; }
+        .mesa-1::after { border-left-color: #211A1A; }
+
+
+        /* Franja Inferior (POSICIÓN INTACTA) */
         .franja-inferior {
             position: absolute;
-            top: 300px; /* Posición vertical de la franja inferior */
+            top: 300px;
             width: 100%;
-            height: calc(510px - 300px); /* Altura restante del plano */
+            height: calc(510px - 300px);
             display: flex;
             justify-content: space-between;
-            align-items: flex-end; /* Alinea los elementos a la parte inferior de la franja */
-            padding: 10px 4px; /* Relleno a los lados y abajo */
+            align-items: flex-end;
+            padding: 10px 4px;
             box-sizing: border-box;
-            gap: 4px; /* Espacio entre columnas */
+            gap: 4px;
         }
 
-        .columna {
-            height: 100%; /* Las columnas ocupan toda la altura disponible */
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column; /* Apila elementos verticalmente */
-            gap: 4px; /* Espacio entre recuadros apilados */
-        }
-
-        .columna-1 { flex-basis: 25%; } /* Ancho de la primera columna */
-        .columna-2 { flex-basis: 20%; } /* Ancho de la segunda columna */
-        .columna-3 { flex-grow: 1; }   /* La tercera columna toma el espacio restante */
-        .columna-4 { flex-basis: 18%; } /* Ancho de la cuarta columna */
+        .columna { height: 100%; box-sizing: border-box; display: flex; flex-direction: column; gap: 4px; }
+        .columna-1 { flex-basis: 25%; }
+        .columna-2 { flex-basis: 20%; }
+        .columna-3 { flex-grow: 1; }
+        .columna-4 { flex-basis: 18%; }
 
         .recuadro {
             text-align: center;
@@ -197,39 +200,37 @@
             justify-content: center;
             align-items: center;
             box-sizing: border-box;
-            border: 1px solid #777;
+            border: 1px solid var(--color-marrondark);
             border-radius: 4px;
             padding: 3px;
-            color: #333;
+            color: var(--color-marrondark);
+            box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
         }
 
-        .recuadro-full {
-            height: 100%; /* Ocupa toda la altura de la columna */
+        .recuadro-full { height: 100%; }
+        .recuadro-top { height: 75px; }
+        .recuadro-bottom { flex-grow: 1; }
+
+        /* APLICACIÓN DE COLORES INFERIORES */
+        .color-salon { 
+            background: linear-gradient(to bottom, var(--color-primary-mid), var(--color-primary-dark)); 
+            color: var(--color-blanco); 
         }
-
-        .recuadro-top {
-            height: 75px; /* Altura fija para el recuadro superior */
-        }
-
-        .recuadro-bottom {
-            flex-grow: 1; /* Ocupa el espacio restante en la columna */
-        }
-
-        .color-salon { background-color: #8bc34a; /* Verde */ color: #fff; }
-        .color-office { background-color: #cddc39; /* Verde lima */ }
-        .color-oratorio { background-color: #ffc107; /* Ámbar */ }
+        .color-office { background-color: var(--color-tostado-claro); color: var(--color-marrondark); }
+        .color-oratorio { background-color: var(--color-tostado-medio); color: var(--color-marrondark); }
 
 
-        /* Ingreso y Salida */
+        /* Ingreso y Salida (INTACTO) */
         .ingreso-salida-box {
-            background-color: #f9f9f9;
-            border: 1px solid #ccc;
+            background-color: var(--color-blanco);
+            border: 2px dashed var(--color-marrondark); /* Borde punteado para el área de paso */
             height: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: space-around;
             padding: 0;
+            box-shadow: none;
         }
 
         .ingreso-salida-box .label-io {
@@ -247,8 +248,8 @@
             font-weight: 900;
             line-height: 1;
         }
-        .flecha-ingreso { color: #4CAF50; }
-        .flecha-salida { color: #F44336; }
+        .flecha-ingreso { color: var(--color-ingreso); }
+        .flecha-salida { color: var(--color-salida); }
 
     </style>
 </head>
@@ -283,12 +284,12 @@
             <div class="columna columna-3">
                 <div class="recuadro recuadro-full ingreso-salida-box">
                     <div class="label-io">
-                        <div class="flecha flecha-salida" style="color: #F44336;">&darr;</div>
-                        <div style="color: #333; font-weight: bold;">SALIDA</div>
+                        <div class="flecha flecha-salida" style="color: var(--color-salida);">&darr;</div>
+                        <div style="color: var(--color-marrondark); font-weight: bold;">SALIDA</div>
                     </div>
                     <div class="label-io">
-                        <div style="color: #333; font-weight: bold;">INGRESO</div>
-                        <div class="flecha flecha-ingreso" style="color: #4CAF50;">&uarr;</div>
+                        <div style="color: var(--color-marrondark); font-weight: bold;">INGRESO</div>
+                        <div class="flecha flecha-ingreso" style="color: var(--color-ingreso);">&uarr;</div>
                     </div>
                 </div>
             </div>
