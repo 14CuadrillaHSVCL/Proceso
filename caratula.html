@@ -12,17 +12,15 @@
         :root {
             --color-marrondark: #4A3C2F;     /* Marrón chocolate profundo */
             --color-dorado-accent: #B8860B; /* Dorado para acentos importantes */
-            --color-crema-bg: #FAF8F5;       /* Fondo crema suave */
-            --color-blanco-main: #FFFFFF;    /* Blanco puro para contenido */
-            --color-amarillo-soft: #FFD700; /* Amarillo para detalles */
-            --text-light: #F0EAD6; /* Texto claro para fondos oscuros */
+            --color-crema-bg: #FAF8F5;       
+            --color-blanco-main: #FFFFFF;    /* Fondo de la caja central */
             --shadow-subtle: 0 4px 10px rgba(0, 0, 0, 0.1);
             --shadow-deep: 0 8px 25px rgba(0, 0, 0, 0.3);
             --border-radius-main: 10px;
         }
 
         /* ---------------------------------
-           ESTRUCTURA BASE Y FONDO
+           ESTRUCTURA BASE Y FONDO (VIRGEN LIBRE)
         --------------------------------- */
         body {
             font-family: 'Montserrat', sans-serif;
@@ -32,67 +30,58 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background-color: var(--color-crema-bg);
+            /* El fondo del body ahora solo muestra la Virgen */
+            background-color: var(--color-crema-bg); 
             color: var(--color-marrondark);
-            overflow-x: hidden; /* Previene scroll horizontal */
-        }
-
-        .main-container {
-            width: 100%;
-            max-width: 900px; /* Ancho máximo para el diseño */
-            background-color: var(--color-blanco-main);
-            border-radius: var(--border-radius-main);
-            box-shadow: var(--shadow-deep);
-            overflow: hidden; /* Asegura que la imagen de fondo no se desborde */
+            overflow-x: hidden; 
             position: relative;
-            min-height: 800px; /* Altura mínima para la carátula */
-            display: flex;
-            flex-direction: column;
         }
 
-        /* IMAGEN DE FONDO DE LA VIRGEN DEL CARMEN (AJUSTES CLAVE AQUÍ) */
+        /* CONTENEDOR DE LA VIRGEN COMO FONDO DEL BODY */
         .background-image-container {
-            position: absolute;
+            position: fixed; /* Fijo para que no se mueva al hacer scroll */
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             overflow: hidden;
-            z-index: 0; 
+            z-index: -1; /* Detrás de todo el contenido */
         }
 
         .background-image-container img {
             width: 100%;
             height: 100%;
             object-fit: cover; 
-            filter: grayscale(40%) brightness(0.7) contrast(1.1); /* Brillo aumentado */
-            opacity: 0.8; /* Opacidad AUMENTADA para hacerla más visible */
-            transform: scale(1.05); 
+            filter: grayscale(40%) brightness(0.6) contrast(1.1); 
+            opacity: 0.8; /* MÁXIMA VISIBILIDAD DE LA VIRGEN */
         }
 
-        /* Capa de degradado sobre la imagen para mejorar legibilidad (AJUSTES CLAVE AQUÍ) */
-        .background-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
+        /* ELIMINAMOS EL OVERLAY, YA QUE EL TEXTO ESTARÁ SOBRE LA CAJA BLANCA */
+        /* .background-overlay { display: none; } */
+
+
+        /* CAJA CENTRAL (DONDE VA TODO EL TEXTO) */
+        .main-container {
             width: 100%;
-            height: 100%;
-            /* Opacidad del degradado REDUCIDA para que la imagen se vea más */
-background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.5) 50%, var(--color-blanco-main) 100%);            z-index: 1;
+            max-width: 600px; /* Hacemos la caja más compacta y central */
+            background-color: var(--color-blanco-main);
+            border-radius: var(--border-radius-main);
+            box-shadow: var(--shadow-deep);
+            padding: 40px; /* Aumentamos el padding para airear el contenido */
+            position: relative;
+            min-height: 400px; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Centramos verticalmente el contenido dentro de la caja */
+            border: 4px solid var(--color-dorado-accent); /* Borde elegante */
         }
 
         /* ---------------------------------
-           CONTENIDO PRINCIPAL
+           CONTENIDO PRINCIPAL (TODO DENTRO DE LA CAJA)
         --------------------------------- */
         .content {
-            position: relative; 
-            z-index: 2;
-            padding: 30px 40px;
             text-align: center;
-            flex-grow: 1; 
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between; 
+            /* Ya no necesita z-index ni padding, el main-container lo maneja */
         }
 
         /* HEADER: Título y Logos */
@@ -101,36 +90,36 @@ background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2) 0%, rgba(255, 25
             align-items: center;
             justify-content: space-between; 
             gap: 15px; 
-            margin-bottom: 25px;
+            margin-bottom: 30px;
         }
 
         .logo {
-            width: 100px; 
+            width: 80px; /* Reducimos el tamaño de los logos para la caja más pequeña */
             height: auto;
             flex-shrink: 0; 
         }
 
         .main-title {
             font-family: 'Playfair Display', serif; 
-            font-size: 2.8em; 
-            color: var(--color-marrondark);
+            font-size: 2.5em; /* Ajustamos el tamaño del título */
+            color: var(--color-dorado-accent); 
             margin: 0;
             line-height: 1.1;
             flex-grow: 1; 
-            background: linear-gradient(to right, var(--color-marrondark), #6E5F52);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            /* Sombra más sutil porque está sobre fondo blanco */
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); 
         }
         
         /* Información de Evento */
         .event-info {
-            margin-bottom: 30px;
-            margin-top: 20px;
+            margin-bottom: 35px;
+            padding: 15px 0;
+            border-top: 1px solid #EEE;
+            border-bottom: 1px solid #EEE;
         }
 
         .event-date {
-            font-size: 1.8em;
+            font-size: 1.7em;
             font-weight: 700;
             color: var(--color-marrondark);
             margin-bottom: 5px;
@@ -138,134 +127,76 @@ background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2) 0%, rgba(255, 25
         }
 
         .event-time {
-            font-size: 1.4em;
+            font-size: 1.3em;
             font-weight: 600;
             color: var(--color-dorado-accent);
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
         }
 
         .event-slogan {
             font-family: 'Playfair Display', serif;
-            font-size: 1.1em;
+            font-size: 1.0em;
             font-style: italic;
-            color: #6E5F52; 
+            color: var(--color-marrondark); 
             margin-top: 15px;
             letter-spacing: 0.5px;
         }
 
-        /* Información de Sede */
+        /* Información de Sede (Todo el texto está aquí ahora) */
         .location-info {
-            margin-bottom: 30px;
-            padding: 20px;
-            background-color: var(--color-crema-bg);
-            border-radius: var(--border-radius-main);
-            box-shadow: var(--shadow-subtle);
-            border: 1px solid #E0DED7;
+            margin-top: 30px;
+            padding-bottom: 20px;
         }
 
         .location-title {
-            font-size: 1.5em;
+            font-size: 1.3em;
             font-weight: 700;
-            color: var(--color-dorado-accent);
-            margin-bottom: 10px;
+            color: var(--color-marrondark);
+            margin-bottom: 5px;
         }
 
         .location-address {
-            font-size: 1.1em;
+            font-size: 1.0em;
             color: var(--color-marrondark);
-            margin-bottom: 15px;
             line-height: 1.5;
         }
 
-        /* Google Maps */
-        .map-container {
-            border-radius: var(--border-radius-main);
-            overflow: hidden; 
-            margin-top: 20px;
-            box-shadow: var(--shadow-subtle);
-            border: 2px solid var(--color-dorado-accent);
-            width: 100%;
-            height: 300px; 
-        }
-
-        .map-container iframe {
-            width: 100%;
-            height: 100%;
-            border: none; 
-        }
 
         /* Footer */
         .footer {
             margin-top: 30px;
-            font-size: 0.9em;
+            font-size: 0.8em;
             color: #8C7B6A; 
-            padding-top: 20px;
+            padding-top: 15px;
             border-top: 1px solid #EEE;
         }
 
         /* ---------------------------------
-           RESPONSIVIDAD (AJUSTADA)
+           RESPONSIVIDAD
         --------------------------------- */
         @media (max-width: 768px) {
             .main-container {
-                min-height: auto;
-                margin: 20px;
+                padding: 30px;
+                max-width: 90%;
             }
-            .content {
-                padding: 20px;
-            }
-            .main-title {
-                font-size: 2.2em; 
-            }
-            .event-date {
-                font-size: 1.5em;
-            }
-            .event-time {
-                font-size: 1.2em;
-            }
-            .logo {
-                width: 70px; 
-            }
-            .header {
-                gap: 10px; 
-            }
-            .map-container {
-                height: 250px;
-            }
+            .main-title { font-size: 2em; }
+            .logo { width: 70px; }
         }
 
         @media (max-width: 480px) {
-            .content {
-                padding: 15px;
-            }
-            .main-title {
-                font-size: 1.6em; 
-            }
-            .logo {
-                width: 50px; 
-            }
-            .header {
-                gap: 8px; 
-            }
-            .event-date {
-                font-size: 1.2em;
-            }
-            .event-time {
-                font-size: 1em;
-            }
-            .location-address {
-                font-size: 0.9em;
-            }
+            .main-container { padding: 20px; }
+            .main-title { font-size: 1.5em; }
+            .logo { width: 50px; }
+            .event-date { font-size: 1.4em; }
         }
     </style>
 </head>
 <body>
 
+<div class="background-image-container">
+    <img src="https://14cuadrillahsvcl.github.io/Proceso/virgen_nube.jpg" alt="Virgen del Carmen">
+</div>
+
 <div class="main-container">
-    <div class="background-image-container">
-        <img src="https://14cuadrillahsvcl.github.io/Proceso/virgen_nube.jpg" alt="Virgen del Carmen">
-    </div>
-    <div class="background-overlay"></div>
 
     <div class="content">
         <header class="header">
@@ -285,15 +216,6 @@ background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2) 0%, rgba(255, 25
         <section class="location-info">
             <h2 class="location-title">SEDE INSTITUCIONAL DE NUESTRA HERMANDAD</h2>
             <p class="location-address">Jirón Junín 1145 - 1149, Lima Cercado</p>
-
-            <div class="map-container">
-                <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3902.046552042735!2d-77.02700878518331!3d-12.042145391456952!2m3!1f0!2m3!1f0!2f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c589b2756a59%3A0xc4a4b4f5d6f1c4e7!2sJr.%20Jun%C3%ADn%201145%2C%20Cercado%20de%20Lima%2015001!5e0!3m2!1ses-419!2spe!4v1678901234567!5m2!1ses-419!2spe" 
-                    allowfullscreen="" 
-                    loading="lazy" 
-                    referrerpolicy="no-referrer-when-downgrade">
-                </iframe>
-            </div>
         </section>
 
         <footer class="footer">
