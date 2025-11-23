@@ -10,218 +10,218 @@
            VARIABLES DE PALETA Y ESTILOS PREMIUM
         --------------------------------- */
         :root {
-            --color-marrondark: #4A3C2F;     /* Marrón chocolate profundo */
-            --color-dorado-accent: #B8860B; /* Dorado para acentos importantes */
-            --color-crema-bg: #FAF8F5;       
-            --color-blanco-main: #FFFFFF;    /* Fondo de la caja central */
+            --color-marrondark: #4A3C2F;     /* Fondo de la Columna de Texto */
+            --color-dorado-accent: #B8860B; /* Dorado para Títulos y Acentos */
+            --color-blanco-main: #FFFFFF;    /* Texto de Contraste */
+            --color-crema-bg: #FAF8F5;       /* Color base sutil */
             --shadow-subtle: 0 4px 10px rgba(0, 0, 0, 0.1);
-            --shadow-deep: 0 8px 25px rgba(0, 0, 0, 0.3);
-            --border-radius-main: 10px;
         }
 
         /* ---------------------------------
-           ESTRUCTURA BASE Y FONDO (VIRGEN LIBRE)
+           ESTRUCTURA DE DOS COLUMNAS (REPLICA DISNEY+)
         --------------------------------- */
         body {
             font-family: 'Montserrat', sans-serif;
             margin: 0;
             padding: 0;
             display: flex;
-            justify-content: center;
-            align-items: center;
             min-height: 100vh;
-            /* El fondo del body ahora solo muestra la Virgen */
-            background-color: var(--color-crema-bg); 
-            color: var(--color-marrondark);
+            background-color: var(--color-marrondark); /* El color marrón cubre el body */
+            color: var(--color-blanco-main);
             overflow-x: hidden; 
-            position: relative;
         }
 
-        /* CONTENEDOR DE LA VIRGEN COMO FONDO DEL BODY */
-        .background-image-container {
-            position: fixed; /* Fijo para que no se mueva al hacer scroll */
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: -1; /* Detrás de todo el contenido */
-        }
-
-        .background-image-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; 
-            filter: grayscale(40%) brightness(0.6) contrast(1.1); 
-            opacity: 0.8; /* MÁXIMA VISIBILIDAD DE LA VIRGEN */
-        }
-
-        /* ELIMINAMOS EL OVERLAY, YA QUE EL TEXTO ESTARÁ SOBRE LA CAJA BLANCA */
-        /* .background-overlay { display: none; } */
-
-
-        /* CAJA CENTRAL (DONDE VA TODO EL TEXTO) */
         .main-container {
+            display: flex;
             width: 100%;
-            max-width: 600px; /* Hacemos la caja más compacta y central */
-            background-color: var(--color-blanco-main);
-            border-radius: var(--border-radius-main);
-            box-shadow: var(--shadow-deep);
-            padding: 40px; /* Aumentamos el padding para airear el contenido */
+            height: 100vh; /* Ocupa el 100% de la altura de la ventana */
             position: relative;
-            min-height: 400px; 
+        }
+
+        /* COLUMNA IZQUIERDA: CONTENIDO Y TEXTO */
+        .content-column {
+            width: 50%;
+            padding: 50px;
+            background-color: var(--color-marrondark);
             display: flex;
             flex-direction: column;
-            justify-content: center; /* Centramos verticalmente el contenido dentro de la caja */
-            border: 4px solid var(--color-dorado-accent); /* Borde elegante */
+            justify-content: center;
+            align-items: flex-start; /* Alinea el texto a la izquierda, como el ejemplo */
+            text-align: left;
+            z-index: 2; /* Asegura que el texto esté por encima de la imagen */
+        }
+
+        /* COLUMNA DERECHA: IMAGEN DE LA VIRGEN */
+        .image-column {
+            width: 50%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .image-column img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* La imagen se muestra sin filtro/opacidad, ya que no hay texto encima */
         }
 
         /* ---------------------------------
-           CONTENIDO PRINCIPAL (TODO DENTRO DE LA CAJA)
+           ESTILOS DE CONTENIDO
         --------------------------------- */
-        .content {
-            text-align: center;
-            /* Ya no necesita z-index ni padding, el main-container lo maneja */
-        }
-
-        /* HEADER: Título y Logos */
         .header {
             display: flex;
             align-items: center;
-            justify-content: space-between; 
+            margin-bottom: 20px;
+            /* Justify-content se desactiva para alinear todo a la izquierda */
             gap: 15px; 
-            margin-bottom: 30px;
         }
 
         .logo {
-            width: 80px; /* Reducimos el tamaño de los logos para la caja más pequeña */
+            width: 70px; /* Tamaño más pequeño y profesional */
             height: auto;
             flex-shrink: 0; 
         }
 
         .main-title {
             font-family: 'Playfair Display', serif; 
-            font-size: 2.5em; /* Ajustamos el tamaño del título */
-            color: var(--color-dorado-accent); 
+            font-size: 3em; 
+            color: var(--color-blanco-main); /* Blanco para máximo contraste */
             margin: 0;
-            line-height: 1.1;
-            flex-grow: 1; 
-            /* Sombra más sutil porque está sobre fondo blanco */
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); 
+            line-height: 1.2;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5); 
         }
         
         /* Información de Evento */
         .event-info {
-            margin-bottom: 35px;
-            padding: 15px 0;
-            border-top: 1px solid #EEE;
-            border-bottom: 1px solid #EEE;
+            margin-bottom: 40px;
+            padding: 10px 0;
         }
 
         .event-date {
-            font-size: 1.7em;
+            font-size: 1.8em;
             font-weight: 700;
-            color: var(--color-marrondark);
+            color: var(--color-dorado-accent);
             margin-bottom: 5px;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
         }
 
         .event-time {
-            font-size: 1.3em;
+            font-size: 1.4em;
             font-weight: 600;
-            color: var(--color-dorado-accent);
+            color: var(--color-blanco-main);
         }
 
         .event-slogan {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Montserrat', sans-serif;
             font-size: 1.0em;
-            font-style: italic;
-            color: var(--color-marrondark); 
-            margin-top: 15px;
+            color: var(--color-crema-bg); 
+            margin-top: 20px;
             letter-spacing: 0.5px;
         }
 
-        /* Información de Sede (Todo el texto está aquí ahora) */
+        /* Información de Sede */
         .location-info {
-            margin-top: 30px;
-            padding-bottom: 20px;
+            margin-bottom: 40px;
+            padding: 15px;
+            background-color: rgba(255, 255, 255, 0.1); /* Recuadro sutil tipo "correo electrónico" */
+            border-radius: 5px;
         }
 
         .location-title {
-            font-size: 1.3em;
+            font-size: 1.2em;
             font-weight: 700;
-            color: var(--color-marrondark);
+            color: var(--color-dorado-accent);
             margin-bottom: 5px;
         }
 
         .location-address {
-            font-size: 1.0em;
-            color: var(--color-marrondark);
-            line-height: 1.5;
+            font-size: 1.1em;
+            color: var(--color-blanco-main);
         }
-
 
         /* Footer */
         .footer {
-            margin-top: 30px;
+            position: absolute; /* Fijo en la esquina */
+            bottom: 30px;
+            left: 50px;
             font-size: 0.8em;
-            color: #8C7B6A; 
-            padding-top: 15px;
-            border-top: 1px solid #EEE;
+            color: #8C7B6A; /* Gris claro sobre el marrón */
         }
 
         /* ---------------------------------
            RESPONSIVIDAD
         --------------------------------- */
-        @media (max-width: 768px) {
+        @media (max-width: 992px) {
             .main-container {
-                padding: 30px;
-                max-width: 90%;
+                flex-direction: column;
+                height: auto;
             }
-            .main-title { font-size: 2em; }
-            .logo { width: 70px; }
+            .content-column, .image-column {
+                width: 100%;
+                height: auto;
+                min-height: 50vh; 
+            }
+            .content-column {
+                padding: 30px;
+                order: 1; /* El contenido arriba en móvil */
+            }
+            .image-column {
+                order: 2; /* La imagen abajo en móvil */
+            }
+            .main-title { font-size: 2.5em; }
+            .footer {
+                position: static;
+                text-align: center;
+                margin-top: 20px;
+                padding-left: 0;
+            }
         }
 
-        @media (max-width: 480px) {
-            .main-container { padding: 20px; }
-            .main-title { font-size: 1.5em; }
-            .logo { width: 50px; }
-            .event-date { font-size: 1.4em; }
+        @media (max-width: 576px) {
+            .main-title { font-size: 2em; }
+            .event-date { font-size: 1.5em; }
+            .logo { width: 60px; }
+            .header { gap: 10px; }
         }
     </style>
 </head>
 <body>
 
-<div class="background-image-container">
-    <img src="https://14cuadrillahsvcl.github.io/Proceso/virgen_nube.jpg" alt="Virgen del Carmen">
-</div>
-
 <div class="main-container">
+    
+    <div class="content-column">
 
-    <div class="content">
         <header class="header">
-            <img src="https://via.placeholder.com/100x100/4A3C2F/FFD700?text=Logo+Izq" alt="Insignia Izquierda" class="logo logo-left">
+            <img src="https://via.placeholder.com/100x100/FFFFFF/4A3C2F?text=Logo+Izq" alt="Insignia Izquierda" class="logo logo-left">
             
             <h1 class="main-title">ELECCIONES GENERALES HSVCL</h1>
-            
-            <img src="https://via.placeholder.com/100x100/4A3C2F/FFD700?text=Logo+Der" alt="Insignia Derecha" class="logo logo-right">
         </header>
 
         <section class="event-info">
-            <p class="event-date"><strong>23 DE NOVIEMBRE</strong></p>
+            <p class="event-date">23 DE NOVIEMBRE</p>
             <p class="event-time">DE 9:00 AM A 4:00 PM</p>
             <p class="event-slogan">"Por la Unión y el Progreso de Nuestra Hermandad"</p>
         </section>
 
         <section class="location-info">
-            <h2 class="location-title">SEDE INSTITUCIONAL DE NUESTRA HERMANDAD</h2>
+            <h2 class="location-title">SEDE INSTITUCIONAL</h2>
             <p class="location-address">Jirón Junín 1145 - 1149, Lima Cercado</p>
         </section>
 
-        <footer class="footer">
-            <p>© 2023 Hermandad de la Virgen del Carmen. Todos los derechos reservados.</p>
-        </footer>
+        <img src="https://via.placeholder.com/100x100/FFFFFF/4A3C2F?text=Logo+Der" alt="Insignia Derecha" class="logo logo-right" style="margin-top: 30px;">
+
+
     </div>
+    
+    <div class="image-column">
+        <img src="https://14cuadrillahsvcl.github.io/Proceso/virgen_nube.jpg" alt="Virgen del Carmen">
+    </div>
+
+    <footer class="footer">
+        © 2023 Hermandad de la Virgen del Carmen. Todos los derechos reservados.
+    </footer>
 </div>
 
 </body>
