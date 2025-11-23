@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ubicación de Mesas - ALINEACIÓN DE FLECHAS AJUSTADA</title>
+    <title>Ubicación de Mesas - TEXTO DE FLECHAS MÁS GRANDE</title>
     <style>
         /* ---------------------------------
            PALETA PROFESIONAL (RIGUROSA)
@@ -173,7 +173,7 @@
         .columna { height: 100%; box-sizing: border-box; display: flex; flex-direction: column; gap: 4px; }
         .columna-1 { flex-basis: 25%; }
         .columna-2 { flex-basis: 20%; }
-        .columna-3 { flex-grow: 1; } /* Columna central flexible */
+        .columna-3 { flex-grow: 1; } 
         .columna-4 { flex-basis: 18%; }
 
         .recuadro {
@@ -204,36 +204,35 @@
         .color-oratorio { background-color: var(--color-tostado-medio); color: var(--color-marrondark); }
 
 
-        /* Ingreso y Salida (AJUSTE DE ALINEACIÓN CLAVE) */
+        /* Ingreso y Salida (AJUSTES FINALES DE TAMAÑO Y POSICIÓN) */
         .ingreso-salida-box {
             background-color: var(--color-blanco);
             border: 2px dashed var(--color-marrondark); 
             height: 100%;
             display: flex;
-            /* CAMBIO CLAVE: Usa space-between para pegar los elementos a los lados */
             justify-content: space-between; 
-            flex-direction: column; /* Sigue apilando los dos grupos (Salida y Ingreso) */
-            align-items: stretch; /* Permite que los contenedores internos se estiren */
-            padding: 10px 0; /* Pequeño padding vertical */
+            flex-direction: column; 
+            align-items: stretch; 
+            padding: 10px 0; 
             box-shadow: none;
         }
 
         .flecha-container {
             display: flex;
             flex-direction: column; 
-            line-height: 1.2; 
-            margin: 5px 0; 
+            line-height: 1; /* Ajuste para un espaciado más compacto */
         }
 
-        /* ESTILO ESPECÍFICO PARA CADA DIRECCIÓN */
         .flecha-container.salida {
-            align-items: flex-start; /* Pega el grupo (flecha/texto) a la izquierda */
-            padding-left: 10px; /* Margen interno para separarlo del borde */
+            align-items: flex-start; 
+            padding-left: 10px; 
+            margin-bottom: 5px; /* Pequeño margen entre los dos contenedores de flecha */
         }
 
         .flecha-container.ingreso {
-            align-items: flex-end; /* Pega el grupo (flecha/texto) a la derecha */
-            padding-right: 10px; /* Margen interno para separarlo del borde */
+            align-items: flex-end; 
+            padding-right: 10px; 
+            margin-top: 5px; /* Pequeño margen entre los dos contenedores de flecha */
         }
         
         .flecha {
@@ -246,11 +245,12 @@
         .flecha-salida { color: var(--color-salida); }
 
         .label-io-text {
-            font-size: 0.8em; 
+            font-size: 1.2em; /* Aumentado el tamaño del texto */
             font-weight: bold;
             color: var(--color-marrondark);
-            margin-top: 5px; 
-            text-align: center; /* Asegura que el texto esté centrado bajo su flecha */
+            margin-top: 8px; /* Aumentado el margen superior para separar más del icono */
+            text-align: center; 
+            line-height: 1; /* Para que el texto no ocupe demasiado espacio vertical */
         }
     </style>
 </head>
