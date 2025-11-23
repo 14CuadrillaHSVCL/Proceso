@@ -50,7 +50,7 @@
             flex-direction: column;
         }
 
-        /* IMAGEN DE FONDO DE LA VIRGEN DEL CARMEN */
+        /* IMAGEN DE FONDO DE LA VIRGEN DEL CARMEN (AJUSTES CLAVE AQUÍ) */
         .background-image-container {
             position: absolute;
             top: 0;
@@ -58,26 +58,27 @@
             width: 100%;
             height: 100%;
             overflow: hidden;
-            z-index: 0; /* Detrás del contenido */
+            z-index: 0; 
         }
 
         .background-image-container img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Cubre todo el espacio */
-            filter: grayscale(40%) brightness(0.6) contrast(1.1); /* Efecto vintage y sutil */
-            opacity: 0.3; /* Opacidad para que no opaque el texto */
-            transform: scale(1.05); /* Pequeño zoom para evitar bordes afilados */
+            object-fit: cover; 
+            filter: grayscale(40%) brightness(0.7) contrast(1.1); /* Brillo aumentado */
+            opacity: 0.5; /* Opacidad AUMENTADA para hacerla más visible */
+            transform: scale(1.05); 
         }
 
-        /* Capa de degradado sobre la imagen para mejorar legibilidad */
+        /* Capa de degradado sobre la imagen para mejorar legibilidad (AJUSTES CLAVE AQUÍ) */
         .background-overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.9) 50%, var(--color-blanco-main) 100%);
+            /* Opacidad del degradado REDUCIDA para que la imagen se vea más */
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.7) 50%, var(--color-blanco-main) 100%);
             z-index: 1;
         }
 
@@ -85,44 +86,38 @@
            CONTENIDO PRINCIPAL
         --------------------------------- */
         .content {
-            position: relative; /* Para que el contenido esté sobre la imagen de fondo */
+            position: relative; 
             z-index: 2;
             padding: 30px 40px;
             text-align: center;
-            flex-grow: 1; /* Permite que el contenido ocupe el espacio restante */
+            flex-grow: 1; 
             display: flex;
             flex-direction: column;
-            justify-content: space-between; /* Distribuye el espacio entre los bloques */
+            justify-content: space-between; 
         }
 
         /* HEADER: Título y Logos */
         .header {
             display: flex;
             align-items: center;
-            justify-content: space-between; /* Distribuye espacio entre logos y título */
-            gap: 15px; /* Espacio entre los elementos */
+            justify-content: space-between; 
+            gap: 15px; 
             margin-bottom: 25px;
         }
 
         .logo {
-            width: 100px; /* Tamaño de los logos */
+            width: 100px; 
             height: auto;
             flex-shrink: 0; 
-            /* --- CAMBIOS AQUÍ: SE ELIMINAN BORDES Y SOMBRAS --- */
-            /* border-radius: 50%; */ 
-            /* box-shadow: var(--shadow-subtle); */
-            /* border: 2px solid var(--color-dorado-accent); */
-            /* ------------------------------------------------ */
         }
 
         .main-title {
-            font-family: 'Playfair Display', serif; /* Fuente elegante para el título */
-            font-size: 2.8em; /* Tamaño del título principal */
+            font-family: 'Playfair Display', serif; 
+            font-size: 2.8em; 
             color: var(--color-marrondark);
             margin: 0;
             line-height: 1.1;
-            flex-grow: 1; /* Permite que el título ocupe el espacio central */
-            /* Degradado de texto para un efecto premium */
+            flex-grow: 1; 
             background: linear-gradient(to right, var(--color-marrondark), #6E5F52);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -146,7 +141,6 @@
         .event-time {
             font-size: 1.4em;
             font-weight: 600;
-            /* Acento amarillo para la hora */
             color: var(--color-dorado-accent);
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
         }
@@ -155,7 +149,7 @@
             font-family: 'Playfair Display', serif;
             font-size: 1.1em;
             font-style: italic;
-            color: #6E5F52; /* Un tono intermedio */
+            color: #6E5F52; 
             margin-top: 15px;
             letter-spacing: 0.5px;
         }
@@ -187,25 +181,25 @@
         /* Google Maps */
         .map-container {
             border-radius: var(--border-radius-main);
-            overflow: hidden; /* Asegura que el iframe respete el border-radius */
+            overflow: hidden; 
             margin-top: 20px;
             box-shadow: var(--shadow-subtle);
             border: 2px solid var(--color-dorado-accent);
             width: 100%;
-            height: 300px; /* Altura del mapa */
+            height: 300px; 
         }
 
         .map-container iframe {
             width: 100%;
             height: 100%;
-            border: none; /* Elimina el borde predeterminado del iframe */
+            border: none; 
         }
 
         /* Footer */
         .footer {
             margin-top: 30px;
             font-size: 0.9em;
-            color: #8C7B6A; /* Tono de gris/marrón para el footer */
+            color: #8C7B6A; 
             padding-top: 20px;
             border-top: 1px solid #EEE;
         }
@@ -222,7 +216,7 @@
                 padding: 20px;
             }
             .main-title {
-                font-size: 2.2em; /* Título un poco más pequeño */
+                font-size: 2.2em; 
             }
             .event-date {
                 font-size: 1.5em;
@@ -230,12 +224,11 @@
             .event-time {
                 font-size: 1.2em;
             }
-            /* Ajuste de logos para que quepan */
             .logo {
-                width: 70px; /* Reducir tamaño del logo en pantallas medianas */
+                width: 70px; 
             }
             .header {
-                gap: 10px; /* Reducir espacio entre elementos */
+                gap: 10px; 
             }
             .map-container {
                 height: 250px;
@@ -247,14 +240,13 @@
                 padding: 15px;
             }
             .main-title {
-                font-size: 1.6em; /* Título aún más pequeño */
+                font-size: 1.6em; 
             }
             .logo {
-                width: 50px; /* Logos más pequeños en móviles */
-                /* border-width: 1px; */ /* Si eliminamos el borde, esto ya no es necesario */
+                width: 50px; 
             }
             .header {
-                gap: 8px; /* Espacio mínimo */
+                gap: 8px; 
             }
             .event-date {
                 font-size: 1.2em;
@@ -272,17 +264,17 @@
 
 <div class="main-container">
     <div class="background-image-container">
-        <img src="https://14cuadrillahsvcl.github.io/Proceso/virgen_nube.jpg" alt="Virgen del Carmen">
+        <img src="https://via.placeholder.com/1200x800/8C7B6A/FAF8F5?text=Imagen+Virgen+del+Carmen" alt="Virgen del Carmen">
     </div>
     <div class="background-overlay"></div>
 
     <div class="content">
         <header class="header">
-            <img src="https://edwinhsvcl14-maker.github.io/asistencias/logo_hermandad.png" alt="Insignia Izquierda" class="logo logo-left">
+            <img src="https://via.placeholder.com/100x100/4A3C2F/FFD700?text=Logo+Izq" alt="Insignia Izquierda" class="logo logo-left">
             
             <h1 class="main-title">ELECCIONES GENERALES HSVCL</h1>
             
-            <img src="https://edwinhsvcl14-maker.github.io/asistencias/logo_hermandad.png" alt="Insignia Derecha" class="logo logo-right">
+            <img src="https://via.placeholder.com/100x100/4A3C2F/FFD700?text=Logo+Der" alt="Insignia Derecha" class="logo logo-right">
         </header>
 
         <section class="event-info">
