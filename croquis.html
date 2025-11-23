@@ -48,4 +48,263 @@
             width: 470px;
             padding: 20px;
             border: 6px solid var(--color-marrondark);
-            border-radius
+            border-radius: 12px;
+            background-color: var(--color-blanco);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5), 0 0 0 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .titulo {
+            text-align: center;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: var(--color-marrondark);
+            font-weight: 800;
+            text-shadow: 1px 1px 0 var(--color-blanco), -1px -1px 0 rgba(0, 0, 0, 0.1); 
+        }
+
+        .plano {
+            width: 100%;
+            height: 510px;
+            border: 1px solid #D0D0D0;
+            position: relative;
+            background: linear-gradient(180deg, #F9F9F9 0%, var(--color-blanco) 100%);
+        }
+
+        .area {
+            position: absolute;
+            text-align: center;
+            font-size: 0.7em;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 6px;
+            color: var(--color-blanco);
+            padding: 5px;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Franja Superior (POSICIÓN INTACTA) */
+        .sshh { height: 50px; top: 5px; }
+        .bar-cafe { height: 50px; top: 5px; }
+        .w-sshh { width: 18%; }
+        .w-bar-cafe { width: 30%; }
+
+        /* DEGRADADOS MÁS SATURADOS PARA EFECTO PULIDO */
+        .sshh-cab { left: 0; background: linear-gradient(to right, var(--color-primary-dark), var(--color-primary-mid)); }
+        .bar { left: calc(18% + 4px); background: linear-gradient(to right, var(--color-primary-mid), var(--color-primary-light)); }
+        .cafeteria { left: calc(18% + 30% + 8px); background: linear-gradient(to right, var(--color-primary-light), var(--color-primary-mid)); }
+        .sshh-damas { right: 0; background: linear-gradient(to right, var(--color-primary-mid), var(--color-primary-dark)); }
+
+        /* Mesas */
+        .mesa {
+            position: absolute;
+            text-align: center;
+            font-size: 0.6em;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+            border: 1px solid rgba(0, 0, 0, 0.1); 
+            border-radius: 4px;
+            padding: 6px 8px;
+            width: 130px; 
+            height: 48px; 
+            line-height: 1.2;
+            color: var(--color-marrondark); 
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(0, 0, 0, 0.05);
+        }
+
+        /* POSICIÓN INTACTA */
+        .mesa-4 { top: 81px; left: 0; }
+        .mesa-5 { top: 81px; right: 0; }
+        .mesa-3 { top: 155px; left: 0; }
+        .mesa-2 { top: 229px; left: 0; }
+        .mesa-1 { top: 229px; right: 0; }
+        
+        /* Flechas en las mesas (INTACTAS) */
+        .mesa::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            border-top: 10px solid transparent; 
+            border-bottom: 10px solid transparent;
+        }
+
+        .mesa-derecha::after { right: -15px; border-left: 15px solid; border-left-color: inherit; }
+        .mesa-izquierda::after { left: -15px; border-right: 15px solid; border-right-color: inherit; }
+
+        /* APLICACIÓN DE COLORES DE MESAS (EFECTO MADERA PULIDA) */
+
+        /* Mesas Secundarias (4, 5, 2): Tostado Claro con degradado sutil */
+        .mesa-4, .mesa-5, .mesa-2 { 
+            background: linear-gradient(180deg, var(--color-tostado-claro), #DEDEDE);
+            color: var(--color-marrondark);
+        }
+        .mesa-4::after { border-right-color: #DEDEDE; }
+        .mesa-5::after { border-left-color: #DEDEDE; }
+        .mesa-2::after { border-right-color: #DEDEDE; }
+
+        /* Mesas Primarias (3, 1): Marrón Profundo (Máximo Contraste) */
+        .mesa-3, .mesa-1 { 
+            background: linear-gradient(180deg, var(--color-marrondark), #181818); 
+            color: var(--color-blanco); 
+        }
+        .mesa-3::after { border-right-color: #181818; }
+        .mesa-1::after { border-left-color: #181818; }
+
+
+        /* Franja Inferior (POSICIÓN INTACTA) */
+        .franja-inferior {
+            position: absolute;
+            top: 300px;
+            width: 100%;
+            height: calc(510px - 300px);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding: 10px 4px;
+            box-sizing: border-box;
+            gap: 4px;
+        }
+
+        .columna { height: 100%; box-sizing: border-box; display: flex; flex-direction: column; gap: 4px; }
+        .columna-1 { flex-basis: 25%; }
+        .columna-2 { flex-basis: 20%; }
+        .columna-3 { flex-grow: 1; }
+        .columna-4 { flex-basis: 18%; }
+
+        .recuadro {
+            text-align: center;
+            font-size: 0.65em;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+            border: 1px solid rgba(0, 0, 0, 0.1); 
+            border-radius: 6px;
+            color: var(--color-marrondark);
+            padding: 3px;
+            box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .recuadro-full { height: 100%; }
+        .recuadro-top { height: 75px; }
+        .recuadro-bottom { flex-grow: 1; }
+
+        /* APLICACIÓN DE COLORES INFERIORES */
+        .color-salon { 
+            background: linear-gradient(to bottom, var(--color-primary-mid), var(--color-primary-dark)); 
+            color: var(--color-blanco); 
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); 
+        }
+        .color-office { 
+            background-color: var(--color-tostado-claro); 
+            color: var(--color-marrondark); 
+        }
+        .color-oratorio { 
+            background-color: var(--color-tostado-medio); 
+            color: var(--color-marrondark); 
+        }
+
+
+        /* Ingreso y Salida (ULTIMO CAMBIO) */
+        .ingreso-salida-box {
+            background-color: var(--color-blanco);
+            border: 2px dashed var(--color-marrondark); 
+            height: 100%;
+            display: flex;
+            flex-direction: column; /* Apila la flecha y el texto verticalmente */
+            align-items: center;
+            justify-content: space-around; /* Espacio uniforme */
+            padding: 0;
+            box-shadow: none;
+        }
+
+        /* Contenedores para agrupar flecha y texto */
+        .flecha-container {
+            display: flex;
+            flex-direction: column; /* Flecha arriba, texto abajo */
+            align-items: center;
+            line-height: 1.2; /* Ajuste para el espacio entre flecha y texto */
+            margin: 5px 0; /* Espacio entre los grupos de flecha/texto */
+        }
+        
+        .flecha {
+            /* 400% más grande que el tamaño anterior (1.8em * 4 = 7.2em) */
+            font-size: 7.2em; 
+            font-weight: 900;
+            line-height: 0.8; /* Ajuste fino para la altura de la línea de la flecha */
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.2); 
+        }
+        .flecha-ingreso { color: var(--color-ingreso); }
+        .flecha-salida { color: var(--color-salida); }
+
+        .label-io-text {
+            font-size: 0.8em; /* Tamaño de texto adecuado para acompañar la flecha grande */
+            font-weight: bold;
+            color: var(--color-marrondark);
+            margin-top: 5px; /* Pequeño margen superior para separar del icono */
+        }
+    </style>
+</head>
+<body>
+
+<div class="croquis-container">
+    <div class="titulo">UBICACIÓN DE MESAS POR CUADRILLAS Y GRUPOS</div>
+
+    <div class="plano">
+        <div class="area sshh sshh-cab w-sshh">SS. HH. CABALLEROS</div>
+        <div class="area bar-cafe bar w-bar-cafe">BAR</div>
+        <div class="area bar-cafe cafeteria w-bar-cafe">CAFETERÍA</div>
+        <div class="area sshh sshh-damas w-sshh">SS. HH. DAMAS</div>
+        
+        <div class="mesa mesa-izquierda mesa-4">MESA N° 4 <br> CUADRILLAS 13 - 14 - 15 - 16</div>
+        <div class="mesa mesa-derecha mesa-5">MESA N° 5 <br> CUADRILLAS 17 - 18 - 19 - 20 <br> **CANTORAS**</div>
+        <div class="mesa mesa-izquierda mesa-3">MESA N° 3 <br> CUADRILLAS 9 - 10 - 11 - 12</div>
+        <div class="mesa mesa-izquierda mesa-2">MESA N° 2 <br> CUADRILLAS 5 - 6 - 7 - 8</div>
+        <div class="mesa mesa-derecha mesa-1">MESA N° 1 <br> CUADRILLA 1 <br> **SAHUMADORAS**</div>
+
+        <div class="franja-inferior">
+            
+            <div class="columna columna-1">
+                <div class="recuadro color-salon recuadro-full">SALÓN CARRASCO</div>
+            </div>
+            
+            <div class="columna columna-2">
+                <div class="recuadro color-office recuadro-top">FISCALÍA</div>
+                <div class="recuadro color-salon recuadro-bottom">SALÓN VIRGEN DEL CARMEN</div>
+            </div>
+            
+            <div class="columna columna-3">
+                <div class="recuadro recuadro-full ingreso-salida-box">
+                    <div class="flecha-container">
+                        <div class="flecha flecha-salida">&darr;</div>
+                        <div class="label-io-text">SALIDA</div>
+                    </div>
+                    <div class="flecha-container">
+                        <div class="flecha flecha-ingreso">&uarr;</div>
+                        <div class="label-io-text">INGRESO</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="columna columna-4">
+                <div class="recuadro color-office recuadro-top">JURADO ELECTORAL</div>
+                <div class="recuadro color-oratorio recuadro-bottom">ORATORIO</div>
+            </div>
+            
+        </div>
+        
+    </div>
+</div>
+
+</body>
+</html>
