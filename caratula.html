@@ -10,15 +10,15 @@
            VARIABLES DE PALETA Y ESTILOS PREMIUM
         --------------------------------- */
         :root {
-            --color-marrondark: #4A3C2F;     /* Fondo de la Columna de Texto */
+            --color-marrondark: #4A3C2F;     /* Marrón oscuro para el degradado */
+            --color-marron-claro-degradado: #6E5F52; /* Marrón más claro para el degradado */
             --color-dorado-accent: #B8860B; /* Dorado para Títulos y Acentos */
             --color-blanco-main: #FFFFFF;    /* Texto de Contraste */
-            --color-crema-bg: #FAF8F5;       /* Color base sutil */
-            --shadow-subtle: 0 4px 10px rgba(0, 0, 0, 0.1);
+            --color-crema-bg: #FAF8F5;       
         }
 
         /* ---------------------------------
-           ESTRUCTURA DE DOS COLUMNAS (REPLICA DISNEY+)
+           ESTRUCTURA BASE: VIRGEN COMPLETA
         --------------------------------- */
         body {
             font-family: 'Montserrat', sans-serif;
@@ -28,53 +28,76 @@
             min-height: 100vh;
             color: var(--color-blanco-main);
             overflow-x: hidden; 
+            position: relative;
         }
 
+        /* DIV QUE CONTIENE LA IMAGEN DE LA VIRGEN SIN NINGÚN EFECTO DE OPACIDAD */
+        .full-background-image {
+            position: fixed; /* Fijo para que cubra la pantalla */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2; /* El más bajo */
+            overflow: hidden;
+        }
+
+        .full-background-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 1; /* IMAGEN DE LA VIRGEN SIN OPACIDAD/EFECTOS */
+        }
+
+        /* NUEVO: DIV DE CAPA/VELO MARRÓN CON DEGRADADO Y TRANSPARENCIA */
+        .full-screen-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Sobre la Virgen, debajo del contenido */
+            /* Degradado de Marrón a Transparente para crear el efecto suave */
+            background: linear-gradient(to right, 
+                rgba(74, 60, 47, 0.95) 0%,     /* Marrón oscuro muy opaco a la izquierda (para el texto) */
+                rgba(110, 95, 82, 0.7) 50%,     /* Marrón medio transparente al centro */
+                rgba(74, 60, 47, 0.5) 100%);   /* Marrón oscuro transparente a la derecha (sobre la Virgen) */
+        }
+
+        /* ---------------------------------
+           ESTRUCTURA DE DOS COLUMNAS (CONTENIDO)
+        --------------------------------- */
         .main-container {
             display: flex;
             width: 100%;
             height: 100vh; 
             position: relative;
+            z-index: 1; /* El contenido debe estar por encima del overlay */
         }
 
-        /* COLUMNA IZQUIERDA: CONTENIDO Y TEXTO (FONDO MARRÓN SÓLIDO) */
+        /* COLUMNA IZQUIERDA: CONTENIDO Y TEXTO (SIN FONDO PROPIO, USA EL OVERLAY) */
         .content-column {
             width: 50%;
             padding: 50px;
-            background-color: var(--color-marrondark); /* Fondo marrón sólido */
+            /* Eliminamos el background-color. El fondo lo da el .full-screen-overlay */
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: flex-start; 
             text-align: left;
-            z-index: 2; 
         }
 
-        /* COLUMNA DERECHA: IMAGEN DE LA VIRGEN */
+        /* COLUMNA DERECHA: IMAGEN DE LA VIRGEN (SIN IMAGEN DENTRO, SOLO PARA MANTENER LA DIVISIÓN) */
         .image-column {
             width: 50%;
             height: 100%;
             position: relative;
-            overflow: hidden;
-            z-index: 1;
         }
-
-        .image-column img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            /* CAMBIO CLAVE: Opacidad directa sobre la imagen de la Virgen */
-            opacity: 0.6; /* Puedes ajustar este valor (0.1 a 1.0) para el nivel de "tenue" */
-            filter: brightness(0.9); /* Opcional: bajar un poco el brillo si se ve muy vívida */
-        }
-
-        /* Eliminamos el pseudo-elemento ::before y cualquier overlay */
-        /* .image-column::before { display: none; } */
-
-
+        
         /* ---------------------------------
            ESTILOS DE CONTENIDO
         --------------------------------- */
+        /* ... Estilos de texto (header, main-title, event-info, location-info, footer) sin cambios ... */
         .header {
             display: flex;
             align-items: center;
@@ -97,7 +120,6 @@
             text-shadow: 0 0 10px rgba(0, 0, 0, 0.5); 
         }
         
-        /* Información de Evento */
         .event-info {
             margin-bottom: 40px;
             padding: 10px 0;
@@ -125,7 +147,6 @@
             letter-spacing: 0.5px;
         }
 
-        /* Información de Sede */
         .location-info {
             margin-bottom: 40px;
             padding: 15px;
@@ -145,7 +166,6 @@
             color: var(--color-blanco-main);
         }
 
-        /* Footer */
         .footer {
             position: absolute; 
             bottom: 30px;
@@ -182,6 +202,13 @@
                 margin-top: 20px;
                 padding-left: 0;
             }
+            /* Ajustamos el overlay para la vista móvil */
+            .full-screen-overlay {
+                background: linear-gradient(to bottom, 
+                    rgba(74, 60, 47, 0.95) 0%, 
+                    rgba(110, 95, 82, 0.7) 50%, 
+                    rgba(74, 60, 47, 0.5) 100%);
+            }
         }
 
         @media (max-width: 576px) {
@@ -193,6 +220,12 @@
     </style>
 </head>
 <body>
+
+<div class="full-background-image">
+    <img src="https://14cuadrillahsvcl.github.io/Proceso/virgen_nube.jpg" alt="Virgen del Carmen">
+</div>
+
+<div class="full-screen-overlay"></div>
 
 <div class="main-container">
     
@@ -216,13 +249,10 @@
         </section>
 
         <img src="https://via.placeholder.com/100x100/FFFFFF/4A3C2F?text=Logo+Der" alt="Insignia Derecha" class="logo logo-right" style="margin-top: 30px;">
-
-
     </div>
     
     <div class="image-column">
-        <img src="https://14cuadrillahsvcl.github.io/Proceso/virgen_nube.jpg" alt="Virgen del Carmen">
-    </div>
+        </div>
 
     <footer class="footer">
         © 2023 Hermandad de la Virgen del Carmen. Todos los derechos reservados.
