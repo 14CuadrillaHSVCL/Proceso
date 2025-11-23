@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ubicación de Mesas - VERSIÓN PROFESIONAL MARRÓN/CREMA/BLANCO</title>
+    <title>Ubicación de Mesas - DISEÑO INCREÍBLE CON EFECTOS VISUALES 3D</title>
     <style>
         /* ---------------------------------
-           PALETA PROFESIONAL
+           PALETA PROFESIONAL (RIGUROSA)
         --------------------------------- */
         :root {
             /* Colores de Jerarquía */
@@ -14,19 +14,21 @@
             --color-crema: #F7F4F0;        /* Crema Suave (Fondo del Body) */
             --color-blanco: #FFFFFF;       /* Blanco Puro (Fondo del Plano, Contraste) */
             
-            /* Color Primario VIVO (Cobre/Caramelo) */
-            --color-primary-base: #AF710E;
-            --color-primary-light: #D49D46; 
-            --color-primary-dark: #8C5B0A;  
-            --color-primary-mid: #BF872F; 
+            /* Color Primario VIVO (Cobre/Caramelo - Más Saturado) */
+            --color-primary-base: #B87C19; 
+            --color-primary-light: #E0A94F; 
+            --color-primary-dark: #9E6410;  
+            --color-primary-mid: #CC9038; 
             
             /* Marrón Medio (Para Mesas y Oficinas) */
             --color-tostado-medio: #BCAAA4;
-            --color-tostado-claro: #E0E0E0;
+            --color-tostado-claro: #EFEBE9; /* Casi blanco */
             
             /* Colores de Funcionalidad (Se mantienen) */
             --color-ingreso: #4CAF50;
             --color-salida: #F44336;
+            
+            --gap: 4px; 
         }
 
         /* ---------------------------------
@@ -38,7 +40,6 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            /* CAMBIO DE COLOR */
             background-color: var(--color-crema); 
             margin: 0;
         }
@@ -46,29 +47,30 @@
         .croquis-container {
             width: 470px;
             padding: 20px;
-            border: 2px solid var(--color-marrondark);
-            border-radius: 8px;
-            /* CAMBIO DE COLOR */
+            /* Borde más grueso y sombra profunda para el marco */
+            border: 6px solid var(--color-marrondark);
+            border-radius: 12px;
             background-color: var(--color-blanco);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5), 0 0 0 8px rgba(0, 0, 0, 0.05);
         }
 
         .titulo {
             text-align: center;
             font-size: 1.5em;
             margin-bottom: 15px;
-            /* CAMBIO DE COLOR */
             color: var(--color-marrondark);
             font-weight: 800;
+             /* Efecto de texto grabado en el fondo */
+            text-shadow: 1px 1px 0 var(--color-blanco), -1px -1px 0 rgba(0, 0, 0, 0.1); 
         }
 
         .plano {
             width: 100%;
             height: 510px;
-            border: 1px solid #ccc;
+            /* Borde suave, fondo ligeramente degradado para el 'papel' */
+            border: 1px solid #D0D0D0;
             position: relative;
-            /* CAMBIO DE COLOR */
-            background-color: var(--color-blanco);
+            background: linear-gradient(180deg, #F9F9F9 0%, var(--color-blanco) 100%);
         }
 
         .area {
@@ -80,12 +82,13 @@
             justify-content: center;
             align-items: center;
             box-sizing: border-box;
-            border: 1px solid var(--color-marrondark);
-            border-radius: 4px;
-            /* CAMBIO DE COLOR */
+            /* Borde casi invisible, dejando que la sombra haga el trabajo */
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 6px;
             color: var(--color-blanco);
             padding: 5px;
-            box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.2); /* Detalle de degradado/profundidad */
+            /* Sombra interna para efecto 'hundido' o de marco */
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2);
         }
 
         /* Franja Superior (POSICIÓN INTACTA) */
@@ -94,7 +97,7 @@
         .w-sshh { width: 18%; }
         .w-bar-cafe { width: 30%; }
 
-        /* APLICACIÓN DE DEGRADADOS VIVOS (#AF710E) */
+        /* DEGRADADOS MÁS SATURADOS PARA EFECTO PULIDO */
         .sshh-cab { left: 0; background: linear-gradient(to right, var(--color-primary-dark), var(--color-primary-mid)); }
         .bar { left: calc(18% + 4px); background: linear-gradient(to right, var(--color-primary-mid), var(--color-primary-light)); }
         .cafeteria { left: calc(18% + 30% + 8px); background: linear-gradient(to right, var(--color-primary-light), var(--color-primary-mid)); }
@@ -110,15 +113,15 @@
             justify-content: center;
             align-items: center;
             box-sizing: border-box;
-            border: 1px solid var(--color-marrondark);
+            border: 1px solid rgba(0, 0, 0, 0.1); 
             border-radius: 4px;
             padding: 6px 8px;
             width: 130px; 
             height: 48px; 
             line-height: 1.2;
-            /* TEXTO PREDETERMINADO */
             color: var(--color-marrondark); 
-            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Sombra suave para relieve */
+            /* Sombra compleja para efecto de elevación 3D */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(0, 0, 0, 0.05);
         }
 
         /* POSICIÓN INTACTA */
@@ -140,36 +143,27 @@
             border-bottom: 10px solid transparent;
         }
 
-        .mesa-derecha::after {
-            right: -15px;
-            border-left: 15px solid;
-            border-left-color: inherit;
-        }
+        .mesa-derecha::after { right: -15px; border-left: 15px solid; border-left-color: inherit; }
+        .mesa-izquierda::after { left: -15px; border-right: 15px solid; border-right-color: inherit; }
 
-        .mesa-izquierda::after {
-            left: -15px;
-            border-right: 15px solid;
-            border-right-color: inherit;
-        }
+        /* APLICACIÓN DE COLORES DE MESAS (EFECTO MADERA PULIDA) */
 
-        /* APLICACIÓN DE COLORES DE MESAS (JERARQUÍA VISUAL) */
-
-        /* Mesas Secundarias (4, 5, 2): Tostado Medio, Texto Marrón Oscuro */
+        /* Mesas Secundarias (4, 5, 2): Tostado Claro con degradado sutil */
         .mesa-4, .mesa-5, .mesa-2 { 
-            background: linear-gradient(135deg, var(--color-tostado-claro), var(--color-tostado-medio));
+            background: linear-gradient(180deg, var(--color-tostado-claro), #DEDEDE);
             color: var(--color-marrondark);
         }
-        .mesa-4::after { border-right-color: var(--color-tostado-medio); }
-        .mesa-5::after { border-left-color: var(--color-tostado-medio); }
-        .mesa-2::after { border-right-color: var(--color-tostado-medio); }
+        .mesa-4::after { border-right-color: #DEDEDE; }
+        .mesa-5::after { border-left-color: #DEDEDE; }
+        .mesa-2::after { border-right-color: #DEDEDE; }
 
-        /* Mesas Primarias (3, 1): Marrón Profundo (Máximo Contraste), Texto Blanco */
+        /* Mesas Primarias (3, 1): Marrón Profundo (Máximo Contraste) */
         .mesa-3, .mesa-1 { 
-            background: linear-gradient(135deg, var(--color-marrondark), #211A1A); 
+            background: linear-gradient(180deg, var(--color-marrondark), #181818); 
             color: var(--color-blanco); 
         }
-        .mesa-3::after { border-right-color: #211A1A; }
-        .mesa-1::after { border-left-color: #211A1A; }
+        .mesa-3::after { border-right-color: #181818; }
+        .mesa-1::after { border-left-color: #181818; }
 
 
         /* Franja Inferior (POSICIÓN INTACTA) */
@@ -200,11 +194,11 @@
             justify-content: center;
             align-items: center;
             box-sizing: border-box;
-            border: 1px solid var(--color-marrondark);
-            border-radius: 4px;
-            padding: 3px;
+            border: 1px solid rgba(0, 0, 0, 0.1); /* Borde muy sutil */
+            border-radius: 6px;
             color: var(--color-marrondark);
-            box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+            padding: 3px;
+            box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
         }
 
         .recuadro-full { height: 100%; }
@@ -215,22 +209,29 @@
         .color-salon { 
             background: linear-gradient(to bottom, var(--color-primary-mid), var(--color-primary-dark)); 
             color: var(--color-blanco); 
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Efecto de tarima elevada */
         }
-        .color-office { background-color: var(--color-tostado-claro); color: var(--color-marrondark); }
-        .color-oratorio { background-color: var(--color-tostado-medio); color: var(--color-marrondark); }
+        .color-office { 
+            background-color: var(--color-tostado-claro); 
+            color: var(--color-marrondark); 
+        }
+        .color-oratorio { 
+            background-color: var(--color-tostado-medio); 
+            color: var(--color-marrondark); 
+        }
 
 
-        /* Ingreso y Salida (INTACTO) */
+        /* Ingreso y Salida (DETALLE FINAL) */
         .ingreso-salida-box {
             background-color: var(--color-blanco);
-            border: 2px dashed var(--color-marrondark); /* Borde punteado para el área de paso */
+            border: 2px dashed var(--color-marrondark); 
             height: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: space-around;
             padding: 0;
-            box-shadow: none;
+            box-shadow: none; /* Quitamos la sombra para mantenerlo como área de paso */
         }
 
         .ingreso-salida-box .label-io {
@@ -247,6 +248,8 @@
             font-size: 1.8em;
             font-weight: 900;
             line-height: 1;
+            /* Sombra sutil para hacer las flechas más visibles */
+            text-shadow: 0 0 3px rgba(0, 0, 0, 0.1); 
         }
         .flecha-ingreso { color: var(--color-ingreso); }
         .flecha-salida { color: var(--color-salida); }
