@@ -29,7 +29,6 @@
         }
 
         .croquis-container {
-            /* Contenedor Alargado */
             width: 550px; 
             padding: 25px;
             border-radius: 18px;
@@ -49,7 +48,7 @@
 
         .plano {
             width: 100%;
-            height: 700px; /* Altura mantenida para el efecto alargado */
+            height: 700px;
             position: relative;
             border: 1px solid #E0E0E0;
         }
@@ -104,32 +103,28 @@
         .mesa-1::after { border-right-color: #211A1A; }
 
 
-        /* --- 3. ESTRUCTURA INFERIOR (AJUSTES FINALES) --- */
+        /* --- 3. ESTRUCTURA INFERIOR (AJUSTE FINAL: Ingreso/Salida expandido) --- */
         .inferior { top: 400px; height: 280px; margin-top: 10px; }
 
-        /* Paso 1: Reducir Salón Carrasco (33% -> 25%) */
+        /* Salón Carrasco (25% ancho) */
         .salon-carrasco { left: 10px; width: 25%; }
         
-        /* Paso 2: Aumentar Fiscalía/Salón Virgen del Carmen (28% -> 36%) */
+        /* Fiscalía y Salón Virgen (18% ancho) */
         .fiscalia { left: 26%; width: 18%; }
         .salon-virgen { left: 26%; width: 18%; top: 500px; height: 180px; }
         
-        /* Paso 3: Mover Ingreso/Salida y aumentar su ancho (10% -> 12%) */
-        .ingreso-salida-box { left: 45%; width: 12%; }
-
-        /* Paso 4: Reorganizar Jurado Electoral (Encima de Oratorio) */
-        /* Jurado Electoral y Oratorio ahora comparten el espacio derecho */
-        .jurado { left: 58%; width: 20%; height: 140px; top: 400px; } /* Mitad superior */
-        .oratorio { left: 58%; width: 20%; height: 140px; top: 550px; } /* Mitad inferior */
+        /* Jurado/Oratorio (20% ancho) */
+        .jurado { right: 10px; width: 20%; height: 130px; top: 400px; } /* Pegado a la derecha */
+        .oratorio { right: 10px; width: 20%; height: 130px; top: 550px; } /* Pegado a la derecha */
         
-        /* Ajuste de Salón Carrasco y Oratorio (El Oratorio ya no necesita su propia posición, Jurado Electoral lo define) */
+        /* Ingreso/Salida BOX (Expandido para tomar el espacio restante) */
+        /* Nuevo ancho: 100% - (25% + 1% gap) - (18% + 1% gap) - (20% + 1% gap) = 34% (aproximado) */
+        .ingreso-salida-box { left: 45%; width: 34%; height: 280px; } 
+
+        /* Ajustes de Altura */
         .salon-carrasco, .ingreso-salida-box { height: 280px; }
         .fiscalia { height: 90px; }
         
-        /* Altura de Oratorio y Jurado Electoral */
-        .oratorio, .jurado { height: 130px; }
-
-
         /* Flechas de Ingreso/Salida */
         .ingreso-salida-box { display: flex; flex-direction: column; align-items: center; justify-content: space-around; padding: 0; }
         .flecha { font-size: 2em; font-weight: 900; text-shadow: 0 0 5px rgba(0,0,0,0.5); line-height: 1; }
