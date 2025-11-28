@@ -5,208 +5,145 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>¡La Luz de Adviento! | Hermandad del Carmen de Lima</title>
     <style>
-        /* CSS GENERAL Y TEMÁTICO */
+        /* ---------------------------------------------------- */
+        /* --------- CSS: DISEÑO Y EFECTOS PROFESIONALES ------ */
+        /* ---------------------------------------------------- */
+
+        /* Paleta: #0A192F (Noche), #6A0573 (Morado Adviento), #990011 (Rojo Granate), #FFD700 (Dorado), #F0F8FF (Crema) */
+
         body {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background-color: #1C2F4D; /* Noche invernal oscura */
+            background-color: #0A192F; /* Noche profunda */
             font-family: 'Arial', sans-serif;
-            color: #F5F5DC; /* Crema/Blanco suave */
+            color: #F0F8FF; 
             margin: 0;
             padding: 20px;
             min-height: 100vh;
             overflow: hidden; 
             position: relative; 
+            transition: background-color 0.5s;
         }
 
         /* --- Estilo de Nieve (Overlay) --- */
         .snow {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 9999; 
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 9999; 
         }
         .snow-dot {
-            position: absolute;
-            background-color: white;
-            border-radius: 50%;
-            opacity: 0.8;
+            position: absolute; background-color: white; border-radius: 50%;
+            opacity: 0.9;
             animation: snowfall linear infinite;
         }
         @keyframes snowfall {
-            0% { transform: translateY(-100%) translateX(0px); opacity: 0.8;}
-            100% { transform: translateY(100vh) translateX(20px); opacity: 0.8;}
+            0% { transform: translateY(-100%) translateX(0px); opacity: 0.9;}
+            100% { transform: translateY(100vh) translateX(20px); opacity: 0.9;}
         }
 
-        /* --- Contenedores de Pantallas --- */
+        /* --- Contenedores de Pantallas y Neumorfismo --- */
         #game-screen, #mission-screen, #victory-screen {
             display: none;
             width: 90vw;
             max-width: 800px;
+            min-height: 400px;
             position: relative;
-            background-color: #3B597C; 
-            border: 5px solid #B00020; 
-            box-shadow: 0 0 20px #B00020, 0 0 10px #FFD700; 
-            border-radius: 10px;
+            background: linear-gradient(145deg, #10294c, #0d2139); /* Neumorfismo suave */
+            border-radius: 20px;
+            box-shadow: 10px 10px 20px #081523, -10px -10px 20px #0c1d3b; /* Sombra profunda */
+            border: 1px solid rgba(255, 255, 255, 0.05);
             overflow: hidden;
+            transition: opacity 0.5s, transform 0.5s;
         }
 
         /* --- Pantalla Principal (Menu) --- */
         #main-menu {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            width: 90vw;
-            max-width: 800px;
-            min-height: 400px;
-            /* RUTA DE LA IMAGEN DEL MENÚ - ACTUALIZADA CON LA URL */
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            width: 90vw; max-width: 800px; min-height: 400px;
             background: url('https://14cuadrillahsvcl.github.io/Proceso/14c.png') no-repeat center center / cover; 
-            border-radius: 10px;
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
+            border-radius: 20px;
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.7);
             text-align: center;
             padding: 30px 10px;
             position: relative;
             overflow: hidden;
+            transition: all 0.5s;
         }
         #main-menu::before { 
-            content: "";
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-color: rgba(0, 0, 0, 0.4);
+            content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(0, 0, 0, 0.6); /* Oscurecer más para contraste */
             z-index: 1;
-        }
-
-        #main-menu h1, #main-menu p, #main-start-btn {
-            position: relative;
-            z-index: 2; 
         }
 
         #main-menu h1 {
             color: #FFD700; 
-            font-size: 3.5em; 
+            font-size: 4em; 
             margin-bottom: 10px;
-            text-shadow: 0 0 15px #B00020, 0 0 8px #000;
+            text-shadow: 0 0 20px #990011, 0 0 10px #000;
+            animation: pulse-glow 2s infinite alternate; /* Efecto de luz pulsante */
+        }
+        @keyframes pulse-glow {
+            from { text-shadow: 0 0 10px #FFD700, 0 0 5px #990011; }
+            to { text-shadow: 0 0 20px #FFD700, 0 0 15px #990011; }
         }
 
-        #main-menu p {
-            color: #F5F5DC;
-            font-size: 1.3em;
-            margin-bottom: 40px;
-            text-shadow: 1px 1px 3px #000;
-        }
-        
-        /* --- Estilos de Botones --- */
+        /* --- Estilos de Botones (Profesional) --- */
         .btn-start {
             padding: 18px 45px; 
             font-size: 1.6em; 
             font-weight: bold;
-            color: #FFFFFF; 
-            background-color: #00A050; 
+            color: #F0F8FF; 
+            background-color: #6A0573; /* Morado Adviento */
             border: none;
-            border-radius: 10px; 
+            border-radius: 15px; 
             cursor: pointer;
-            box-shadow: 0 6px #006030; 
-            transition: all 0.15s ease-in-out;
+            box-shadow: 5px 5px 10px #081523, -5px -5px 10px #122c4a; /* Sombra neumórfica */
+            transition: all 0.2s ease-in-out;
             letter-spacing: 1px;
+            text-transform: uppercase;
         }
         .btn-start:hover {
-            background-color: #00B060;
+            background-color: #8A0593;
+            transform: translateY(-2px);
+            box-shadow: 8px 8px 15px #081523, -8px -8px 15px #122c4a;
         }
         .btn-start:active {
-            box-shadow: 0 2px #006030;
-            transform: translateY(4px);
-            background-color: #009040;
+            box-shadow: inset 2px 2px 5px #081523, inset -2px -2px 5px #122c4a;
+            transform: translateY(1px);
         }
 
         /* --- Pantalla de Misión (Intro) --- */
         #mission-screen {
-            flex-direction: row;
-            justify-content: center; 
-            align-items: center;
-            padding: 20px;
-            min-height: 400px;
-            background-color: #1C2F4D; 
-            color: #F5F5DC;
-            gap: 20px; 
+            padding: 40px;
         }
-
-        #char-box {
-            text-align: center;
-            flex-shrink: 0; 
-        }
-
         #char-image-display {
-            width: 120px; 
-            height: 160px;
-            /* RUTA DE LA IMAGEN DEL PERSONAJE - SIGUE SIENDO LOCAL */
+            width: 140px; 
+            height: 180px;
+            /* RUTA DE LA IMAGEN DEL PERSONAJE */
             background: url('./elias_character.png') no-repeat center center / contain; 
-            border: 3px solid #FFD700; 
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
-            margin-bottom: 8px;
-            display: inline-block;
-        }
-        
-        #mission-text {
-            color: #F5F5DC;
-            text-align: left;
-            flex-grow: 1;
-            padding-left: 10px; 
-            max-width: 60%; 
+            border: 4px solid #FFD700; 
+            border-radius: 50%; /* Más amigable y angelical */
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.9);
         }
         
         #mission-text h2 {
             color: #FFD700;
-            margin-top: 0;
-            font-size: 2em;
-            text-shadow: 1px 1px 2px #000;
+            text-shadow: 0 0 5px #990011;
         }
-
         #mission-description {
-            border-right: .15em solid #FFD700; 
-            font-family: 'Georgia', serif; 
-            font-size: 1.1em;
-            white-space: pre-wrap; 
-            overflow: hidden;
-            letter-spacing: .03em;
-            min-height: 120px; 
-            padding-right: 5px;
-            line-height: 1.5;
+            color: #F0F8FF;
+            font-size: 1.2em;
+            line-height: 1.6;
         }
-        
+
         /* --- Elementos de Juego --- */
-        canvas {
-            display: block;
-            width: 100%;
-            height: auto;
-            position: relative; 
-            z-index: 1;
-        }
-
-        #game-container {
-            width: 90vw;
-            max-width: 800px;
-            position: relative;
-            border: 5px solid #B00020;
-            box-shadow: 0 0 20px #B00020, 0 0 10px #FFD700;
-            border-radius: 10px;
-            overflow: hidden;
-            background-color: transparent; 
-        }
-
         #score-board {
             width: 100%; 
-            margin-top: 0; margin-bottom: 0; 
-            padding: 10px 20px;
-            font-size: 1.5em; color: #FFFFFF;
-            background-color: #5D2E8E; /* Morado Adviento oscuro */
-            border-bottom: 2px solid #FFD700;
+            padding: 15px 20px;
+            font-size: 1.6em; color: #F0F8FF;
+            background-color: #6A0573; /* Morado Adviento oscuro */
+            border-bottom: 3px solid #FFD700;
             text-align: center;
         }
         #score-board span {
@@ -214,63 +151,81 @@
             color: #FFD700; 
         }
 
+        /* --- ALERTA DE NIVEL PERSONALIZADA (MODAL) --- */
+        #custom-alert-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none; justify-content: center; align-items: center;
+            z-index: 10000;
+            backdrop-filter: blur(5px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        #custom-alert-box {
+            background: linear-gradient(135deg, #990011, #6A0573); /* Rojo/Morado degradado */
+            padding: 40px;
+            border-radius: 25px;
+            text-align: center;
+            color: #F0F8FF;
+            transform: scale(0.5);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Efecto pop */
+            box-shadow: 0 0 50px #FFD700;
+            border: 5px solid #FFD700;
+        }
+        #alert-title {
+            color: #FFD700;
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 0 0 15px #FFF, 0 0 8px #000;
+            animation: pulse-glow 1.5s infinite alternate;
+        }
+        #alert-message {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+        #alert-button {
+            background-color: #FFD700;
+            color: #0A192F;
+            font-weight: bold;
+            padding: 10px 30px;
+            border-radius: 10px;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 4px #c2a800;
+            transition: all 0.1s;
+        }
+        #alert-button:active {
+            box-shadow: 0 1px #c2a800;
+            transform: translateY(3px);
+        }
+
         /* --- Pantalla de Victoria --- */
         #victory-screen {
-            flex-direction: column; justify-content: center; align-items: center; 
-            min-height: 400px; text-align: center; padding: 20px;
-            background: linear-gradient(135deg, #FFD700 0%, #FF4040 50%, #FFD700 100%); 
-            color: #1a1a2e; 
+            padding: 40px;
+            background: linear-gradient(135deg, #FFD700 0%, #990011 50%, #FFD700 100%); 
+            color: #0A192F; 
         }
         #victory-screen h1 {
-            color: #1a1a2e; 
+            color: #0A192F; 
             font-size: 4.5em; margin-bottom: 20px;
             text-shadow: 0 0 15px #FFFFFF, 0 0 8px #000;
         }
         #victory-screen p {
-            font-size: 1.7em; color: #1a1a2e;
-            margin-top: 10px; line-height: 1.4;
-            text-shadow: 1px 1px 2px #fff;
-        }
-        #victory-screen p:last-of-type { 
-            font-size: 1.4em; color: #5D2E8E; 
-            margin-top: 30px; font-style: italic;
+            color: #0A192F;
         }
         #restart-btn {
-            margin-top: 30px;
-            background-color: #B00020; 
-            box-shadow: 0 6px #600010;
+            background-color: #990011; 
+            box-shadow: 0 6px #550009;
         }
-        #restart-btn:hover { background-color: #CC0030; }
-        #restart-btn:active { background-color: #900000; }
+        #restart-btn:hover { background-color: #b00020; }
+        #restart-btn:active { background-color: #77000b; }
 
-        /* --- Créditos Hermandad --- */
-        #credits {
-            margin-top: 15px;
-            font-size: 0.8em;
-            color: #F5F5DC; 
-            text-align: center;
-            text-shadow: 1px 1px 2px #000;
-        }
-        #credits span {
-            color: #D2B48C; 
-            font-weight: bold;
-        }
-
-        /* Media Queries para Ajuste Móvil */
+        /* Media Queries */
         @media (max-width: 600px) {
-            #main-menu h1 { font-size: 2.5em; }
-            #main-menu p { font-size: 1em; }
-            .btn-start { padding: 12px 25px; font-size: 1.2em; }
-            
-            #mission-screen { flex-direction: column; text-align: center; gap: 10px; }
-            #char-box { margin-bottom: 10px; }
-            #mission-text { padding-left: 0; max-width: 100%; }
-            #mission-text h2 { font-size: 1.5em; }
-            #mission-description { font-size: 0.9em; min-height: 100px; }
-
-            #score-board { font-size: 1.2em; }
-            #victory-screen h1 { font-size: 3em; }
-            #victory-screen p { font-size: 1.2em; }
+            #main-menu h1 { font-size: 3em; }
+            #mission-screen { flex-direction: column; text-align: center; }
+            #char-image-display { margin: 10px auto; }
+            #alert-title { font-size: 2em; }
         }
     </style>
 </head>
@@ -280,19 +235,19 @@
 
     <div id="main-menu">
         <h1>¡LA LUZ DE ADVIENTO!</h1>
-        <p>Una aventura de esperanza y fe en espera del Redentor.</p>
+        <p style="position: relative; z-index: 2; font-size: 1.3em; text-shadow: 1px 1px 3px #000;">Una aventura de esperanza y fe en espera del Redentor.</p>
         <button id="main-start-btn" class="btn-start">INICIAR AVENTURA</button>
     </div>
 
     <div id="mission-screen">
         <div id="char-box">
             <div id="char-image-display"></div> 
-            <p style="color: #FFD700; font-weight: bold; margin-top: 5px; text-shadow: 1px 1px 2px #000;">Mensajero Elías</p>
+            <p style="color: #FFD700; font-weight: bold; margin-top: 15px; text-shadow: 1px 1px 2px #000;">Mensajero Elías</p>
         </div>
         <div id="mission-text">
             <h2>Misión de Adviento</h2>
             <div id="mission-description"></div>
-            <button id="mission-start-btn" class="btn-start" style="margin-top: 25px; display: none;">EMPEZAR JUEGO</button>
+            <button id="mission-start-btn" class="btn-start" style="margin-top: 35px; display: none;">EMPEZAR JUEGO</button>
         </div>
     </div>
 
@@ -307,16 +262,24 @@
 
     <div id="victory-screen">
         <h1>¡MISIÓN CUMPLIDA!</h1>
-        <p>
+        <p style="font-size: 1.7em;">
             Has encendido la Luz de Adviento (50 Velitas) y guiado el camino de la Estrella al Portal de Belén.
             <br>¡La Navidad ha llegado!
         </p>
-        <p>"El Adviento es caminar juntos al encuentro de Dios."</p>
+        <p style="font-size: 1.4em; font-style: italic; margin-top: 30px;">"El Adviento es caminar juntos al encuentro de Dios."</p>
         <button id="restart-btn" class="btn-start">VOLVER AL INICIO</button>
     </div>
 
-    <p id="credits">
-        Creado con fe y devoción por: <span>Hermandad de la Santísima Virgen del Carmen de Lima</span>
+    <div id="custom-alert-overlay">
+        <div id="custom-alert-box">
+            <h2 id="alert-title">¡NIVEL SUPERADO!</h2>
+            <p id="alert-message">La velocidad ha aumentado. Concéntrate en llegar a la meta final.</p>
+            <button id="alert-button">Continuar</button>
+        </div>
+    </div>
+
+    <p style="margin-top: 15px; font-size: 0.8em; color: #F0F8FF; text-align: center; text-shadow: 1px 1px 2px #000;">
+        Creado con fe y devoción por: <span style="color: #D2B48C; font-weight: bold;">Hermandad de la Santísima Virgen del Carmen de Lima</span>
     </p>
 
     <script>
@@ -329,27 +292,23 @@
         const ctx = canvas.getContext('2d');
         const scoreElement = document.getElementById('score');
         const levelElement = document.getElementById('level');
+        const alertOverlay = document.getElementById('custom-alert-overlay');
+        const alertBox = document.getElementById('custom-alert-box');
+        const alertTitle = document.getElementById('alert-title');
+        const alertMessage = document.getElementById('alert-message');
+        const alertButton = document.getElementById('alert-button');
         
         // Creamos un botón de salto táctil dinámicamente
         const jumpButton = document.createElement('button');
         jumpButton.id = 'jump-button-mobile'; 
         jumpButton.textContent = 'SALTA';
-        // Estilos para el botón táctil (usado solo cuando game-screen está visible)
         jumpButton.style.cssText = `
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            padding: 15px 30px;
-            font-size: 1.2em;
-            font-weight: bold;
-            color: #FFFFFF;
-            background-color: #B00020; 
-            border: none;
-            border-radius: 8px;
-            box-shadow: 0 5px #600010;
-            cursor: pointer;
-            z-index: 1000;
+            position: fixed; bottom: 20px; right: 20px; padding: 15px 30px;
+            font-size: 1.2em; font-weight: bold; color: #F0F8FF;
+            background-color: #990011; border: none; border-radius: 8px;
+            box-shadow: 0 5px #550009; cursor: pointer; z-index: 1000;
             display: none; 
+            transition: all 0.1s;
         `;
         document.body.appendChild(jumpButton);
 
@@ -366,24 +325,22 @@
         const LEVEL1_GOAL = 30; 
         const LEVEL2_GOAL = 50; 
 
-        // --- Fondos Parallax ---
+        // --- Fondos Parallax (Más realista) ---
         const parallaxBg = {
-            layer2: { x: 0, speed: 1.5 }, 
-            layer3: { x: 0, speed: 3 } 
+            layer2: { x: 0, speed: 1.5, color: '#10294c' }, // Bosque lejano
+            layer3: { x: 0, speed: 3, color: '#004d40' } // Pinos cercanos
         };
 
         function drawParallaxLayers() {
-            // Fondo base (cielo) ya manejado por background-color del game-screen
-            
-            // Capa 2: Montañas o árboles lejanos (más grandes y lentos)
-            ctx.fillStyle = '#2A4058'; 
-            ctx.fillRect(parallaxBg.layer2.x, HEIGHT - 120, WIDTH + 2, 80);
-            ctx.fillRect(parallaxBg.layer2.x + WIDTH, HEIGHT - 120, WIDTH + 2, 80); 
+            // Capa 2: Bosque lejano (siluetas suaves)
+            ctx.fillStyle = parallaxBg.layer2.color; 
+            ctx.fillRect(parallaxBg.layer2.x, HEIGHT - 150, WIDTH * 2, 110);
+            ctx.fillRect(parallaxBg.layer2.x + WIDTH, HEIGHT - 150, WIDTH * 2, 110); 
 
-            // Capa 3: Árboles cercanos o elementos de primer plano (más pequeños y rápidos)
-            ctx.fillStyle = '#0d1a26'; 
-            ctx.fillRect(parallaxBg.layer3.x, HEIGHT - 80, WIDTH + 2, 40);
-            ctx.fillRect(parallaxBg.layer3.x + WIDTH, HEIGHT - 80, WIDTH + 2, 40); 
+            // Capa 3: Pinos cercanos (siluetas oscuras, más detalle)
+            ctx.fillStyle = parallaxBg.layer3.color; 
+            ctx.fillRect(parallaxBg.layer3.x, HEIGHT - 100, WIDTH * 2, 60);
+            ctx.fillRect(parallaxBg.layer3.x + WIDTH, HEIGHT - 100, WIDTH * 2, 60); 
         }
 
         function updateParallaxLayers() {
@@ -396,15 +353,15 @@
 
         // --- Efecto de Nieve (Inicialización) ---
         const snowContainer = document.querySelector('.snow');
-        const numSnowflakes = 50;
+        const numSnowflakes = 80; // Más copos
 
         function createSnowflake() {
             const snowflake = document.createElement('div');
             snowflake.classList.add('snow-dot');
             snowflake.style.left = Math.random() * 100 + 'vw';
-            snowflake.style.animationDuration = (Math.random() * 5 + 5) + 's'; 
+            snowflake.style.animationDuration = (Math.random() * 4 + 6) + 's'; 
             snowflake.style.animationDelay = (Math.random() * -5) + 's'; 
-            snowflake.style.width = snowflake.style.height = (Math.random() * 3 + 1) + 'px'; 
+            snowflake.style.width = snowflake.style.height = (Math.random() * 4 + 2) + 'px'; // Variación de tamaño
             snowContainer.appendChild(snowflake);
         }
 
@@ -414,19 +371,18 @@
 
         // --- Lógica del Personaje ---
         const characterImage = new Image();
-        characterImage.src = './elias_character.png'; // RUTA DE LA IMAGEN DEL PERSONAJE (AÚN LOCAL)
-        characterImage.onerror = () => { console.error("Error al cargar la imagen del personaje Elías. Asegúrate de que 'elias_character.png' esté en la misma carpeta o sea una URL válida."); };
+        characterImage.src = './elias_character.png'; 
+        characterImage.onerror = () => { console.warn("La imagen del personaje Elías no se pudo cargar. Se usará el cuadrado de reemplazo."); };
 
         const player = {
             x: 50, y: GROUND_Y, width: 30, height: 40, velocityY: 0,
             draw() {
-                // Dibuja la imagen del personaje si está cargada, sino dibuja el cuadrado
                 if (characterImage.complete && characterImage.naturalWidth !== 0) {
                     ctx.drawImage(characterImage, this.x - 5, this.y - 10, this.width + 10, this.height + 15); 
                 } else {
-                    ctx.fillStyle = '#add8e6'; 
+                    ctx.fillStyle = '#F0F8FF'; 
                     ctx.fillRect(this.x, this.y, this.width, this.height);
-                    ctx.strokeStyle = '#000000'; ctx.lineWidth = 2;
+                    ctx.strokeStyle = '#6A0573'; ctx.lineWidth = 3;
                     ctx.strokeRect(this.x, this.y, this.width, this.height);
                 }
             },
@@ -439,7 +395,7 @@
                 }
                 
                 if (level === 1 && score >= LEVEL1_GOAL) {
-                    goToLevel(2);
+                    showCustomAlert("¡NIVEL 2: Guía la Estrella!", `Has recogido ${LEVEL1_GOAL} velitas. La velocidad aumenta. ¡Concentración para la meta final!`, () => goToLevel(2));
                 } else if (level === 2 && score >= LEVEL2_GOAL) {
                     endGame();
                 }
@@ -451,36 +407,35 @@
             }
         };
 
-        // --- Lógica de Monedas/Velitas ---
+        // --- Lógica de Monedas/Velitas (con animación y brillo) ---
         let candles = [];
         const CANDLE_WIDTH = 12; 
         const CANDLE_HEIGHT = 30; 
-        const CANDLE_COLOR = '#8A4EF0'; 
-        const CANDLE_WAX_COLOR = '#F5F5DC'; 
+        const CANDLE_COLOR = '#6A0573'; 
+        const CANDLE_WAX_COLOR = '#F0F8FF'; 
         const FLAME_COLOR = '#FFD700'; 
         const WICK_COLOR = '#4B3F3D'; 
 
-        function createCandle() {
-            const yPos = GROUND_Y - (Math.random() * 100 + 30); 
-            const speed = level === 1 ? 3.5 : 5.5; 
-            candles.push({
-                x: WIDTH, y: yPos, width: CANDLE_WIDTH, height: CANDLE_HEIGHT, speed: speed
-            });
-        }
-
         function drawCandles() {
             candles.forEach(candle => {
+                // Cuerpo de la vela
                 ctx.fillStyle = CANDLE_COLOR;
                 ctx.fillRect(candle.x, candle.y, candle.width, candle.height); 
 
+                // Goteo de cera (efecto 3D)
                 ctx.fillStyle = CANDLE_WAX_COLOR;
                 ctx.beginPath();
                 ctx.arc(candle.x + candle.width / 2, candle.y + candle.height, candle.width / 2 + 2, 0, Math.PI);
                 ctx.fill();
 
+                // Mecha
                 ctx.fillStyle = WICK_COLOR;
                 ctx.fillRect(candle.x + candle.width / 2 - 1, candle.y - 5, 2, 7);
 
+                // Llama (Efecto de brillo y pulso)
+                ctx.shadowColor = '#ffff00';
+                ctx.shadowBlur = 10 + Math.sin(Date.now() / 150) * 3; // Brillo pulsante
+                
                 ctx.fillStyle = FLAME_COLOR;
                 ctx.beginPath();
                 const centerX = candle.x + candle.width / 2;
@@ -501,10 +456,17 @@
                 ctx.closePath();
                 ctx.fill();
 
-                ctx.shadowColor = '#ffff00';
-                ctx.shadowBlur = 10;
-                ctx.fill(); 
-                ctx.shadowBlur = 0; 
+                ctx.shadowBlur = 0; // Limpiar sombra
+            });
+        }
+        
+        // La lógica de updateCandles, createCandle y drawGround sigue igual.
+
+        function createCandle() {
+            const yPos = GROUND_Y - (Math.random() * 100 + 30); 
+            const speed = level === 1 ? 3.5 : 5.5; 
+            candles.push({
+                x: WIDTH, y: yPos, width: CANDLE_WIDTH, height: CANDLE_HEIGHT, speed: speed
             });
         }
 
@@ -531,7 +493,7 @@
         function drawGround() {
             ctx.fillStyle = '#a8bacc'; 
             ctx.fillRect(0, GROUND_Y + player.height, WIDTH, 40);
-            ctx.fillStyle = '#ffffff'; 
+            ctx.fillStyle = '#F0F8FF'; 
             ctx.fillRect(0, GROUND_Y, WIDTH, 5); 
         }
         
@@ -555,21 +517,33 @@
         // --- Control de Navegación y Vistas ---
 
         function showScreen(screen) {
-            mainMenu.style.display = 'none';
-            missionScreen.style.display = 'none';
-            gameScreen.style.display = 'none';
-            victoryScreen.style.display = 'none';
-            
-            screen.style.display = 'flex';
+            // Ocultar todas las pantallas con transición suave
+            const screens = [mainMenu, missionScreen, gameScreen, victoryScreen];
+            screens.forEach(s => {
+                s.style.opacity = 0;
+                s.style.transform = 'scale(0.95)';
+                setTimeout(() => s.style.display = 'none', 500);
+            });
 
-            if (screen === gameScreen) {
-                 jumpButton.style.display = 'block';
-                 if (!gameLoopId) gameLoop(); 
-            } else {
-                 jumpButton.style.display = 'none';
-                 if (gameLoopId) cancelAnimationFrame(gameLoopId); 
-                 gameLoopId = null;
-            }
+            // Mostrar la pantalla deseada con transición suave
+            setTimeout(() => {
+                screen.style.display = 'flex';
+                // Usar requestAnimationFrame para asegurar que el display:flex se aplica antes de la transición
+                requestAnimationFrame(() => {
+                    screen.style.opacity = 1;
+                    screen.style.transform = 'scale(1)';
+                });
+                
+                // Controlar el botón de salto y el loop del juego
+                if (screen === gameScreen) {
+                    jumpButton.style.display = 'block';
+                    if (!gameLoopId) gameLoop(); 
+                } else {
+                    jumpButton.style.display = 'none';
+                    if (gameLoopId) cancelAnimationFrame(gameLoopId); 
+                    gameLoopId = null;
+                }
+            }, 500); 
         }
 
         function goToMission() {
@@ -594,24 +568,44 @@
             levelElement.textContent = level;
             scoreElement.textContent = score;
             candles = [];
+        }
+
+        // --- Alerta de Nivel Personalizada ---
+        function showCustomAlert(title, message, callback) {
+            alertTitle.textContent = title;
+            alertMessage.textContent = message;
             
+            alertOverlay.style.display = 'flex';
+            requestAnimationFrame(() => {
+                alertOverlay.style.opacity = 1;
+                alertBox.style.transform = 'scale(1)';
+            });
+
+            // Detener el juego
+            if (gameLoopId) cancelAnimationFrame(gameLoopId);
+            gameLoopId = null;
+
+            alertButton.onclick = () => {
+                alertOverlay.style.opacity = 0;
+                alertBox.style.transform = 'scale(0.5)';
+                setTimeout(() => {
+                    alertOverlay.style.display = 'none';
+                    if (callback) callback();
+                }, 300);
+            };
         }
 
         function goToLevel(newLevel) {
-            cancelAnimationFrame(gameLoopId);
-            gameLoopId = null;
-
             level = newLevel;
             levelElement.textContent = level;
             candles = [];
-
-            alert(`¡Nivel ${newLevel}! ¡Misión: Guiar la Estrella! La velocidad ha aumentado. Concéntrate en llegar a la meta final (${LEVEL2_GOAL} Velitas).`);
             
-            gameLoop();
+            // Reanudar el juego
+            if (!gameLoopId) gameLoop();
         }
 
         function endGame() {
-            cancelAnimationFrame(gameLoopId);
+            if (gameLoopId) cancelAnimationFrame(gameLoopId);
             gameLoopId = null;
             showScreen(victoryScreen);
         }
@@ -623,7 +617,7 @@
                 element.innerHTML += text.charAt(i);
                 setTimeout(function() {
                     typeWriter(id, text, i + 1, callback);
-                }, 40); 
+                }, 30); /* Un poco más rápido */
             } else if (callback) {
                 callback();
             }
@@ -632,7 +626,6 @@
         // --- Eventos de Control de Pantalla ---
         document.getElementById('main-start-btn').addEventListener('click', goToMission);
         document.getElementById('mission-start-btn').addEventListener('click', startGame);
-        
         document.getElementById('restart-btn').addEventListener('click', () => {
             showScreen(mainMenu); 
         });
@@ -664,4 +657,3 @@
     </script>
 </body>
 </html>
-```http://googleusercontent.com/image_generation_content/1
