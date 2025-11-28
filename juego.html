@@ -5,16 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>¡La Luz de Adviento! | Hermandad del Carmen de Lima</title>
     <style>
-        /* Paleta de Colores Sugerida:
-        - Morado Adviento: #5D2E8E (Oscuro), #8A4EF0 (Claro)
-        - Rojo Navidad: #B00020 (Oscuro), #FF4040 (Claro)
-        - Verde Pino: #006030 (Oscuro), #00A050 (Claro)
-        - Dorado/Estrella: #FFD700
-        - Crema/Blanco: #F5F5DC, #FFFFFF
-        - Marrón/Ocre Carmen: #8B4513, #D2B48C (Ocre)
-        - Cielo Invernal: #1C2F4D (Oscuro), #3B597C (Medio)
-        */
-
         /* CSS GENERAL Y TEMÁTICO */
         body {
             display: flex;
@@ -27,8 +17,8 @@
             margin: 0;
             padding: 20px;
             min-height: 100vh;
-            overflow: hidden; /* Evita barras de desplazamiento por la nieve */
-            position: relative; /* Para la nieve */
+            overflow: hidden; 
+            position: relative; 
         }
 
         /* --- Estilo de Nieve (Overlay) --- */
@@ -39,7 +29,7 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 9999; /* Asegura que la nieve esté encima de todo */
+            z-index: 9999; 
         }
         .snow-dot {
             position: absolute;
@@ -59,9 +49,9 @@
             width: 90vw;
             max-width: 800px;
             position: relative;
-            background-color: #3B597C; /* Cielo azul invernal */
-            border: 5px solid #B00020; /* Borde rojo navideño */
-            box-shadow: 0 0 20px #B00020, 0 0 10px #FFD700; /* Brillo */
+            background-color: #3B597C; 
+            border: 5px solid #B00020; 
+            box-shadow: 0 0 20px #B00020, 0 0 10px #FFD700; 
             border-radius: 10px;
             overflow: hidden;
         }
@@ -75,7 +65,8 @@
             width: 90vw;
             max-width: 800px;
             min-height: 400px;
-            background: url('https://14cuadrillahsvcl.github.io/Proceso/14c.png') no-repeat center center / cover; /* Imagen de fondo */
+            /* RUTA DE LA IMAGEN DEL MENÚ - ACTUALIZADA CON LA URL */
+            background: url('https://14cuadrillahsvcl.github.io/Proceso/14c.png') no-repeat center center / cover; 
             border-radius: 10px;
             box-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
             text-align: center;
@@ -83,7 +74,7 @@
             position: relative;
             overflow: hidden;
         }
-        #main-menu::before { /* Overlay para oscurecer la imagen y que el texto se lea mejor */
+        #main-menu::before { 
             content: "";
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
@@ -93,12 +84,12 @@
 
         #main-menu h1, #main-menu p, #main-start-btn {
             position: relative;
-            z-index: 2; /* Asegura que el texto y botón estén encima del overlay */
+            z-index: 2; 
         }
 
         #main-menu h1 {
-            color: #FFD700; /* Dorado brillante */
-            font-size: 3.5em; /* Más grande y llamativo */
+            color: #FFD700; 
+            font-size: 3.5em; 
             margin-bottom: 10px;
             text-shadow: 0 0 15px #B00020, 0 0 8px #000;
         }
@@ -112,15 +103,15 @@
         
         /* --- Estilos de Botones --- */
         .btn-start {
-            padding: 18px 45px; /* Más grande */
-            font-size: 1.6em; /* Más grande */
+            padding: 18px 45px; 
+            font-size: 1.6em; 
             font-weight: bold;
-            color: #FFFFFF; /* Texto blanco para contraste */
-            background-color: #00A050; /* Verde pino más vivo */
+            color: #FFFFFF; 
+            background-color: #00A050; 
             border: none;
-            border-radius: 10px; /* Bordes más suaves */
+            border-radius: 10px; 
             cursor: pointer;
-            box-shadow: 0 6px #006030; /* Sombra más pronunciada */
+            box-shadow: 0 6px #006030; 
             transition: all 0.15s ease-in-out;
             letter-spacing: 1px;
         }
@@ -136,25 +127,26 @@
         /* --- Pantalla de Misión (Intro) --- */
         #mission-screen {
             flex-direction: row;
-            justify-content: center; /* Centrar contenido */
+            justify-content: center; 
             align-items: center;
             padding: 20px;
             min-height: 400px;
-            background-color: #1C2F4D; /* Noche invernal */
+            background-color: #1C2F4D; 
             color: #F5F5DC;
-            gap: 20px; /* Espacio entre elementos */
+            gap: 20px; 
         }
 
         #char-box {
             text-align: center;
-            flex-shrink: 0; /* No permitir que se encoja */
+            flex-shrink: 0; 
         }
 
         #char-image-display {
-            width: 120px; /* Tamaño más grande para la imagen del personaje */
+            width: 120px; 
             height: 160px;
-            background: url('https://14cuadrillahsvcl.github.io/Proceso/14c.png') no-repeat center center / contain; /* Imagen del personaje */
-            border: 3px solid #FFD700; /* Borde dorado */
+            /* RUTA DE LA IMAGEN DEL PERSONAJE - SIGUE SIENDO LOCAL */
+            background: url('./elias_character.png') no-repeat center center / contain; 
+            border: 3px solid #FFD700; 
             border-radius: 10px;
             box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
             margin-bottom: 8px;
@@ -165,8 +157,8 @@
             color: #F5F5DC;
             text-align: left;
             flex-grow: 1;
-            padding-left: 10px; /* Espacio */
-            max-width: 60%; /* Limita ancho del texto */
+            padding-left: 10px; 
+            max-width: 60%; 
         }
         
         #mission-text h2 {
@@ -177,13 +169,13 @@
         }
 
         #mission-description {
-            border-right: .15em solid #FFD700; /* Cursor dorado */
-            font-family: 'Georgia', serif; /* Fuente más clásica */
+            border-right: .15em solid #FFD700; 
+            font-family: 'Georgia', serif; 
             font-size: 1.1em;
-            white-space: pre-wrap;
+            white-space: pre-wrap; 
             overflow: hidden;
             letter-spacing: .03em;
-            min-height: 120px; /* Suficiente espacio para el texto */
+            min-height: 120px; 
             padding-right: 5px;
             line-height: 1.5;
         }
@@ -193,11 +185,10 @@
             display: block;
             width: 100%;
             height: auto;
-            position: relative; /* Para el fondo de paralaje */
+            position: relative; 
             z-index: 1;
         }
 
-        /* Contenedor del juego para el fondo de paralaje */
         #game-container {
             width: 90vw;
             max-width: 800px;
@@ -206,11 +197,11 @@
             box-shadow: 0 0 20px #B00020, 0 0 10px #FFD700;
             border-radius: 10px;
             overflow: hidden;
-            background-color: transparent; /* Permite ver el paralaje */
+            background-color: transparent; 
         }
 
         #score-board {
-            width: 100%; /* Ajuste a todo el ancho del contenedor del juego */
+            width: 100%; 
             margin-top: 0; margin-bottom: 0; 
             padding: 10px 20px;
             font-size: 1.5em; color: #FFFFFF;
@@ -220,18 +211,18 @@
         }
         #score-board span {
             font-weight: bold;
-            color: #FFD700; /* Dorado para los valores */
+            color: #FFD700; 
         }
 
         /* --- Pantalla de Victoria --- */
         #victory-screen {
             flex-direction: column; justify-content: center; align-items: center; 
             min-height: 400px; text-align: center; padding: 20px;
-            background: linear-gradient(135deg, #FFD700 0%, #FF4040 50%, #FFD700 100%); /* Fondo festivo */
-            color: #1a1a2e; /* Texto oscuro para contraste */
+            background: linear-gradient(135deg, #FFD700 0%, #FF4040 50%, #FFD700 100%); 
+            color: #1a1a2e; 
         }
         #victory-screen h1 {
-            color: #1a1a2e; /* Oscuro para contraste */
+            color: #1a1a2e; 
             font-size: 4.5em; margin-bottom: 20px;
             text-shadow: 0 0 15px #FFFFFF, 0 0 8px #000;
         }
@@ -240,13 +231,13 @@
             margin-top: 10px; line-height: 1.4;
             text-shadow: 1px 1px 2px #fff;
         }
-        #victory-screen p:last-of-type { /* Frase final */
-            font-size: 1.4em; color: #5D2E8E; /* Morado Adviento */
+        #victory-screen p:last-of-type { 
+            font-size: 1.4em; color: #5D2E8E; 
             margin-top: 30px; font-style: italic;
         }
         #restart-btn {
             margin-top: 30px;
-            background-color: #B00020; /* Rojo navideño */
+            background-color: #B00020; 
             box-shadow: 0 6px #600010;
         }
         #restart-btn:hover { background-color: #CC0030; }
@@ -256,12 +247,12 @@
         #credits {
             margin-top: 15px;
             font-size: 0.8em;
-            color: #F5F5DC; /* Crema/Blanco */
+            color: #F5F5DC; 
             text-align: center;
             text-shadow: 1px 1px 2px #000;
         }
         #credits span {
-            color: #D2B48C; /* Ocre Carmelita */
+            color: #D2B48C; 
             font-weight: bold;
         }
 
@@ -311,10 +302,7 @@
         </div>
         <div id="game-container">
             <canvas id="gameCanvas" width="800" height="400"></canvas>
-            <div class="parallax-bg layer-1" style="background-color: #3B597C;"></div>
-            <div class="parallax-bg layer-2"></div>
-            <div class="parallax-bg layer-3"></div>
-            </div>
+        </div>
     </div>
 
     <div id="victory-screen">
@@ -342,11 +330,11 @@
         const scoreElement = document.getElementById('score');
         const levelElement = document.getElementById('level');
         
-        // Creamos un botón de salto táctil dinámicamente y lo adjuntamos al body
-        // Esto permite ocultarlo/mostrarlo fácilmente y evita que ocupe espacio visual innecesario en el HTML
+        // Creamos un botón de salto táctil dinámicamente
         const jumpButton = document.createElement('button');
-        jumpButton.id = 'jump-button-mobile'; // ID para el botón táctil
+        jumpButton.id = 'jump-button-mobile'; 
         jumpButton.textContent = 'SALTA';
+        // Estilos para el botón táctil (usado solo cuando game-screen está visible)
         jumpButton.style.cssText = `
             position: fixed;
             bottom: 20px;
@@ -355,13 +343,13 @@
             font-size: 1.2em;
             font-weight: bold;
             color: #FFFFFF;
-            background-color: #B00020; /* Rojo Navidad */
+            background-color: #B00020; 
             border: none;
             border-radius: 8px;
             box-shadow: 0 5px #600010;
             cursor: pointer;
             z-index: 1000;
-            display: none; /* Oculto por defecto */
+            display: none; 
         `;
         document.body.appendChild(jumpButton);
 
@@ -375,31 +363,27 @@
         
         let score = 0;
         let level = 1;
-        const LEVEL1_GOAL = 30; // Meta para pasar al Nivel 2
-        const LEVEL2_GOAL = 50; // Meta de Victoria Final
+        const LEVEL1_GOAL = 30; 
+        const LEVEL2_GOAL = 50; 
 
         // --- Fondos Parallax ---
-        // Estos serán objetos que se moverán detrás del canvas
         const parallaxBg = {
-            layer1: { x: 0, speed: 0.5, color: '#3B597C' }, // Cielo, casi no se mueve
-            layer2: { x: 0, speed: 1.5, image: null }, // Montañas lejanas/bosque invernal
-            layer3: { x: 0, speed: 3, image: null } // Árboles cercanos/siluetas
+            layer2: { x: 0, speed: 1.5 }, 
+            layer3: { x: 0, speed: 3 } 
         };
 
-        // Cargar imágenes para el paralaje (puedes crear estas imágenes o usar las generadas por IA si las tienes)
-        // Por ahora, usaremos colores o formas simples.
         function drawParallaxLayers() {
             // Fondo base (cielo) ya manejado por background-color del game-screen
             
             // Capa 2: Montañas o árboles lejanos (más grandes y lentos)
-            ctx.fillStyle = '#2A4058'; // Tono más oscuro de cielo/montaña
+            ctx.fillStyle = '#2A4058'; 
             ctx.fillRect(parallaxBg.layer2.x, HEIGHT - 120, WIDTH + 2, 80);
-            ctx.fillRect(parallaxBg.layer2.x + WIDTH, HEIGHT - 120, WIDTH + 2, 80); // Duplicado para loop
+            ctx.fillRect(parallaxBg.layer2.x + WIDTH, HEIGHT - 120, WIDTH + 2, 80); 
 
             // Capa 3: Árboles cercanos o elementos de primer plano (más pequeños y rápidos)
-            ctx.fillStyle = '#0d1a26'; // Casi negro, siluetas de árboles
+            ctx.fillStyle = '#0d1a26'; 
             ctx.fillRect(parallaxBg.layer3.x, HEIGHT - 80, WIDTH + 2, 40);
-            ctx.fillRect(parallaxBg.layer3.x + WIDTH, HEIGHT - 80, WIDTH + 2, 40); // Duplicado para loop
+            ctx.fillRect(parallaxBg.layer3.x + WIDTH, HEIGHT - 80, WIDTH + 2, 40); 
         }
 
         function updateParallaxLayers() {
@@ -410,7 +394,7 @@
             if (parallaxBg.layer3.x < -WIDTH) parallaxBg.layer3.x = 0;
         }
 
-        // --- Efecto de Nieve ---
+        // --- Efecto de Nieve (Inicialización) ---
         const snowContainer = document.querySelector('.snow');
         const numSnowflakes = 50;
 
@@ -418,9 +402,9 @@
             const snowflake = document.createElement('div');
             snowflake.classList.add('snow-dot');
             snowflake.style.left = Math.random() * 100 + 'vw';
-            snowflake.style.animationDuration = (Math.random() * 5 + 5) + 's'; // 5-10s
-            snowflake.style.animationDelay = (Math.random() * -5) + 's'; // Desfase para que no empiecen juntas
-            snowflake.style.width = snowflake.style.height = (Math.random() * 3 + 1) + 'px'; // 1-4px
+            snowflake.style.animationDuration = (Math.random() * 5 + 5) + 's'; 
+            snowflake.style.animationDelay = (Math.random() * -5) + 's'; 
+            snowflake.style.width = snowflake.style.height = (Math.random() * 3 + 1) + 'px'; 
             snowContainer.appendChild(snowflake);
         }
 
@@ -429,15 +413,18 @@
         }
 
         // --- Lógica del Personaje ---
+        const characterImage = new Image();
+        characterImage.src = './elias_character.png'; // RUTA DE LA IMAGEN DEL PERSONAJE (AÚN LOCAL)
+        characterImage.onerror = () => { console.error("Error al cargar la imagen del personaje Elías. Asegúrate de que 'elias_character.png' esté en la misma carpeta o sea una URL válida."); };
+
         const player = {
             x: 50, y: GROUND_Y, width: 30, height: 40, velocityY: 0,
             draw() {
-                // Si la imagen de Elías está cargada, la dibuja
+                // Dibuja la imagen del personaje si está cargada, sino dibuja el cuadrado
                 if (characterImage.complete && characterImage.naturalWidth !== 0) {
-                    ctx.drawImage(characterImage, this.x - 5, this.y - 10, this.width + 10, this.height + 15); // Un poco más grande para ajustar
+                    ctx.drawImage(characterImage, this.x - 5, this.y - 10, this.width + 10, this.height + 15); 
                 } else {
-                    // Si no, dibuja el cuadrado (fallback)
-                    ctx.fillStyle = '#add8e6'; // Azul claro (Mensajero)
+                    ctx.fillStyle = '#add8e6'; 
                     ctx.fillRect(this.x, this.y, this.width, this.height);
                     ctx.strokeStyle = '#000000'; ctx.lineWidth = 2;
                     ctx.strokeRect(this.x, this.y, this.width, this.height);
@@ -464,14 +451,14 @@
             }
         };
 
-        // --- Lógica de Monedas/Velitas (con más detalle) ---
+        // --- Lógica de Monedas/Velitas ---
         let candles = [];
-        const CANDLE_WIDTH = 12; // Un poco más ancho
-        const CANDLE_HEIGHT = 30; // Un poco más alto
-        const CANDLE_COLOR = '#8A4EF0'; // Morado Adviento más claro
-        const CANDLE_WAX_COLOR = '#F5F5DC'; // Cera blanca
-        const FLAME_COLOR = '#FFD700'; // Dorado de la Llama
-        const WICK_COLOR = '#4B3F3D'; // Mecha
+        const CANDLE_WIDTH = 12; 
+        const CANDLE_HEIGHT = 30; 
+        const CANDLE_COLOR = '#8A4EF0'; 
+        const CANDLE_WAX_COLOR = '#F5F5DC'; 
+        const FLAME_COLOR = '#FFD700'; 
+        const WICK_COLOR = '#4B3F3D'; 
 
         function createCandle() {
             const yPos = GROUND_Y - (Math.random() * 100 + 30); 
@@ -483,53 +470,41 @@
 
         function drawCandles() {
             candles.forEach(candle => {
-                // Cuerpo de la vela (Morado Adviento)
                 ctx.fillStyle = CANDLE_COLOR;
                 ctx.fillRect(candle.x, candle.y, candle.width, candle.height); 
 
-                // Goteo de cera (opcional, para detalle)
                 ctx.fillStyle = CANDLE_WAX_COLOR;
                 ctx.beginPath();
                 ctx.arc(candle.x + candle.width / 2, candle.y + candle.height, candle.width / 2 + 2, 0, Math.PI);
                 ctx.fill();
 
-                // Mecha
                 ctx.fillStyle = WICK_COLOR;
                 ctx.fillRect(candle.x + candle.width / 2 - 1, candle.y - 5, 2, 7);
 
-                // Llama (Estrella dorada)
                 ctx.fillStyle = FLAME_COLOR;
                 ctx.beginPath();
-                // Forma de estrella simple o llama con 5 puntos
                 const centerX = candle.x + candle.width / 2;
                 const centerY = candle.y - 10;
                 const outerRadius = 8;
                 const innerRadius = 3;
                 let rot = Math.PI / 2 * 3;
-                let x = centerX;
-                let y = centerY;
                 const step = Math.PI / 5;
 
                 ctx.moveTo(centerX, centerY - outerRadius);
                 for (let i = 0; i < 5; i++) {
-                    x = centerX + Math.cos(rot) * outerRadius;
-                    y = centerY + Math.sin(rot) * outerRadius;
-                    ctx.lineTo(x, y);
+                    ctx.lineTo(centerX + Math.cos(rot) * outerRadius, centerY + Math.sin(rot) * outerRadius);
                     rot += step;
 
-                    x = centerX + Math.cos(rot) * innerRadius;
-                    y = centerY + Math.sin(rot) * innerRadius;
-                    ctx.lineTo(x, y);
+                    ctx.lineTo(centerX + Math.cos(rot) * innerRadius, centerY + Math.sin(rot) * innerRadius);
                     rot += step;
                 }
                 ctx.closePath();
                 ctx.fill();
 
-                // Efecto de brillo de la llama
                 ctx.shadowColor = '#ffff00';
                 ctx.shadowBlur = 10;
-                ctx.fill(); // Rellenar de nuevo para aplicar la sombra
-                ctx.shadowBlur = 0; // Limpiar sombra para otros objetos
+                ctx.fill(); 
+                ctx.shadowBlur = 0; 
             });
         }
 
@@ -554,7 +529,7 @@
         }
 
         function drawGround() {
-            ctx.fillStyle = '#a8bacc'; // Camino Nevado
+            ctx.fillStyle = '#a8bacc'; 
             ctx.fillRect(0, GROUND_Y + player.height, WIDTH, 40);
             ctx.fillStyle = '#ffffff'; 
             ctx.fillRect(0, GROUND_Y, WIDTH, 5); 
@@ -565,11 +540,10 @@
         function gameLoop() {
             ctx.clearRect(0, 0, WIDTH, HEIGHT);
             
-            // Dibujar y actualizar las capas de paralaje
             updateParallaxLayers();
             drawParallaxLayers();
 
-            drawGround(); // El suelo se dibuja sobre el paralaje
+            drawGround(); 
             player.update(); 
             player.draw();
             updateCandles();
@@ -577,11 +551,6 @@
 
             gameLoopId = requestAnimationFrame(gameLoop);
         }
-
-        // --- Gestión de Imágenes ---
-        const characterImage = new Image();
-        characterImage.src = './elias_character.png'; // Ruta de la imagen del personaje
-        characterImage.onerror = () => { console.error("Error al cargar la imagen del personaje Elías."); };
 
         // --- Control de Navegación y Vistas ---
 
@@ -593,12 +562,13 @@
             
             screen.style.display = 'flex';
 
-            // Mostrar/Ocultar el botón de salto táctil
             if (screen === gameScreen) {
                  jumpButton.style.display = 'block';
+                 if (!gameLoopId) gameLoop(); 
             } else {
                  jumpButton.style.display = 'none';
-                 cancelAnimationFrame(gameLoopId); // Detener el bucle si no estamos en el juego
+                 if (gameLoopId) cancelAnimationFrame(gameLoopId); 
+                 gameLoopId = null;
             }
         }
 
@@ -625,23 +595,24 @@
             scoreElement.textContent = score;
             candles = [];
             
-            if (gameLoopId) cancelAnimationFrame(gameLoopId); 
-            gameLoop();
         }
 
         function goToLevel(newLevel) {
             cancelAnimationFrame(gameLoopId);
+            gameLoopId = null;
+
             level = newLevel;
             levelElement.textContent = level;
             candles = [];
 
-            alert(`¡Nivel ${newLevel}! ¡Misión: Guiar la Estrella! La velocidad ha aumentado. Concéntrate en llegar a la meta final (50 Velitas).`);
+            alert(`¡Nivel ${newLevel}! ¡Misión: Guiar la Estrella! La velocidad ha aumentado. Concéntrate en llegar a la meta final (${LEVEL2_GOAL} Velitas).`);
             
             gameLoop();
         }
 
         function endGame() {
             cancelAnimationFrame(gameLoopId);
+            gameLoopId = null;
             showScreen(victoryScreen);
         }
 
@@ -661,11 +632,36 @@
         // --- Eventos de Control de Pantalla ---
         document.getElementById('main-start-btn').addEventListener('click', goToMission);
         document.getElementById('mission-start-btn').addEventListener('click', startGame);
+        
         document.getElementById('restart-btn').addEventListener('click', () => {
-            showScreen(mainMenu); // VOLVER AL INICIO AHORA FUNCIONA
+            showScreen(mainMenu); 
         });
 
         // --- Controles de Salto (Teclado y Táctil) ---
         jumpButton.addEventListener('touchstart', (event) => {
              if (gameScreen.style.display === 'flex') {
                 event.preventDefault();
+                player.jump();
+             }
+        });
+        jumpButton.addEventListener('click', (event) => {
+             if (gameScreen.style.display === 'flex') {
+                player.jump();
+             }
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (gameScreen.style.display === 'flex' && (event.code === 'Space' || event.code === 'KeyW')) { 
+                event.preventDefault();
+                player.jump();
+            }
+        });
+
+        // --- Inicialización al Cargar la Ventana ---
+        window.onload = function() {
+            showScreen(mainMenu);
+        }
+    </script>
+</body>
+</html>
+```http://googleusercontent.com/image_generation_content/1
