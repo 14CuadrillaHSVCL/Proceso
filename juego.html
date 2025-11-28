@@ -112,10 +112,11 @@
                 }
             },
 
+            // Lógica de Salto
             jump() {
                 if (!this.isJumping) {
                     this.isJumping = true;
-                    this.velocityY = -JUMP_POWER; // Mover hacia arriba (negativo)
+                    this.velocityY = -JUMP_POWER; // Mover hacia arriba (NEGATIVO)
                 }
             }
         };
@@ -202,7 +203,7 @@
 
             // 2. Dibujar y Actualizar Objetos
             drawGround();
-            player.update();
+            player.update(); // <-- Aquí se aplica la gravedad y el movimiento
             player.draw();
             updateCoins();
             drawCoins();
@@ -211,12 +212,12 @@
         }
 
         // --- Control de Entrada del Teclado ---
-        // ESTA ES LA FORMA MÁS ROBUSTA DE ESCUCHAR LAS TECLAS EN UN DOCUMENTO HTML
+        // Escucha en el DOCUMENTO completo, es la forma más confiable.
         document.addEventListener('keydown', (event) => {
             // Tecla de espacio (Code 'Space') o W (Code 'KeyW')
             if (event.code === 'Space' || event.code === 'KeyW') { 
                 event.preventDefault(); // Evita que la barra espaciadora haga scroll en la página
-                player.jump();
+                player.jump(); // <-- Llama a la función de salto
             }
         });
 
