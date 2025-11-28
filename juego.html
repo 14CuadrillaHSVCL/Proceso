@@ -1,52 +1,484 @@
-<style>
-        /* CSS para los efectos bonitos y el estilo */
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡La Luz de Adviento! | Hermandad</title>
+    <style>
+        /* CSS GENERAL Y TEMÁTICO */
         body {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background-color: #1a1a2e;
+            background-color: #1a1a2e; /* Noche invernal */
             font-family: 'Arial', sans-serif;
             color: #ffffff;
             margin: 0;
             padding: 20px;
+            min-height: 100vh;
         }
-        h1 { color: #ffcc00; text-shadow: 2px 2px 4px #000000; }
-        
-        #game-container {
-            /* **CAMBIO 1: Máximo Ancho para Responsive** */
-            width: 90vw; /* Usa el 90% del ancho del viewport */
-            max-width: 800px; /* Limita el tamaño en pantallas grandes */
-            
-            border: 5px solid #ffcc00;
-            box-shadow: 0 0 20px #ffcc00, 0 0 10px #ff00ff;
+
+        /* --- Pantallas de Juego --- */
+        #game-screen, #mission-screen, #victory-screen {
+            display: none;
+            width: 90vw;
+            max-width: 800px;
+            position: relative;
+            background-color: #3b597c; /* Cielo azul */
+            border: 5px solid #cc0000;
+            box-shadow: 0 0 20px #cc0000, 0 0 10px #ffd700;
             border-radius: 10px;
             overflow: hidden;
+        }
+
+        /* --- Pantalla Principal (Menu) --- */
+        #main-menu {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 90vw;
+            max-width: 800px;
+            min-height: 400px;
+            /* Fondo Degradado con colores de Noche y Adviento */
+            background: linear-gradient(135deg, #0d1a26 0%, #3b597c 50%, #0d1a26 100%); 
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
+            text-align: center;
+            padding: 30px 10px;
             position: relative;
         }
+
+        #main-menu h1 {
+            color: #ffd700; /* Dorado */
+            font-size: 3em;
+            margin-bottom: 5px;
+            text-shadow: 0 0 10px #cc0000, 0 0 5px #000;
+        }
+
+        #main-menu p {
+            color: #fff;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+
+        /* Placeholder de Imagen con Colores de Adviento/Navidad */
+        .image-placeholder {
+            width: 90%;
+            max-width: 300px;
+            height: 150px;
+            background-image: linear-gradient(to right, #cc0000, #ffd700);
+            border: 3px solid #fff;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.5em;
+            color: #1a1a2e;
+            box-shadow: 0 0 15px #ffd700;
+            /* Nota: Si tienes una imagen real, reemplaza el background-image y elimina el texto interior. */
+        }
         
+        /* --- Estilos de Botones --- */
+        .btn-start {
+            padding: 15px 40px;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #0d1a26;
+            background-color: #00b359; /* Verde pino */
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 5px #00803d;
+            transition: all 0.1s;
+        }
+        .btn-start:active {
+            box-shadow: 0 2px #00803d;
+            transform: translateY(3px);
+            background-color: #00994d;
+        }
+
+        /* --- Pantalla de Misión (Intro) --- */
+        #mission-screen {
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+            padding: 20px;
+            min-height: 400px;
+            background-color: #0d1a26;
+            color: #fff;
+        }
+
+        #char-box {
+            text-align: center;
+            min-width: 120px;
+        }
+
+        #char-image-display {
+            width: 100px;
+            height: 140px;
+            background-color: #add8e6; /* Color del personaje Mensajero */
+            border: 2px solid #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px #fff;
+            margin-bottom: 5px;
+            display: inline-block;
+        }
+        
+        #mission-text {
+            color: #fff;
+            text-align: left;
+            flex-grow: 1;
+            padding-left: 20px;
+        }
+        
+        #mission-text h2 {
+            color: #ffd700;
+            margin-top: 0;
+            font-size: 1.8em;
+        }
+
+        /* Efecto de máquina de escribir */
+        #mission-description {
+            border-right: .15em solid orange;
+            font-family: monospace;
+            white-space: pre-wrap; /* Permite saltos de línea y se ajusta */
+            overflow: hidden;
+            letter-spacing: .05em;
+            min-height: 100px;
+            padding-right: 5px;
+        }
+        
+        /* --- Elementos de Juego --- */
         canvas {
-            background-color: #5d5d81;
             display: block;
-            /* **CAMBIO 2: Hace que el Canvas ocupe el 100% del contenedor** */
             width: 100%;
-            height: auto; /* Mantiene la proporción */
+            height: auto;
         }
 
         #score-board {
-            margin-top: 15px; font-size: 1.5em; color: #ffffff;
-            background-color: #333366; padding: 10px 20px;
-            border-radius: 5px; border: 2px solid #ffcc00;
+            margin-top: 0; margin-bottom: 0; 
+            padding: 10px 20px;
+            font-size: 1.5em; color: #ffffff;
+            background-color: #2a4058;
+            border-bottom: 2px solid #ffd700;
         }
-        #jump-button {
-            margin-top: 20px; padding: 15px 30px; font-size: 1.2em;
-            font-weight: bold; color: #1a1a2e; background-color: #00ff7f;
-            border: none; border-radius: 8px; cursor: pointer;
-            box-shadow: 0 5px #00b359; transition: background-color 0.1s;
-            width: 80%; max-width: 300px;
+
+        /* --- Créditos Hermandad --- */
+        #credits {
+            margin-top: 15px;
+            font-size: 0.8em;
+            color: #ccc;
+            text-align: center;
         }
-        #jump-button:active {
-            box-shadow: 0 2px #00b359; transform: translateY(3px); background-color: #00e673;
+        /* Color Ocre y Blanco/Gris claro de la Hermandad */
+        #credits span {
+            color: #D2B48C; 
+            font-weight: bold;
         }
-        .instructions { margin-top: 10px; text-align: center; font-size: 0.9em; }
     </style>
+</head>
+<body>
+
+    <div id="main-menu">
+        <h1>¡LA LUZ DE ADVIENTO!</h1>
+        <p>Una aventura de esperanza y fe en espera del Redentor.</p>
+        <div class="image-placeholder">
+            [Portal de Belén y Estrella]
+        </div>
+        <button id="main-start-btn" class="btn-start">INICIAR AVENTURA</button>
+    </div>
+
+    <div id="mission-screen">
+        <div id="char-box">
+            <div id="char-image-display"></div> 
+            <p style="color: #ffd700; font-weight: bold; margin-top: 5px;">Mensajero Elías</p>
+        </div>
+        <div id="mission-text">
+            <h2>Misión de Adviento</h2>
+            <div id="mission-description"></div>
+            <button id="mission-start-btn" class="btn-start" style="margin-top: 20px; display: none;">EMPEZAR JUEGO</button>
+        </div>
+    </div>
+
+    <div id="game-screen">
+        <div id="score-board">
+            Velitas: <span id="score">0</span> | Nivel: <span id="level">1</span>
+        </div>
+        <div id="game-container">
+            <canvas id="gameCanvas" width="800" height="400"></canvas>
+        </div>
+    </div>
+
+    <div id="victory-screen" style="flex-direction: column; justify-content: center; align-items: center; min-height: 400px; text-align: center; padding: 20px;">
+        <h1 style="color: #ffd700; font-size: 4em; margin-bottom: 20px;">¡MISIÓN CUMPLIDA!</h1>
+        <p style="font-size: 1.5em; color: #fff;">
+            Has encendido la Luz de Adviento (50 Velitas) y guiado el camino al Portal de Belén.
+            <br>¡La Navidad ha llegado!
+        </p>
+        <p style="font-size: 1.2em; color: #cc0000; margin-top: 30px;">
+            "El Adviento es caminar juntos al encuentro de Dios."
+        </p>
+        <button id="restart-btn" class="btn-start" style="margin-top: 20px;">VOLVER AL INICIO</button>
+    </div>
+
+    <p id="credits">
+        Creado con fe y devoción por: <span>Hermandad de la Santísima Virgen del Carmen de Lima</span>
+    </p>
+
+    <script>
+        // --- JAVASCRIPT: Motor del Juego y Control de Pantallas ---
+        const mainMenu = document.getElementById('main-menu');
+        const missionScreen = document.getElementById('mission-screen');
+        const gameScreen = document.getElementById('game-screen');
+        const victoryScreen = document.getElementById('victory-screen');
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const scoreElement = document.getElementById('score');
+        const levelElement = document.getElementById('level');
+        // Nota: Agregamos un botón de salto invisible que se activa solo en la pantalla de juego
+        const jumpButton = document.createElement('button');
+        jumpButton.style.display = 'none';
+        document.body.appendChild(jumpButton); 
+
+        // --- Configuración del Juego y Nivelado ---
+        const WIDTH = 800;
+        const HEIGHT = 400;
+        const GRAVITY = 0.6;
+        const JUMP_POWER = 12;
+        const GROUND_Y = HEIGHT - 40;
+        
+        let score = 0;
+        let level = 1;
+        const LEVEL1_GOAL = 30; // Meta para pasar al Nivel 2
+        const LEVEL2_GOAL = 50; // Meta de Victoria Final
+
+        // --- Lógica del Personaje ---
+        const player = {
+            x: 50, y: GROUND_Y, width: 30, height: 40, velocityY: 0,
+            draw() {
+                ctx.fillStyle = '#add8e6'; // Azul claro (Mensajero)
+                ctx.fillRect(this.x, this.y, this.width, this.height);
+                ctx.strokeStyle = '#000000'; ctx.lineWidth = 2;
+                ctx.strokeRect(this.x, this.y, this.width, this.height);
+            },
+            update() {
+                this.velocityY += GRAVITY;
+                this.y += this.velocityY;
+                if (this.y >= GROUND_Y) {
+                    this.y = GROUND_Y;
+                    this.velocityY = 0;
+                }
+                
+                // COMPROBACIÓN DE NIVELES Y VICTORIA
+                if (level === 1 && score >= LEVEL1_GOAL) {
+                    goToLevel(2);
+                } else if (level === 2 && score >= LEVEL2_GOAL) {
+                    endGame();
+                }
+            },
+            jump() {
+                if (this.y >= (GROUND_Y - 0.01)) { 
+                    this.velocityY = -JUMP_POWER;
+                }
+            }
+        };
+
+        // --- Lógica de Monedas/Velitas ---
+        let candles = [];
+        const CANDLE_WIDTH = 10;
+        const CANDLE_HEIGHT = 25;
+        const CANDLE_COLOR = '#800080'; // Morado de Adviento 
+        const FLAME_COLOR = '#ffd700'; // Dorado de la Llama
+
+        function createCandle() {
+            const yPos = GROUND_Y - (Math.random() * 100 + 30); 
+            // La velocidad aumenta en el Nivel 2 para mayor dificultad
+            const speed = level === 1 ? 3.5 : 5.5; 
+            candles.push({
+                x: WIDTH, y: yPos, width: CANDLE_WIDTH, height: CANDLE_HEIGHT, speed: speed
+            });
+        }
+
+        function drawCandles() {
+            candles.forEach(candle => {
+                ctx.fillStyle = CANDLE_COLOR;
+                ctx.fillRect(candle.x, candle.y + 5, candle.width, candle.height); 
+                ctx.fillStyle = '#006400'; // Base Verde Adviento
+                ctx.fillRect(candle.x - 2, candle.y + candle.height + 5, candle.width + 4, 5);
+
+                ctx.fillStyle = FLAME_COLOR;
+                ctx.beginPath();
+                ctx.moveTo(candle.x + candle.width / 2, candle.y);
+                ctx.lineTo(candle.x + candle.width / 2 + 5, candle.y + 10);
+                ctx.lineTo(candle.x + candle.width / 2 - 5, candle.y + 10);
+                ctx.closePath();
+                ctx.fill();
+
+                ctx.shadowColor = '#ffff00';
+                ctx.shadowBlur = 8;
+                ctx.fill();
+                ctx.shadowBlur = 0; 
+            });
+        }
+
+        function updateCandles() {
+            for (let i = candles.length - 1; i >= 0; i--) {
+                candles[i].x -= candles[i].speed;
+
+                if (
+                    player.x < candles[i].x + candles[i].width && player.x + player.width > candles[i].x &&
+                    player.y < candles[i].y + candles[i].height && player.y + player.height > candles[i].y
+                ) {
+                    score++;
+                    scoreElement.textContent = score;
+                    candles.splice(i, 1);
+                } else if (candles[i].x + candles[i].width < 0) {
+                    candles.splice(i, 1);
+                }
+            }
+            // Generación de Velitas (más frecuentes en Nivel 2)
+            if (Math.random() < (level === 1 ? 0.02 : 0.04)) { 
+                createCandle();
+            }
+        }
+
+        function drawGround() {
+            ctx.fillStyle = '#a8bacc'; // Camino Nevado
+            ctx.fillRect(0, GROUND_Y + player.height, WIDTH, 40);
+            ctx.fillStyle = '#ffffff'; 
+            ctx.fillRect(0, GROUND_Y, WIDTH, 5); 
+        }
+        
+        // --- Bucle Principal del Juego ---
+        let gameLoopId;
+        function gameLoop() {
+            ctx.clearRect(0, 0, WIDTH, HEIGHT);
+            drawGround();
+            player.update(); 
+            player.draw();
+            updateCandles();
+            drawCandles();
+
+            gameLoopId = requestAnimationFrame(gameLoop);
+        }
+
+        // --- Control de Navegación y Vistas ---
+
+        function showScreen(screen) {
+            mainMenu.style.display = 'none';
+            missionScreen.style.display = 'none';
+            gameScreen.style.display = 'none';
+            victoryScreen.style.display = 'none';
+            
+            // Mostrar la pantalla deseada
+            screen.style.display = 'flex';
+
+            // Ocultar/Mostrar el botón de salto táctil según la pantalla
+            if (screen === gameScreen) {
+                 jumpButton.style.display = 'block';
+            } else {
+                 jumpButton.style.display = 'none';
+            }
+        }
+
+        function goToMission() {
+            showScreen(missionScreen);
+            // El texto de la misión a mostrar
+            const missionText = "Soy Elías. Nuestra misión es simple, pero vital: debemos recolectar velitas de Adviento para encender el camino de la Estrella y guiar a María al Portal de Belén. El tiempo de espera es crucial. ¡Ayúdame a preparar la Luz!";
+            
+            // Inicializar el efecto de máquina de escribir
+            document.getElementById('mission-description').innerHTML = ''; // Limpiar
+            typeWriter('mission-description', missionText, 0, 
+                () => { document.getElementById('mission-start-btn').style.display = 'block'; }
+            );
+        }
+
+        function startGame() {
+            showScreen(gameScreen);
+            // Asegurar que el canvas tiene el tamaño de dibujo correcto (800x400)
+            canvas.width = WIDTH;
+            canvas.height = HEIGHT;
+            
+            // Resetear estado del juego
+            level = 1;
+            score = 0;
+            player.y = GROUND_Y;
+            player.velocityY = 0;
+            levelElement.textContent = level;
+            scoreElement.textContent = score;
+            candles = [];
+            
+            if (gameLoopId) cancelAnimationFrame(gameLoopId); // Detener cualquier bucle anterior
+            gameLoop();
+        }
+
+        function goToLevel(newLevel) {
+            cancelAnimationFrame(gameLoopId); // Pausar el juego
+            level = newLevel;
+            levelElement.textContent = level;
+            candles = []; // Limpiar velas
+
+            alert(`¡Nivel ${newLevel}! ¡Misión: Guiar la Estrella! La velocidad ha aumentado. Concéntrate en llegar a la meta final (50 Velitas).`);
+            
+            gameLoop(); // Reanudar el juego
+        }
+
+        function endGame() {
+            cancelAnimationFrame(gameLoopId);
+            showScreen(victoryScreen);
+        }
+
+        // --- Efecto Máquina de Escribir ---
+        function typeWriter(id, text, i, callback) {
+            const element = document.getElementById(id);
+            if (i < text.length) {
+                element.innerHTML += text.charAt(i);
+                setTimeout(function() {
+                    typeWriter(id, text, i + 1, callback);
+                }, 40); // Velocidad del tecleado
+            } else if (callback) {
+                callback();
+            }
+        }
+
+        // --- Eventos de Control de Pantalla ---
+        document.getElementById('main-start-btn').addEventListener('click', goToMission);
+        document.getElementById('mission-start-btn').addEventListener('click', startGame);
+        document.getElementById('restart-btn').addEventListener('click', () => {
+            showScreen(mainMenu);
+        });
+
+        // --- Controles de Salto (Teclado y Táctil) ---
+        
+        // Creamos un event listener de forma dinámica para el tactil
+        jumpButton.addEventListener('touchstart', (event) => {
+             if (gameScreen.style.display === 'flex') {
+                event.preventDefault();
+                player.jump();
+             }
+        });
+        jumpButton.addEventListener('click', (event) => {
+             if (gameScreen.style.display === 'flex') {
+                player.jump();
+             }
+        });
+
+        // Escucha del Teclado (Para PC)
+        document.addEventListener('keydown', (event) => {
+            if (gameScreen.style.display === 'flex' && (event.code === 'Space' || event.code === 'KeyW')) { 
+                event.preventDefault();
+                player.jump();
+            }
+        });
+
+        // --- Inicialización al Cargar la Ventana ---
+        window.onload = function() {
+            showScreen(mainMenu);
+        }
+    </script>
+</body>
+</html>
