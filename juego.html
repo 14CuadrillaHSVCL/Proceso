@@ -57,7 +57,7 @@
     </div>
 
     <div id="game-container">
-        <canvas id="gameCanvas" width="800" height="400" tabindex="0"></canvas>
+        <canvas id="gameCanvas" width="800" height="400"></canvas>
     </div>
 
     <p style="margin-top: 20px;">
@@ -211,6 +211,7 @@
         }
 
         // --- Control de Entrada del Teclado ---
+        // ESTA ES LA FORMA MÁS ROBUSTA DE ESCUCHAR LAS TECLAS EN UN DOCUMENTO HTML
         document.addEventListener('keydown', (event) => {
             // Tecla de espacio (Code 'Space') o W (Code 'KeyW')
             if (event.code === 'Space' || event.code === 'KeyW') { 
@@ -221,11 +222,6 @@
 
         // --- Inicio del Juego ---
         gameLoop();
-
-        // SOLUCIÓN FINAL: Forzar el enfoque en el canvas al cargar la página para que las teclas funcionen inmediatamente.
-        window.onload = function() {
-            canvas.focus();
-        };
 
     </script>
 </body>
