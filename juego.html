@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>¡Sálvense Quien Pueda! - Móvil</title>
+    <title>¡Sálvense Quien Pueda! - Móvil/PC</title>
     <style>
         /* CSS para los efectos bonitos y el estilo */
         body {
@@ -17,12 +17,7 @@
             margin: 0;
             padding: 20px;
         }
-
-        h1 {
-            color: #ffcc00;
-            text-shadow: 2px 2px 4px #000000;
-        }
-
+        h1 { color: #ffcc00; text-shadow: 2px 2px 4px #000000; }
         #game-container {
             border: 5px solid #ffcc00;
             box-shadow: 0 0 20px #ffcc00, 0 0 10px #ff00ff;
@@ -30,51 +25,23 @@
             overflow: hidden;
             position: relative;
         }
-        
-        canvas {
-            background-color: #5d5d81;
-            display: block;
-        }
-
+        canvas { background-color: #5d5d81; display: block; }
         #score-board {
-            margin-top: 15px;
-            font-size: 1.5em;
-            color: #ffffff;
-            background-color: #333366;
-            padding: 10px 20px;
-            border-radius: 5px;
-            border: 2px solid #ffcc00;
+            margin-top: 15px; font-size: 1.5em; color: #ffffff;
+            background-color: #333366; padding: 10px 20px;
+            border-radius: 5px; border: 2px solid #ffcc00;
         }
-        
-        /* Estilos del botón de salto para móvil */
         #jump-button {
-            margin-top: 20px;
-            padding: 15px 30px;
-            font-size: 1.2em;
-            font-weight: bold;
-            color: #1a1a2e;
-            background-color: #00ff7f; /* Color del jugador */
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            box-shadow: 0 5px #00b359;
-            transition: background-color 0.1s;
-            /* Asegura que el botón sea grande y fácil de tocar en móvil */
-            width: 80%; 
-            max-width: 300px;
+            margin-top: 20px; padding: 15px 30px; font-size: 1.2em;
+            font-weight: bold; color: #1a1a2e; background-color: #00ff7f;
+            border: none; border-radius: 8px; cursor: pointer;
+            box-shadow: 0 5px #00b359; transition: background-color 0.1s;
+            width: 80%; max-width: 300px;
         }
-
         #jump-button:active {
-            box-shadow: 0 2px #00b359;
-            transform: translateY(3px);
-            background-color: #00e673;
+            box-shadow: 0 2px #00b359; transform: translateY(3px); background-color: #00e673;
         }
-
-        .instructions {
-             margin-top: 10px;
-             text-align: center;
-             font-size: 0.9em;
-        }
+        .instructions { margin-top: 10px; text-align: center; font-size: 0.9em; }
     </style>
 </head>
 <body>
@@ -100,17 +67,16 @@
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
         const scoreElement = document.getElementById('score');
-        const jumpButton = document.getElementById('jump-button'); // Obtener el nuevo botón
+        const jumpButton = document.getElementById('jump-button'); 
 
         // --- Configuración del Juego ---
         const WIDTH = 800;
         const HEIGHT = 400;
         const GRAVITY = 0.6;
         const JUMP_POWER = 12;
-        const GROUND_Y = HEIGHT - 40;
+        const GROUND_Y = HEIGHT - 40; // Altura del suelo
         let score = 0;
-        let gameLoopId;
-
+        
         // --- Objeto del Jugador (El Aventurero) ---
         const player = {
             x: 50,
@@ -118,8 +84,7 @@
             width: 30,
             height: 40,
             velocityY: 0,
-            isJumping: false,
-
+            
             draw() {
                 ctx.fillStyle = '#00ff7f';
                 ctx.fillRect(this.x, this.y, this.width, this.height);
@@ -128,40 +93,38 @@
                 ctx.strokeRect(this.x, this.y, this.width, this.height);
             },
 
+            // APLICACIÓN DE GRAVEDAD Y MOVIMIENTO
             update() {
-                if (this.y < GROUND_Y || this.velocityY > 0) {
+                // Si NO está en el suelo, aplica gravedad y mueve
+                if (this.y < GROUND_Y) {
                     this.velocityY += GRAVITY;
                     this.y += this.velocityY;
                 }
 
+                // Corrige si se pasa del suelo
                 if (this.y >= GROUND_Y) {
                     this.y = GROUND_Y;
                     this.velocityY = 0;
-                    this.isJumping = false;
                 }
             },
 
+            // LÓGICA DE SALTO CORREGIDA (Simplemente salta si está en el suelo)
             jump() {
-                if (!this.isJumping) {
-                    this.isJumping = true;
+                // Solo salta si la posición Y es IGUAL al suelo (está plantado)
+                if (this.y === GROUND_Y) { 
                     this.velocityY = -JUMP_POWER;
                 }
             }
         };
 
-        // --- Objetos del Juego: Monedas ---
+        // --- (Resto del código de Monedas y Dibujo es igual) ---
         let coins = [];
         const COIN_SIZE = 15;
         const COIN_COLOR = '#ffcc00';
 
         function createCoin() {
             const yPos = GROUND_Y - (Math.random() * 100 + 30); 
-            coins.push({
-                x: WIDTH,
-                y: yPos,
-                size: COIN_SIZE,
-                speed: 3
-            });
+            coins.push({ x: WIDTH, y: yPos, size: COIN_SIZE, speed: 3 });
         }
 
         function drawCoins() {
@@ -170,14 +133,11 @@
                 ctx.beginPath();
                 ctx.arc(coin.x + coin.size / 2, coin.y + coin.size / 2, coin.size / 2, 0, Math.PI * 2);
                 ctx.fill();
-
                 ctx.shadowColor = '#ffff00';
                 ctx.shadowBlur = 5;
-                
                 ctx.beginPath();
                 ctx.arc(coin.x + coin.size / 2, coin.y + coin.size / 2, coin.size / 2, 0, Math.PI * 2);
                 ctx.fill();
-                
                 ctx.shadowBlur = 0;
             });
         }
@@ -185,39 +145,27 @@
         function updateCoins() {
             for (let i = coins.length - 1; i >= 0; i--) {
                 coins[i].x -= coins[i].speed;
-
-                // Detección de Colisión
                 if (
-                    player.x < coins[i].x + coins[i].size &&
-                    player.x + player.width > coins[i].x &&
-                    player.y < coins[i].y + coins[i].size &&
-                    player.y + player.height > coins[i].y
+                    player.x < coins[i].x + coins[i].size && player.x + player.width > coins[i].x &&
+                    player.y < coins[i].y + coins[i].size && player.y + player.height > coins[i].y
                 ) {
                     score++;
                     scoreElement.textContent = score;
                     coins.splice(i, 1);
-                } 
-                // Eliminar si sale de la pantalla
-                else if (coins[i].x + coins[i].size < 0) {
+                } else if (coins[i].x + coins[i].size < 0) {
                     coins.splice(i, 1);
                 }
             }
-
-            // Generar nuevas monedas periódicamente
-            if (Math.random() < 0.02) { 
-                createCoin();
-            }
+            if (Math.random() < 0.02) { createCoin(); }
         }
 
-        // --- Elemento de Tierra (Plataforma base) ---
         function drawGround() {
             ctx.fillStyle = '#3a2708';
             ctx.fillRect(0, GROUND_Y + player.height, WIDTH, 40);
-            
             ctx.fillStyle = '#228b22';
             ctx.fillRect(0, GROUND_Y, WIDTH, 5); 
         }
-
+        
         // --- Bucle Principal del Juego ---
         function gameLoop() {
             ctx.clearRect(0, 0, WIDTH, HEIGHT);
@@ -227,7 +175,7 @@
             updateCoins();
             drawCoins();
 
-            gameLoopId = requestAnimationFrame(gameLoop);
+            requestAnimationFrame(gameLoop);
         }
 
         // --- Control de Entrada: TECLADO (Para PC) ---
@@ -240,19 +188,15 @@
 
         // --- Control de Entrada: BOTÓN/TOUCH (Para Móvil) ---
         jumpButton.addEventListener('touchstart', (event) => {
-             event.preventDefault(); // Evita el menú contextual o zoom
+             event.preventDefault();
              player.jump();
         });
-        
-        // También escucha el clic normal (mouse) en caso de que se use en PC
         jumpButton.addEventListener('click', (event) => {
              player.jump();
         });
 
-
         // --- Inicio del Juego ---
         gameLoop();
-
     </script>
 </body>
 </html>
