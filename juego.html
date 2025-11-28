@@ -397,4 +397,275 @@
             ctx.fillRect(parallaxBg.layer2.x + WIDTH, HEIGHT - 120, WIDTH + 2, 80); // Duplicado para loop
 
             // Capa 3: Árboles cercanos o elementos de primer plano (más pequeños y rápidos)
-            ctx.fillStyle = '#0d1a26'; // Casi negro,
+            ctx.fillStyle = '#0d1a26'; // Casi negro, siluetas de árboles
+            ctx.fillRect(parallaxBg.layer3.x, HEIGHT - 80, WIDTH + 2, 40);
+            ctx.fillRect(parallaxBg.layer3.x + WIDTH, HEIGHT - 80, WIDTH + 2, 40); // Duplicado para loop
+        }
+
+        function updateParallaxLayers() {
+            parallaxBg.layer2.x -= parallaxBg.layer2.speed;
+            if (parallaxBg.layer2.x < -WIDTH) parallaxBg.layer2.x = 0;
+
+            parallaxBg.layer3.x -= parallaxBg.layer3.speed;
+            if (parallaxBg.layer3.x < -WIDTH) parallaxBg.layer3.x = 0;
+        }
+
+        // --- Efecto de Nieve ---
+        const snowContainer = document.querySelector('.snow');
+        const numSnowflakes = 50;
+
+        function createSnowflake() {
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snow-dot');
+            snowflake.style.left = Math.random() * 100 + 'vw';
+            snowflake.style.animationDuration = (Math.random() * 5 + 5) + 's'; // 5-10s
+            snowflake.style.animationDelay = (Math.random() * -5) + 's'; // Desfase para que no empiecen juntas
+            snowflake.style.width = snowflake.style.height = (Math.random() * 3 + 1) + 'px'; // 1-4px
+            snowContainer.appendChild(snowflake);
+        }
+
+        for (let i = 0; i < numSnowflakes; i++) {
+            createSnowflake();
+        }
+
+        // --- Lógica del Personaje ---
+        const player = {
+            x: 50, y: GROUND_Y, width: 30, height: 40, velocityY: 0,
+            draw() {
+                // Si la imagen de Elías está cargada, la dibuja
+                if (characterImage.complete && characterImage.naturalWidth !== 0) {
+                    ctx.drawImage(characterImage, this.x - 5, this.y - 10, this.width + 10, this.height + 15); // Un poco más grande para ajustar
+                } else {
+                    // Si no, dibuja el cuadrado (fallback)
+                    ctx.fillStyle = '#add8e6'; // Azul claro (Mensajero)
+                    ctx.fillRect(this.x, this.y, this.width, this.height);
+                    ctx.strokeStyle = '#000000'; ctx.lineWidth = 2;
+                    ctx.strokeRect(this.x, this.y, this.width, this.height);
+                }
+            },
+            update() {
+                this.velocityY += GRAVITY;
+                this.y += this.velocityY;
+                if (this.y >= GROUND_Y) {
+                    this.y = GROUND_Y;
+                    this.velocityY = 0;
+                }
+                
+                if (level === 1 && score >= LEVEL1_GOAL) {
+                    goToLevel(2);
+                } else if (level === 2 && score >= LEVEL2_GOAL) {
+                    endGame();
+                }
+            },
+            jump() {
+                if (this.y >= (GROUND_Y - 0.01)) { 
+                    this.velocityY = -JUMP_POWER;
+                }
+            }
+        };
+
+        // --- Lógica de Monedas/Velitas (con más detalle) ---
+        let candles = [];
+        const CANDLE_WIDTH = 12; // Un poco más ancho
+        const CANDLE_HEIGHT = 30; // Un poco más alto
+        const CANDLE_COLOR = '#8A4EF0'; // Morado Adviento más claro
+        const CANDLE_WAX_COLOR = '#F5F5DC'; // Cera blanca
+        const FLAME_COLOR = '#FFD700'; // Dorado de la Llama
+        const WICK_COLOR = '#4B3F3D'; // Mecha
+
+        function createCandle() {
+            const yPos = GROUND_Y - (Math.random() * 100 + 30); 
+            const speed = level === 1 ? 3.5 : 5.5; 
+            candles.push({
+                x: WIDTH, y: yPos, width: CANDLE_WIDTH, height: CANDLE_HEIGHT, speed: speed
+            });
+        }
+
+        function drawCandles() {
+            candles.forEach(candle => {
+                // Cuerpo de la vela (Morado Adviento)
+                ctx.fillStyle = CANDLE_COLOR;
+                ctx.fillRect(candle.x, candle.y, candle.width, candle.height); 
+
+                // Goteo de cera (opcional, para detalle)
+                ctx.fillStyle = CANDLE_WAX_COLOR;
+                ctx.beginPath();
+                ctx.arc(candle.x + candle.width / 2, candle.y + candle.height, candle.width / 2 + 2, 0, Math.PI);
+                ctx.fill();
+
+                // Mecha
+                ctx.fillStyle = WICK_COLOR;
+                ctx.fillRect(candle.x + candle.width / 2 - 1, candle.y - 5, 2, 7);
+
+                // Llama (Estrella dorada)
+                ctx.fillStyle = FLAME_COLOR;
+                ctx.beginPath();
+                // Forma de estrella simple o llama con 5 puntos
+                const centerX = candle.x + candle.width / 2;
+                const centerY = candle.y - 10;
+                const outerRadius = 8;
+                const innerRadius = 3;
+                let rot = Math.PI / 2 * 3;
+                let x = centerX;
+                let y = centerY;
+                const step = Math.PI / 5;
+
+                ctx.moveTo(centerX, centerY - outerRadius);
+                for (let i = 0; i < 5; i++) {
+                    x = centerX + Math.cos(rot) * outerRadius;
+                    y = centerY + Math.sin(rot) * outerRadius;
+                    ctx.lineTo(x, y);
+                    rot += step;
+
+                    x = centerX + Math.cos(rot) * innerRadius;
+                    y = centerY + Math.sin(rot) * innerRadius;
+                    ctx.lineTo(x, y);
+                    rot += step;
+                }
+                ctx.closePath();
+                ctx.fill();
+
+                // Efecto de brillo de la llama
+                ctx.shadowColor = '#ffff00';
+                ctx.shadowBlur = 10;
+                ctx.fill(); // Rellenar de nuevo para aplicar la sombra
+                ctx.shadowBlur = 0; // Limpiar sombra para otros objetos
+            });
+        }
+
+        function updateCandles() {
+            for (let i = candles.length - 1; i >= 0; i--) {
+                candles[i].x -= candles[i].speed;
+
+                if (
+                    player.x < candles[i].x + candles[i].width && player.x + player.width > candles[i].x &&
+                    player.y < candles[i].y + candles[i].height && player.y + player.height > candles[i].y
+                ) {
+                    score++;
+                    scoreElement.textContent = score;
+                    candles.splice(i, 1);
+                } else if (candles[i].x + candles[i].width < 0) {
+                    candles.splice(i, 1);
+                }
+            }
+            if (Math.random() < (level === 1 ? 0.02 : 0.04)) { 
+                createCandle();
+            }
+        }
+
+        function drawGround() {
+            ctx.fillStyle = '#a8bacc'; // Camino Nevado
+            ctx.fillRect(0, GROUND_Y + player.height, WIDTH, 40);
+            ctx.fillStyle = '#ffffff'; 
+            ctx.fillRect(0, GROUND_Y, WIDTH, 5); 
+        }
+        
+        // --- Bucle Principal del Juego ---
+        let gameLoopId;
+        function gameLoop() {
+            ctx.clearRect(0, 0, WIDTH, HEIGHT);
+            
+            // Dibujar y actualizar las capas de paralaje
+            updateParallaxLayers();
+            drawParallaxLayers();
+
+            drawGround(); // El suelo se dibuja sobre el paralaje
+            player.update(); 
+            player.draw();
+            updateCandles();
+            drawCandles();
+
+            gameLoopId = requestAnimationFrame(gameLoop);
+        }
+
+        // --- Gestión de Imágenes ---
+        const characterImage = new Image();
+        characterImage.src = './elias_character.png'; // Ruta de la imagen del personaje
+        characterImage.onerror = () => { console.error("Error al cargar la imagen del personaje Elías."); };
+
+        // --- Control de Navegación y Vistas ---
+
+        function showScreen(screen) {
+            mainMenu.style.display = 'none';
+            missionScreen.style.display = 'none';
+            gameScreen.style.display = 'none';
+            victoryScreen.style.display = 'none';
+            
+            screen.style.display = 'flex';
+
+            // Mostrar/Ocultar el botón de salto táctil
+            if (screen === gameScreen) {
+                 jumpButton.style.display = 'block';
+            } else {
+                 jumpButton.style.display = 'none';
+                 cancelAnimationFrame(gameLoopId); // Detener el bucle si no estamos en el juego
+            }
+        }
+
+        function goToMission() {
+            showScreen(missionScreen);
+            const missionText = "Soy Elías. Nuestra misión es simple, pero vital: debemos recolectar velitas de Adviento para encender el camino de la Estrella y guiar a María al Portal de Belén. El tiempo de espera es crucial. ¡Ayúdame a preparar la Luz!";
+            
+            document.getElementById('mission-description').innerHTML = ''; 
+            typeWriter('mission-description', missionText, 0, 
+                () => { document.getElementById('mission-start-btn').style.display = 'block'; }
+            );
+        }
+
+        function startGame() {
+            showScreen(gameScreen);
+            canvas.width = WIDTH;
+            canvas.height = HEIGHT;
+            
+            level = 1;
+            score = 0;
+            player.y = GROUND_Y;
+            player.velocityY = 0;
+            levelElement.textContent = level;
+            scoreElement.textContent = score;
+            candles = [];
+            
+            if (gameLoopId) cancelAnimationFrame(gameLoopId); 
+            gameLoop();
+        }
+
+        function goToLevel(newLevel) {
+            cancelAnimationFrame(gameLoopId);
+            level = newLevel;
+            levelElement.textContent = level;
+            candles = [];
+
+            alert(`¡Nivel ${newLevel}! ¡Misión: Guiar la Estrella! La velocidad ha aumentado. Concéntrate en llegar a la meta final (50 Velitas).`);
+            
+            gameLoop();
+        }
+
+        function endGame() {
+            cancelAnimationFrame(gameLoopId);
+            showScreen(victoryScreen);
+        }
+
+        // --- Efecto Máquina de Escribir ---
+        function typeWriter(id, text, i, callback) {
+            const element = document.getElementById(id);
+            if (i < text.length) {
+                element.innerHTML += text.charAt(i);
+                setTimeout(function() {
+                    typeWriter(id, text, i + 1, callback);
+                }, 40); 
+            } else if (callback) {
+                callback();
+            }
+        }
+
+        // --- Eventos de Control de Pantalla ---
+        document.getElementById('main-start-btn').addEventListener('click', goToMission);
+        document.getElementById('mission-start-btn').addEventListener('click', startGame);
+        document.getElementById('restart-btn').addEventListener('click', () => {
+            showScreen(mainMenu); // VOLVER AL INICIO AHORA FUNCIONA
+        });
+
+        // --- Controles de Salto (Teclado y Táctil) ---
+        jumpButton.addEventListener('touchstart', (event) => {
+             if (gameScreen.style.display === 'flex') {
+                event.preventDefault();
