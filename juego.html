@@ -178,4 +178,223 @@
 
         #mission-description {
             border-right: .15em solid #FFD700; /* Cursor dorado */
-            font-family: 'Georgia', serif; /* Fuente
+            font-family: 'Georgia', serif; /* Fuente más clásica */
+            font-size: 1.1em;
+            white-space: pre-wrap;
+            overflow: hidden;
+            letter-spacing: .03em;
+            min-height: 120px; /* Suficiente espacio para el texto */
+            padding-right: 5px;
+            line-height: 1.5;
+        }
+        
+        /* --- Elementos de Juego --- */
+        canvas {
+            display: block;
+            width: 100%;
+            height: auto;
+            position: relative; /* Para el fondo de paralaje */
+            z-index: 1;
+        }
+
+        /* Contenedor del juego para el fondo de paralaje */
+        #game-container {
+            width: 90vw;
+            max-width: 800px;
+            position: relative;
+            border: 5px solid #B00020;
+            box-shadow: 0 0 20px #B00020, 0 0 10px #FFD700;
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: transparent; /* Permite ver el paralaje */
+        }
+
+        #score-board {
+            width: 100%; /* Ajuste a todo el ancho del contenedor del juego */
+            margin-top: 0; margin-bottom: 0; 
+            padding: 10px 20px;
+            font-size: 1.5em; color: #FFFFFF;
+            background-color: #5D2E8E; /* Morado Adviento oscuro */
+            border-bottom: 2px solid #FFD700;
+            text-align: center;
+        }
+        #score-board span {
+            font-weight: bold;
+            color: #FFD700; /* Dorado para los valores */
+        }
+
+        /* --- Pantalla de Victoria --- */
+        #victory-screen {
+            flex-direction: column; justify-content: center; align-items: center; 
+            min-height: 400px; text-align: center; padding: 20px;
+            background: linear-gradient(135deg, #FFD700 0%, #FF4040 50%, #FFD700 100%); /* Fondo festivo */
+            color: #1a1a2e; /* Texto oscuro para contraste */
+        }
+        #victory-screen h1 {
+            color: #1a1a2e; /* Oscuro para contraste */
+            font-size: 4.5em; margin-bottom: 20px;
+            text-shadow: 0 0 15px #FFFFFF, 0 0 8px #000;
+        }
+        #victory-screen p {
+            font-size: 1.7em; color: #1a1a2e;
+            margin-top: 10px; line-height: 1.4;
+            text-shadow: 1px 1px 2px #fff;
+        }
+        #victory-screen p:last-of-type { /* Frase final */
+            font-size: 1.4em; color: #5D2E8E; /* Morado Adviento */
+            margin-top: 30px; font-style: italic;
+        }
+        #restart-btn {
+            margin-top: 30px;
+            background-color: #B00020; /* Rojo navideño */
+            box-shadow: 0 6px #600010;
+        }
+        #restart-btn:hover { background-color: #CC0030; }
+        #restart-btn:active { background-color: #900000; }
+
+        /* --- Créditos Hermandad --- */
+        #credits {
+            margin-top: 15px;
+            font-size: 0.8em;
+            color: #F5F5DC; /* Crema/Blanco */
+            text-align: center;
+            text-shadow: 1px 1px 2px #000;
+        }
+        #credits span {
+            color: #D2B48C; /* Ocre Carmelita */
+            font-weight: bold;
+        }
+
+        /* Media Queries para Ajuste Móvil */
+        @media (max-width: 600px) {
+            #main-menu h1 { font-size: 2.5em; }
+            #main-menu p { font-size: 1em; }
+            .btn-start { padding: 12px 25px; font-size: 1.2em; }
+            
+            #mission-screen { flex-direction: column; text-align: center; gap: 10px; }
+            #char-box { margin-bottom: 10px; }
+            #mission-text { padding-left: 0; max-width: 100%; }
+            #mission-text h2 { font-size: 1.5em; }
+            #mission-description { font-size: 0.9em; min-height: 100px; }
+
+            #score-board { font-size: 1.2em; }
+            #victory-screen h1 { font-size: 3em; }
+            #victory-screen p { font-size: 1.2em; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="snow"></div>
+
+    <div id="main-menu">
+        <h1>¡LA LUZ DE ADVIENTO!</h1>
+        <p>Una aventura de esperanza y fe en espera del Redentor.</p>
+        <button id="main-start-btn" class="btn-start">INICIAR AVENTURA</button>
+    </div>
+
+    <div id="mission-screen">
+        <div id="char-box">
+            <div id="char-image-display"></div> 
+            <p style="color: #FFD700; font-weight: bold; margin-top: 5px; text-shadow: 1px 1px 2px #000;">Mensajero Elías</p>
+        </div>
+        <div id="mission-text">
+            <h2>Misión de Adviento</h2>
+            <div id="mission-description"></div>
+            <button id="mission-start-btn" class="btn-start" style="margin-top: 25px; display: none;">EMPEZAR JUEGO</button>
+        </div>
+    </div>
+
+    <div id="game-screen">
+        <div id="score-board">
+            Velitas: <span id="score">0</span> | Nivel: <span id="level">1</span>
+        </div>
+        <div id="game-container">
+            <canvas id="gameCanvas" width="800" height="400"></canvas>
+            <div class="parallax-bg layer-1" style="background-color: #3B597C;"></div>
+            <div class="parallax-bg layer-2"></div>
+            <div class="parallax-bg layer-3"></div>
+            </div>
+    </div>
+
+    <div id="victory-screen">
+        <h1>¡MISIÓN CUMPLIDA!</h1>
+        <p>
+            Has encendido la Luz de Adviento (50 Velitas) y guiado el camino de la Estrella al Portal de Belén.
+            <br>¡La Navidad ha llegado!
+        </p>
+        <p>"El Adviento es caminar juntos al encuentro de Dios."</p>
+        <button id="restart-btn" class="btn-start">VOLVER AL INICIO</button>
+    </div>
+
+    <p id="credits">
+        Creado con fe y devoción por: <span>Hermandad de la Santísima Virgen del Carmen de Lima</span>
+    </p>
+
+    <script>
+        // --- JAVASCRIPT: Motor del Juego y Control de Pantallas ---
+        const mainMenu = document.getElementById('main-menu');
+        const missionScreen = document.getElementById('mission-screen');
+        const gameScreen = document.getElementById('game-screen');
+        const victoryScreen = document.getElementById('victory-screen');
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const scoreElement = document.getElementById('score');
+        const levelElement = document.getElementById('level');
+        
+        // Creamos un botón de salto táctil dinámicamente y lo adjuntamos al body
+        // Esto permite ocultarlo/mostrarlo fácilmente y evita que ocupe espacio visual innecesario en el HTML
+        const jumpButton = document.createElement('button');
+        jumpButton.id = 'jump-button-mobile'; // ID para el botón táctil
+        jumpButton.textContent = 'SALTA';
+        jumpButton.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #FFFFFF;
+            background-color: #B00020; /* Rojo Navidad */
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 5px #600010;
+            cursor: pointer;
+            z-index: 1000;
+            display: none; /* Oculto por defecto */
+        `;
+        document.body.appendChild(jumpButton);
+
+
+        // --- Configuración del Juego y Nivelado ---
+        const WIDTH = 800;
+        const HEIGHT = 400;
+        const GRAVITY = 0.6;
+        const JUMP_POWER = 12;
+        const GROUND_Y = HEIGHT - 40; 
+        
+        let score = 0;
+        let level = 1;
+        const LEVEL1_GOAL = 30; // Meta para pasar al Nivel 2
+        const LEVEL2_GOAL = 50; // Meta de Victoria Final
+
+        // --- Fondos Parallax ---
+        // Estos serán objetos que se moverán detrás del canvas
+        const parallaxBg = {
+            layer1: { x: 0, speed: 0.5, color: '#3B597C' }, // Cielo, casi no se mueve
+            layer2: { x: 0, speed: 1.5, image: null }, // Montañas lejanas/bosque invernal
+            layer3: { x: 0, speed: 3, image: null } // Árboles cercanos/siluetas
+        };
+
+        // Cargar imágenes para el paralaje (puedes crear estas imágenes o usar las generadas por IA si las tienes)
+        // Por ahora, usaremos colores o formas simples.
+        function drawParallaxLayers() {
+            // Fondo base (cielo) ya manejado por background-color del game-screen
+            
+            // Capa 2: Montañas o árboles lejanos (más grandes y lentos)
+            ctx.fillStyle = '#2A4058'; // Tono más oscuro de cielo/montaña
+            ctx.fillRect(parallaxBg.layer2.x, HEIGHT - 120, WIDTH + 2, 80);
+            ctx.fillRect(parallaxBg.layer2.x + WIDTH, HEIGHT - 120, WIDTH + 2, 80); // Duplicado para loop
+
+            // Capa 3: Árboles cercanos o elementos de primer plano (más pequeños y rápidos)
+            ctx.fillStyle = '#0d1a26'; // Casi negro,
