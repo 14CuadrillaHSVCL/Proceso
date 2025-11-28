@@ -61,7 +61,7 @@
     </div>
 
     <p style="margin-top: 20px;">
-        **Instrucciones:** Haz clic en el área del juego (el recuadro) y luego presiona la **barra espaciadora** o la tecla **W** para saltar y recolectar las monedas.
+        **Instrucciones:** Presiona la **barra espaciadora** o la tecla **W** para saltar y recolectar las monedas.
     </p>
 
     <script>
@@ -211,7 +211,6 @@
         }
 
         // --- Control de Entrada del Teclado ---
-        // AHORA ESTAMOS ESCUCHANDO LOS EVENTOS EN EL DOCUMENTO ENTERO
         document.addEventListener('keydown', (event) => {
             // Tecla de espacio (Code 'Space') o W (Code 'KeyW')
             if (event.code === 'Space' || event.code === 'KeyW') { 
@@ -222,6 +221,11 @@
 
         // --- Inicio del Juego ---
         gameLoop();
+
+        // SOLUCIÓN FINAL: Forzar el enfoque en el canvas al cargar la página para que las teclas funcionen inmediatamente.
+        window.onload = function() {
+            canvas.focus();
+        };
 
     </script>
 </body>
