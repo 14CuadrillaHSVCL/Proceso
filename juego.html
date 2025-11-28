@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>¡Sálvense Quien Pueda! - Móvil/PC</title>
+    <title>¡Sálvense Quien Pueda! - FINAL</title>
     <style>
         /* CSS para los efectos bonitos y el estilo */
         body {
@@ -74,7 +74,7 @@
         const HEIGHT = 400;
         const GRAVITY = 0.6;
         const JUMP_POWER = 12;
-        const GROUND_Y = HEIGHT - 40; // Altura del suelo
+        const GROUND_Y = HEIGHT - 40; 
         let score = 0;
         
         // --- Objeto del Jugador (El Aventurero) ---
@@ -93,26 +93,24 @@
                 ctx.strokeRect(this.x, this.y, this.width, this.height);
             },
 
-            // APLICACIÓN DE GRAVEDAD Y MOVIMIENTO
+            // LÓGICA DE MOVIMIENTO CRÍTICA
             update() {
-                // Si NO está en el suelo, aplica gravedad y mueve
-                if (this.y < GROUND_Y) {
-                    this.velocityY += GRAVITY;
-                    this.y += this.velocityY;
-                }
+                // Aplica gravedad y actualiza la posición Y
+                this.velocityY += GRAVITY;
+                this.y += this.velocityY;
 
-                // Corrige si se pasa del suelo
+                // CORRECCIÓN DE SUELO: Si el jugador está por debajo del suelo, lo regresa al suelo
                 if (this.y >= GROUND_Y) {
                     this.y = GROUND_Y;
                     this.velocityY = 0;
                 }
             },
 
-            // LÓGICA DE SALTO CORREGIDA (Simplemente salta si está en el suelo)
+            // FUNCIÓN DE SALTO SIMPLIFICADA AL MÁXIMO
             jump() {
-                // Solo salta si la posición Y es IGUAL al suelo (está plantado)
-                if (this.y === GROUND_Y) { 
-                    this.velocityY = -JUMP_POWER;
+                // Solo permitimos saltar si el jugador está en el suelo (elimina el 'spam jump')
+                if (this.y === GROUND_Y) {
+                    this.velocityY = -JUMP_POWER; // Mueve hacia arriba
                 }
             }
         };
@@ -170,7 +168,7 @@
         function gameLoop() {
             ctx.clearRect(0, 0, WIDTH, HEIGHT);
             drawGround();
-            player.update();
+            player.update(); // <-- El movimiento se recalcula aquí
             player.draw();
             updateCoins();
             drawCoins();
