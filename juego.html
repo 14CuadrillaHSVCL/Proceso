@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -58,11 +57,11 @@
     </div>
 
     <div id="game-container">
-        <canvas id="gameCanvas" width="800" height="400"></canvas>
+        <canvas id="gameCanvas" width="800" height="400" tabindex="0"></canvas>
     </div>
 
     <p style="margin-top: 20px;">
-        **Instrucciones:** Presiona la **barra espaciadora** o la tecla **W** para saltar y recolectar las monedas.
+        **Instrucciones:** Haz clic en el área del juego (el recuadro) y luego presiona la **barra espaciadora** o la tecla **W** para saltar y recolectar las monedas.
     </p>
 
     <script>
@@ -212,9 +211,11 @@
         }
 
         // --- Control de Entrada del Teclado ---
+        // AHORA ESTAMOS ESCUCHANDO LOS EVENTOS EN EL DOCUMENTO ENTERO
         document.addEventListener('keydown', (event) => {
-            // Tecla de espacio (keyCode 32) o W (keyCode 87)
+            // Tecla de espacio (Code 'Space') o W (Code 'KeyW')
             if (event.code === 'Space' || event.code === 'KeyW') { 
+                event.preventDefault(); // Evita que la barra espaciadora haga scroll en la página
                 player.jump();
             }
         });
