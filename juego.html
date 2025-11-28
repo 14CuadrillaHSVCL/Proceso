@@ -1,1 +1,227 @@
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Sálvense Quien Pueda! - El juego de aventura</title>
+    <style>
+        /* CSS para los efectos bonitos y el estilo */
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #1a1a2e; /* Fondo oscuro de aventura */
+            font-family: 'Arial', sans-serif;
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #ffcc00; /* Dorado para el título */
+            text-shadow: 2px 2px 4px #000000;
+        }
+
+        #game-container {
+            border: 5px solid #ffcc00;
+            box-shadow: 0 0 20px #ffcc00, 0 0 10px #ff00ff; /* Efecto de brillo de aventura */
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        /* El lienzo (canvas) donde se dibujan los gráficos */
+        canvas {
+            background-color: #5d5d81; /* Cielo de aventura */
+            display: block;
+        }
+
+        #score-board {
+            margin-top: 15px;
+            font-size: 1.5em;
+            color: #ffffff;
+            background-color: #333366;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: 2px solid #ffcc00;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>¡Sálvense Quien Pueda!</h1>
+
+    <div id="score-board">
+        Puntuación: <span id="score">0</span>
+    </div>
+
+    <div id="game-container">
+        <canvas id="gameCanvas" width="800" height="400"></canvas>
+    </div>
+
+    <p style="margin-top: 20px;">
+        **Instrucciones:** Presiona la **barra espaciadora** o la tecla **W** para saltar y recolectar las monedas.
+    </p>
+
+    <script>
+        // --- JAVASCRIPT: El Motor del Juego ---
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const scoreElement = document.getElementById('score');
+
+        // --- Configuración del Juego ---
+        const WIDTH = 800;
+        const HEIGHT = 400;
+        const GRAVITY = 0.6;
+        const JUMP_POWER = 12;
+        const GROUND_Y = HEIGHT - 40;
+        let score = 0;
+        let gameLoopId;
+
+        // --- Objeto del Jugador (El Aventurero) ---
+        const player = {
+            x: 50,
+            y: GROUND_Y,
+            width: 30,
+            height: 40,
+            velocityY: 0,
+            isJumping: false,
+
+            // Dibujar al jugador (efecto bonito: un rectángulo con un color vibrante)
+            draw() {
+                ctx.fillStyle = '#00ff7f'; // Verde neón vibrante
+                ctx.fillRect(this.x, this.y, this.width, this.height);
+                // Efecto de sombra/contorno
+                ctx.strokeStyle = '#000000'; 
+                ctx.lineWidth = 2;
+                ctx.strokeRect(this.x, this.y, this.width, this.height);
+            },
+
+            // Aplicar gravedad y limitar al suelo
+            update() {
+                if (this.y < GROUND_Y || this.velocityY > 0) {
+                    this.velocityY += GRAVITY;
+                    this.y += this.velocityY;
+                }
+
+                if (this.y >= GROUND_Y) {
+                    this.y = GROUND_Y;
+                    this.velocityY = 0;
+                    this.isJumping = false;
+                }
+            },
+
+            jump() {
+                if (!this.isJumping) {
+                    this.isJumping = true;
+                    this.velocityY = -JUMP_POWER; // Mover hacia arriba (negativo)
+                }
+            }
+        };
+
+        // --- Objetos del Juego: Monedas ---
+        let coins = [];
+        const COIN_SIZE = 15;
+        const COIN_COLOR = '#ffcc00'; // Dorado
+
+        function createCoin() {
+            // Posición aleatoria en el eje Y (para forzar saltos variados)
+            const yPos = GROUND_Y - (Math.random() * 100 + 30); 
+            coins.push({
+                x: WIDTH,
+                y: yPos,
+                size: COIN_SIZE,
+                speed: 3
+            });
+        }
+
+        function drawCoins() {
+            coins.forEach(coin => {
+                ctx.fillStyle = COIN_COLOR;
+                // Dibujar un círculo para que parezca una moneda
+                ctx.beginPath();
+                ctx.arc(coin.x + coin.size / 2, coin.y + coin.size / 2, coin.size / 2, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Efecto de brillo de moneda
+                ctx.shadowColor = '#ffff00';
+                ctx.shadowBlur = 5;
+                
+                ctx.beginPath();
+                ctx.arc(coin.x + coin.size / 2, coin.y + coin.size / 2, coin.size / 2, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Limpiar el efecto de sombra para otros objetos
+                ctx.shadowBlur = 0;
+            });
+        }
+
+        function updateCoins() {
+            for (let i = coins.length - 1; i >= 0; i--) {
+                coins[i].x -= coins[i].speed;
+
+                // 1. Detección de Colisión (Recolección)
+                if (
+                    player.x < coins[i].x + coins[i].size &&
+                    player.x + player.width > coins[i].x &&
+                    player.y < coins[i].y + coins[i].size &&
+                    player.y + player.height > coins[i].y
+                ) {
+                    // Colisión detectada
+                    score++;
+                    scoreElement.textContent = score;
+                    coins.splice(i, 1); // Eliminar la moneda
+                } 
+                // 2. Eliminar si sale de la pantalla
+                else if (coins[i].x + coins[i].size < 0) {
+                    coins.splice(i, 1);
+                }
+            }
+
+            // Generar nuevas monedas periódicamente
+            if (Math.random() < 0.02) { 
+                createCoin();
+            }
+        }
+
+        // --- Elemento de Tierra (Plataforma base) ---
+        function drawGround() {
+            ctx.fillStyle = '#3a2708'; // Color de tierra o plataforma
+            ctx.fillRect(0, GROUND_Y + player.height, WIDTH, 40);
+            
+            // Efecto bonito: Borde de pasto
+            ctx.fillStyle = '#228b22'; // Verde pasto
+            ctx.fillRect(0, GROUND_Y, WIDTH, 5); 
+        }
+
+        // --- Bucle Principal del Juego ---
+        function gameLoop() {
+            // 1. Limpiar el Canvas
+            ctx.clearRect(0, 0, WIDTH, HEIGHT);
+
+            // 2. Dibujar y Actualizar Objetos
+            drawGround();
+            player.update();
+            player.draw();
+            updateCoins();
+            drawCoins();
+
+            gameLoopId = requestAnimationFrame(gameLoop);
+        }
+
+        // --- Control de Entrada del Teclado ---
+        document.addEventListener('keydown', (event) => {
+            // Tecla de espacio (keyCode 32) o W (keyCode 87)
+            if (event.code === 'Space' || event.code === 'KeyW') { 
+                player.jump();
+            }
+        });
+
+        // --- Inicio del Juego ---
+        gameLoop();
+
+    </script>
+</body>
+</html>
