@@ -122,7 +122,7 @@
 
     /* Fase Visible (Clase 'active') */
     .step-content.active {
-        position: relative; /* Ocupa espacio */
+        position: relative; 
         opacity: 1;
         visibility: visible; 
         transform: translateX(0);
@@ -132,6 +132,10 @@
     /* Animación de Transición */
     .step-content.enter-right { position: absolute; visibility: visible; transform: translateX(100%); }
     .step-content.exit-left { position: absolute; transform: translateX(-100%); }
+    /* Para volver de 3 a 1 */
+    .step-content.enter-left { position: absolute; visibility: visible; transform: translateX(-100%); }
+    .step-content.exit-right { position: absolute; transform: translateX(100%); }
+
 
     .step-icon {
         font-size: 4em;
@@ -205,7 +209,7 @@
     /* ESTILOS ESPECÍFICOS PARA EL FORMATO DE DESCARGA DEL QR (PDF) */
     /* ---------------------------------------------------------- */
     #qrCardFormat {
-        width: 300px; 
+        width: 300px; /* Ancho fijo para la captura de la tarjeta */
         padding: 15px;
         box-sizing: border-box;
         border: 2px solid var(--color-acento-oscuro);
@@ -215,7 +219,7 @@
         /* Ocultar, pero mantener renderizado */
         position: absolute; 
         left: -9999px;
-        font-family: 'Poppins', sans-serif; /* Asegurar la fuente en la tarjeta */
+        font-family: 'Poppins', sans-serif; 
     }
     .card-header {
         border-bottom: 1px solid #CCC;
@@ -283,7 +287,7 @@
                 </div>
                 <div class="header-texto">
                     <h1>SISTEMA DE ASISTENCIA AUTOMÁTICA</h1>
-                    <h2>Décima Cuarta Cuadrilla HSVCL | Generación de Código QR Personal123</h2>
+                    <h2>Décima Cuarta Cuadrilla HSVCL | Generación de Código QR Personal</h2>
                 </div>
                 <div class="logo-header">
                     <img src="https://14CuadrillaHSVCL.github.io/Proceso/14c.png" alt="Logo de la Cuadrilla 14">
@@ -495,7 +499,7 @@
     }
 
     // ==========================================================
-    // Lógica de GENERACIÓN Y DESCARGA DE PDF (Paso 3)
+    // Lógica de GENERACIÓN Y DESCARGA DE PDF (Paso 3) - AJUSTADO A A4
     // ==========================================================
     async function downloadPDF() {
         const dni = document.getElementById('dniInput').value.trim();
@@ -509,36 +513,45 @@
         try {
             // 1. Capturar el contenido HTML del formato oculto
             const canvas = await html2canvas(inputElement, { 
-                scale: 3, 
+                scale: 4, // Aumentar la escala para máxima calidad en A4
                 useCORS: true
             });
 
-            const imgData = canvas.toDataURL('image/png');
+            const imgData = canvas.toDataURL('image/jpeg', 1.0); // Usar JPEG con calidad máxima
 
-            // 2. Crear el documento PDF con tamaño de tarjeta (A7)
+            // 2. Crear el documento PDF en formato A4
             const doc = new jsPDF({
                 orientation: 'portrait',
                 unit: 'mm',
-                format: [74, 105] // Tamaño similar a A7 (Tarjeta de identidad)
+                format: 'a4' // Establecer formato A4 (210mm x 297mm)
             });
 
-            // Tamaño para que la imagen ocupe casi todo el ancho del PDF (74mm - 5mm*2 margen = 64mm)
-            const imgWidth = 64; 
-            const imgHeight = (canvas.height * imgWidth) / canvas.width;
-            
-            // Añadir la imagen al PDF con 5mm de margen
-            doc.addImage(imgData, 'PNG', 5, 5, imgWidth, imgHeight); 
+            const pdfWidth = doc.internal.pageSize.getWidth(); // 210 mm
+            const pdfHeight = doc.internal.pageSize.getHeight(); // 297 mm
 
-            // 3. Descargar el archivo
+            // Calcular las dimensiones de la imagen en mm manteniendo la proporción
+            // La tarjeta (#qrCardFormat) tiene un ancho fijo de 300px
+            // El ancho de la imagen capturada en A4 será de 80mm para que sea notable, pero no excesivo
+            const targetWidthMM = 80; 
+            const imgHeightMM = (canvas.height * targetWidthMM) / canvas.width;
+            
+            // Calcular las coordenadas para centrar la tarjeta en la hoja A4
+            const xOffset = (pdfWidth - targetWidthMM) / 2;
+            const yOffset = (pdfHeight - imgHeightMM) / 2;
+
+            // 3. Añadir la imagen (tarjeta) al PDF, centrada
+            doc.addImage(imgData, 'JPEG', xOffset, yOffset, targetWidthMM, imgHeightMM); 
+
+            // 4. Descargar el archivo
             doc.save(`Tarjeta_QR_${hermanoName.replace(/\s/g, '_')}_${dni}.pdf`);
             
-            alert(`✅ Tarjeta QR de ${hermanoName} generada y descargada con éxito.`);
+            alert(`✅ Tarjeta QR de ${hermanoName} generada en formato A4 y descargada con éxito.`);
 
         } catch (error) {
             console.error('Error al generar el PDF:', error);
-            alert('🚫 Ocurrió un error al generar el PDF. Asegúrese de que las imágenes (logos y QR) se cargaron correctamente.');
+            alert('🚫 Ocurrió un error al generar el PDF. Revise la consola para más detalles.');
         } finally {
-            // 4. Restaurar el botón
+            // 5. Restaurar el botón
             downloadButton.innerHTML = '<i class="fas fa-file-pdf"></i> Descargar Tarjeta QR (PDF)';
             downloadButton.disabled = false;
         }
