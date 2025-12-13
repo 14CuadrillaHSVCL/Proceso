@@ -145,6 +145,50 @@
     .step-icon.success { color: var(--color-exito); }
 
     /* ---------------------------------------------------------- */
+    /* Estilos del Formulario (Paso 2) - CORREGIDO */
+    /* ---------------------------------------------------------- */
+    .input-group {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        max-width: 350px;
+    }
+    .input-group label {
+        align-self: flex-start;
+        font-weight: 600;
+        margin-bottom: 5px;
+        color: var(--color-acento-oscuro);
+    }
+    .input-group input {
+        width: 100%;
+        padding: 12px;
+        font-size: 1.1em;
+        border: 2px solid #DDD;
+        border-radius: 8px;
+        text-align: center;
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+    .input-group input:focus {
+        border-color: var(--color-acento-base);
+        box-shadow: 0 0 0 3px rgba(160, 82, 45, 0.2);
+        outline: none;
+    }
+    #error-message {
+        color: #E74C3C;
+        font-weight: 600;
+        margin-top: 15px;
+        animation: shake 0.5s;
+    }
+    @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        20%, 60% { transform: translateX(-10px); }
+        40%, 80% { transform: translateX(10px); }
+    }
+
+
+    /* ---------------------------------------------------------- */
     /* Estilos de Botones Secundarios */
     /* ---------------------------------------------------------- */
     .btn-secondary {
@@ -269,7 +313,7 @@
                 </div>
                 <div class="header-texto">
                     <h1>SISTEMA DE ASISTENCIA AUTOMÁTICA</h1>
-                    <h2>Décima Cuarta Cuadrilla HSVCL | Generación de Código QR Personal1121212</h2>
+                    <h2>Décima Cuarta Cuadrilla HSVCL | Generación de Código QR Personal12313131313edw</h2>
                 </div>
                 <div class="logo-header">
                     <img src="https://14CuadrillaHSVCL.github.io/Proceso/14c.png" alt="Logo de la Cuadrilla 14">
@@ -449,7 +493,7 @@
             const hermanoName = BROTHER_DATABASE[dni];
             
             if (hermanoName) {
-                const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${dni}`; // Usamos 300x300 por si acaso
+                const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${dni}`;
 
                 document.getElementById('hermanoNombre').textContent = hermanoName;
                 document.getElementById('qrImage').src = qrUrl;
@@ -493,7 +537,7 @@
         try {
             // 1. Capturar el contenido HTML del formato oculto (Ahora 600px de ancho)
             const canvas = await html2canvas(inputElement, { 
-                scale: 2, // Escala ligeramente reducida para evitar problemas de memoria al ser 600px el ancho base
+                scale: 2, 
                 useCORS: true
             });
 
@@ -509,13 +553,12 @@
             const pdfWidth = doc.internal.pageSize.getWidth(); // 210 mm
 
             // Calcular las dimensiones de la imagen en mm manteniendo la proporción
-            // ANCHO TARGET: 160 mm (Máximo en A4 es aprox 190mm para dejar márgenes)
             const targetWidthMM = 160; 
             const imgHeightMM = (canvas.height * targetWidthMM) / canvas.width;
             
             // Calcular las coordenadas para centrar la tarjeta en la hoja A4
             const xOffset = (pdfWidth - targetWidthMM) / 2;
-            const yOffset = 20; // 20mm desde la parte superior (margen superior fijo)
+            const yOffset = 20; 
 
             // 3. Añadir la imagen (tarjeta) al PDF, centrada y grande
             doc.addImage(imgData, 'JPEG', xOffset, yOffset, targetWidthMM, imgHeightMM); 
