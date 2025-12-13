@@ -56,7 +56,7 @@
     
     /* Contenedor Principal - Mantenido */
     .contenedor {
-        width: 95%; max-width: 900px; /* Reducción para centrar el formulario */
+        width: 95%; max-width: 900px; 
         margin: 30px auto; background: linear-gradient(to right, #FFF8E1 0%, #FEFBEA 100%);
         box-shadow: var(--sombra-elegante); border-radius: 20px; padding: 30px;
         opacity: 0; transform: translateY(20px);
@@ -79,9 +79,8 @@
     .btn-main {
         background: var(--degradado-acento); color: white; padding: 15px 35px; text-decoration: none;
         border-radius: 50px; font-size: 1.2em; font-weight: 700; letter-spacing: 1px;
-        transition: all 0.3s ease; border: none; box-shadow: 0 0 0 0 rgba(0,0,0,0); /* Desactivado el box-shadow inicial */
+        transition: all 0.3s ease; border: none; box-shadow: 0 0 0 0 rgba(0,0,0,0); 
         display: inline-block; text-transform: uppercase; cursor: pointer;
-        /* Efecto de Pulso para animar el botón de inicio */
         animation: pulse-btn 2s infinite;
     }
     .btn-main:hover {
@@ -93,14 +92,14 @@
     .pie-pagina { text-align: center; margin-top: 30px; padding-top: 15px; border-top: 1px dashed var(--color-acento-base); }
 
     /* ========================================================== */
-    /* ESTILOS ESPECÍFICOS DEL SISTEMA DE QR (FASES) */
+    /* ESTILOS ESPECÍFICOS DEL SISTEMA DE QR (FASES) - CORREGIDO */
     /* ========================================================== */
 
     /* Contenedor de Fases */
     #stepContainer {
         position: relative;
-        overflow: hidden; /* Oculta las fases que se están moviendo */
-        min-height: 400px; /* Altura mínima para evitar saltos */
+        overflow: hidden; 
+        min-height: 400px; 
         padding: 20px;
     }
 
@@ -112,34 +111,39 @@
         left: 0;
         padding: 0;
         opacity: 0;
-        transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+        visibility: hidden; /* OCULTAR POR DEFECTO */
+        transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out, visibility 0.5s;
         box-sizing: border-box;
         text-align: center;
         background-color: var(--color-secundario-fondo);
         border-radius: 12px;
         border: 1px solid #E0E0E0;
         box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        min-height: 360px; /* Asegura que todas las fases tengan una altura similar */
+        min-height: 360px; 
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
     }
 
-    /* Fase Visible (Clase 'active') */
+    /* Fase Visible (Clase 'active') - CORREGIDA */
     .step-content.active {
-        position: relative; /* Restaura la posición normal */
+        position: relative; /* CLAVE: Ocupa espacio */
         opacity: 1;
+        visibility: visible; /* CLAVE: Muestra el contenido */
         transform: translateX(0);
         margin: 0;
     }
     
     /* Animación de entrada: Viene de la derecha */
     .step-content.enter-right {
+        position: absolute; 
+        visibility: visible;
         transform: translateX(100%);
     }
     /* Animación de salida: Va a la izquierda */
     .step-content.exit-left {
+        position: absolute; 
         transform: translateX(-100%);
     }
 
@@ -368,7 +372,6 @@
     // Lógica de Transición de Fases
     // ==========================================================
     let currentStep = 1;
-    const stepContainer = document.getElementById('stepContainer');
 
     function nextStep(stepNumber) {
         const currentContent = document.getElementById(`step${currentStep}`);
@@ -379,15 +382,15 @@
         // Ocultar la fase actual con animación de salida
         currentContent.classList.remove('active');
         currentContent.classList.add('exit-left');
-
-        // Mostrar la siguiente fase con animación de entrada
+        
+        // La siguiente fase entra inmediatamente, pero oculta hasta que la anterior salga
         nextContent.classList.add('enter-right');
         
-        // Timeout para esperar la animación de salida
+        // Timeout para esperar la animación de salida (500ms)
         setTimeout(() => {
             currentContent.classList.remove('exit-left');
             
-            // Reajustar el contenedor de la siguiente fase a la posición normal
+            // Reajustar el contenedor de la siguiente fase
             nextContent.classList.remove('enter-right');
             nextContent.classList.add('active');
             
@@ -427,6 +430,8 @@
             if (hermanoName) {
                 // ÉXITO: Pasar al Paso 3
                 document.getElementById('hermanoNombre').textContent = hermanoName;
+                
+                // Usando un servicio de QR, codificando el DNI
                 document.getElementById('qrImage').src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${dni}`;
                 nextStep(3);
                 
@@ -455,6 +460,7 @@
         // Crear un enlace temporal para la descarga
         const a = document.createElement('a');
         a.href = qrImageUrl;
+        // Nombre de archivo amigable
         a.download = `QR_Asistencia_${hermanoName.replace(/\s/g, '_')}_${dni}.png`;
         document.body.appendChild(a);
         a.click();
