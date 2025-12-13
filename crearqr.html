@@ -9,16 +9,16 @@
     
 <style>
     /* ========================================================== */
-    /* Estilos CSS Base (Copia del Diseño Electoral) */
+    /* Estilos CSS Base y Variables */
     /* ========================================================== */
 
     :root {
         --color-primario-fondo: #FFF8E1; 
         --color-secundario-fondo: #FEFBEA; 
-        --color-acento-base: #A0522D; 
-        --color-acento-oscuro: #5D4037; 
+        --color-acento-base: #A0522D; /* Marrón Cardenal/Siena */
+        --color-acento-oscuro: #5D4037; /* Marrón Oscuro */
         --color-texto-oscuro: #3E2723; 
-        --color-exito: #4CAF50; /* Nuevo: Para estado de éxito/validación */
+        --color-exito: #4CAF50; 
         
         --sombra-elegante: 0 10px 20px rgba(0, 0, 0, 0.15), 0 4px 8px rgba(0, 0, 0, 0.1);
         --degradado-acento: linear-gradient(135deg, var(--color-acento-base) 0%, var(--color-acento-oscuro) 100%); 
@@ -35,67 +35,62 @@
         min-height: 100vh;
     }
     
-    /* Preloader - Mantenido */
+    /* Preloader */
     #preloader {
         position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-        background-color: var(--color-primario-fondo); 
-        z-index: 9999; display: flex; flex-direction: column;
-        justify-content: center; align-items: center;
-        opacity: 1; visibility: visible;
-        transition: opacity 1s ease-out, visibility 1s ease-out; 
+        background-color: var(--color-primario-fondo); z-index: 9999; 
+        display: flex; flex-direction: column; justify-content: center; align-items: center;
+        opacity: 1; visibility: visible; transition: opacity 1s ease-out, visibility 1s ease-out; 
     }
     #preloader.hidden { opacity: 0; visibility: hidden; }
     .loader {
-        width: 120px; height: 120px; border: 10px solid var(--color-secundario-fondo);
-        border-top: 10px solid var(--color-acento-base); 
-        border-radius: 50%; animation: spin 1.2s linear infinite;
-        margin-bottom: 20px; box-shadow: var(--sombra-elegante);
+        width: 60px; height: 60px; border: 6px solid var(--color-secundario-fondo);
+        border-top: 6px solid var(--color-acento-base); border-radius: 50%; 
+        animation: spin 1.2s linear infinite; margin-bottom: 20px; 
     }
-    .loader-text { color: var(--color-acento-oscuro); font-size: 1.2em; font-weight: 600; letter-spacing: 1px; }
     @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     
-    /* Contenedor Principal - Mantenido */
+    /* Contenedor Principal */
     .contenedor {
-        width: 95%; max-width: 900px; 
-        margin: 30px auto; background: linear-gradient(to right, #FFF8E1 0%, #FEFBEA 100%);
+        width: 95%; max-width: 900px; margin: 30px auto; 
+        background: linear-gradient(to right, #FFF8E1 0%, #FEFBEA 100%);
         box-shadow: var(--sombra-elegante); border-radius: 20px; padding: 30px;
         opacity: 0; transform: translateY(20px);
         transition: opacity 1s ease-in-out 1s, transform 1s ease-in-out 1s; 
     }
     .contenedor.visible { opacity: 1; transform: translateY(0); }
     
-    /* Encabezado Principal - Mantenido */
+    /* Encabezado */
     .main-header { text-align: center; padding-bottom: 25px; border-bottom: 3px double var(--color-acento-base); margin-bottom: 30px; }
     .header-logo-container { display: flex; justify-content: center; align-items: center; margin-bottom: 15px; }
-    .logo-header { width: 150px; height: 150px; margin: 0 10px; display: flex; justify-content: center; align-items: center; }
+    .logo-header { width: 100px; height: 100px; margin: 0 10px; display: flex; justify-content: center; align-items: center; }
     .logo-header img { max-width: 100%; max-height: 100%; object-fit: contain; }
-    .header-texto h1 { color: var(--color-acento-oscuro); font-family: 'Georgia', serif; font-size: 1.8em; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1.5px; text-shadow: 1px 1px 2px rgba(0,0,0,0.1); }
-    .header-texto h2 { font-size: 1.2em; margin: 0; color: var(--color-acento-base); font-weight: 500; }
+    .header-texto h1 { color: var(--color-acento-oscuro); font-family: 'Georgia', serif; font-size: 1.6em; margin-bottom: 5px; text-transform: uppercase; }
+    .header-texto h2 { font-size: 1em; margin: 0; color: var(--color-acento-base); font-weight: 500; }
     
-    .seccion { margin-bottom: 35px; padding: 20px; background-color: var(--color-secundario-fondo); border-radius: 12px; border: 1px solid #E0E0E0; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-    .seccion h3 { color: var(--color-acento-oscuro); font-size: 1.6em; border-bottom: 2px solid var(--color-acento-base); padding-bottom: 5px; margin-top: 0; font-weight: 600; }
-    
-    /* Botón Principal - Mantenido */
+    /* Botón Principal */
     .btn-main {
         background: var(--degradado-acento); color: white; padding: 15px 35px; text-decoration: none;
-        border-radius: 50px; font-size: 1.2em; font-weight: 700; letter-spacing: 1px;
-        transition: all 0.3s ease; border: none; box-shadow: 0 0 0 0 rgba(0,0,0,0); 
-        display: inline-block; text-transform: uppercase; cursor: pointer;
-        animation: pulse-btn 2s infinite;
+        border-radius: 50px; font-size: 1.1em; font-weight: 700; letter-spacing: 1px;
+        transition: all 0.3s ease; border: none; display: inline-block; 
+        text-transform: uppercase; cursor: pointer; animation: pulse-btn 2s infinite;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     }
     .btn-main:hover {
         background: linear-gradient(135deg, var(--color-acento-oscuro) 0%, var(--color-acento-base) 100%);
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); 
-        transform: translateY(-3px) scale(1.02);
+        transform: translateY(-2px) scale(1.01);
+    }
+    .btn-main:disabled {
+        background: #CCC;
+        cursor: not-allowed;
+        animation: none;
+        box-shadow: none;
     }
     
-    .pie-pagina { text-align: center; margin-top: 30px; padding-top: 15px; border-top: 1px dashed var(--color-acento-base); }
-
-    /* ========================================================== */
-    /* ESTILOS ESPECÍFICOS DEL SISTEMA DE QR (FASES) - CORREGIDO */
-    /* ========================================================== */
-
-    /* Contenedor de Fases */
+    /* ---------------------------------------------------------- */
+    /* ESTILOS DE FASES Y TRANSICIÓN */
+    /* ---------------------------------------------------------- */
+    
     #stepContainer {
         position: relative;
         overflow: hidden; 
@@ -103,7 +98,6 @@
         padding: 20px;
     }
 
-    /* Estilo Base de Cada Fase */
     .step-content {
         position: absolute;
         width: 100%;
@@ -111,7 +105,7 @@
         left: 0;
         padding: 0;
         opacity: 0;
-        visibility: hidden; /* OCULTAR POR DEFECTO */
+        visibility: hidden; 
         transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out, visibility 0.5s;
         box-sizing: border-box;
         text-align: center;
@@ -126,44 +120,29 @@
         align-items: center;
     }
 
-    /* Fase Visible (Clase 'active') - CORREGIDA */
+    /* Fase Visible (Clase 'active') */
     .step-content.active {
-        position: relative; /* CLAVE: Ocupa espacio */
+        position: relative; /* Ocupa espacio */
         opacity: 1;
-        visibility: visible; /* CLAVE: Muestra el contenido */
+        visibility: visible; 
         transform: translateX(0);
         margin: 0;
     }
     
-    /* Animación de entrada: Viene de la derecha */
-    .step-content.enter-right {
-        position: absolute; 
-        visibility: visible;
-        transform: translateX(100%);
-    }
-    /* Animación de salida: Va a la izquierda */
-    .step-content.exit-left {
-        position: absolute; 
-        transform: translateX(-100%);
-    }
+    /* Animación de Transición */
+    .step-content.enter-right { position: absolute; visibility: visible; transform: translateX(100%); }
+    .step-content.exit-left { position: absolute; transform: translateX(-100%); }
 
-    /* Estilo de los Íconos de Fase */
     .step-icon {
         font-size: 4em;
         color: var(--color-acento-base);
         margin-bottom: 20px;
-        text-shadow: 2px 2px 5px rgba(0,0,0,0.1);
     }
-    .step-icon.success {
-        color: var(--color-exito);
-    }
-    .step-icon.loading {
-        animation: spin 1.5s linear infinite;
-    }
+    .step-icon.success { color: var(--color-exito); }
 
-    /* ----------------------------------- */
+    /* ---------------------------------------------------------- */
     /* Estilos del Formulario (Paso 2) */
-    /* ----------------------------------- */
+    /* ---------------------------------------------------------- */
     .input-group {
         margin-top: 20px;
         display: flex;
@@ -185,7 +164,6 @@
         border: 2px solid #DDD;
         border-radius: 8px;
         text-align: center;
-        transition: border-color 0.3s, box-shadow 0.3s;
         box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
     }
     .input-group input:focus {
@@ -199,66 +177,94 @@
         margin-top: 15px;
         animation: shake 0.5s;
     }
-    
-    /* ----------------------------------- */
-    /* Estilos del Resultado (Paso 3) */
-    /* ----------------------------------- */
-    #hermano-info h4 {
-        font-size: 1.6em;
-        color: var(--color-exito);
-        margin: 10px 0 5px;
-        font-weight: 700;
-    }
-    #hermano-info p {
-        font-size: 1.1em;
-        color: var(--color-acento-oscuro);
-        margin-bottom: 30px;
-    }
-    
-    /* ----------------------------------- */
-    /* Botones Adicionales */
-    /* ----------------------------------- */
-    .btn-download {
-        background-color: var(--color-exito);
-        border: none;
-        color: white;
-        padding: 12px 25px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 1em;
-        margin-top: 15px;
-        cursor: pointer;
-        border-radius: 50px;
-        transition: background-color 0.3s, transform 0.2s;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    }
-    .btn-download:hover {
-        background-color: #388E3C;
-        transform: translateY(-2px);
-    }
-
-    /* Animación de pulso para el botón principal */
-    @keyframes pulse-btn {
-        0% { box-shadow: 0 0 0 0 rgba(160, 82, 45, 0.5); }
-        70% { box-shadow: 0 0 0 15px rgba(160, 82, 45, 0); }
-        100% { box-shadow: 0 0 0 0 rgba(160, 82, 45, 0); }
-    }
-    /* Animación de error */
     @keyframes shake {
         0%, 100% { transform: translateX(0); }
         20%, 60% { transform: translateX(-10px); }
         40%, 80% { transform: translateX(10px); }
     }
 
+    /* ---------------------------------------------------------- */
+    /* Estilos de Botones Secundarios */
+    /* ---------------------------------------------------------- */
+    .btn-secondary {
+        background-color: #999;
+        color: white;
+        padding: 12px 25px;
+        border: none;
+        border-radius: 50px;
+        font-size: 1em;
+        margin-left: 10px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    .btn-secondary:hover {
+        background-color: #777;
+    }
+
+    /* ---------------------------------------------------------- */
+    /* ESTILOS ESPECÍFICOS PARA EL FORMATO DE DESCARGA DEL QR (PDF) */
+    /* ---------------------------------------------------------- */
+    #qrCardFormat {
+        width: 300px; 
+        padding: 15px;
+        box-sizing: border-box;
+        border: 2px solid var(--color-acento-oscuro);
+        border-radius: 10px;
+        background-color: white;
+        text-align: center;
+        /* Ocultar, pero mantener renderizado */
+        position: absolute; 
+        left: -9999px;
+        font-family: 'Poppins', sans-serif; /* Asegurar la fuente en la tarjeta */
+    }
+    .card-header {
+        border-bottom: 1px solid #CCC;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+    }
+    .card-header h4 {
+        margin: 0;
+        color: var(--color-acento-oscuro);
+        font-size: 1.1em;
+        font-family: 'Georgia', serif;
+    }
+    .card-logo {
+        width: 50px;
+        height: 50px;
+        margin-bottom: 5px;
+    }
+    .card-info h5 {
+        margin: 5px 0 0;
+        color: var(--color-acento-base);
+        font-size: 1.2em;
+        font-weight: 700;
+    }
+    .card-info p {
+        margin: 0;
+        font-size: 0.9em;
+        color: #666;
+    }
+    .card-qr-container {
+        padding: 5px;
+        border: 1px dashed var(--color-acento-base);
+        display: inline-block;
+        margin-top: 15px;
+    }
+    #pdfQrImage {
+        width: 150px;
+        height: 150px;
+    }
+
 
     /* Responsive Design */
     @media (max-width: 600px) {
-        .logo-header { display: none; }
-        .header-texto h1 { font-size: 1.6em; }
-        .header-texto h2 { font-size: 1em; }
+        .logo-header { width: 70px; height: 70px; margin: 0 5px; }
+        .header-texto h1 { font-size: 1.3em; }
+        .header-texto h2 { font-size: 0.9em; }
         .step-icon { font-size: 3em; }
         .step-content { min-height: 300px; padding: 10px; }
+        .btn-main { padding: 12px 25px; font-size: 1em; }
+        .btn-secondary { padding: 10px 20px; font-size: 0.9em; margin-left: 5px; }
     }
 </style>
 </head>
@@ -291,10 +297,10 @@
                 <i class="fas fa-qrcode step-icon"></i>
                 <h3 style="color: var(--color-acento-oscuro);">¡Bienvenidos al Futuro de la Asistencia!</h3>
                 <p style="max-width: 600px; font-size: 1.05em; color: var(--color-texto-oscuro); text-align: center;">
-                    La Hermandad implementa el sistema de **Asistencia Automática** mediante Código QR. Este paso es **necesario e importante** para optimizar los registros y garantizar la transparencia y eficiencia en el control de asistencia de nuestros hermanos.
+                    Este sistema permite generar su **Código QR personal** para registrar su asistencia de manera eficiente y transparente.
                 </p>
                 <p style="max-width: 600px; font-size: 0.95em; font-style: italic;">
-                    Siga los pasos a continuación para generar y descargar su código personal único.
+                    Haga clic para iniciar el proceso de verificación y descarga.
                 </p>
                 <button class="btn-main" onclick="nextStep(2)">Comenzar Proceso <i class="fas fa-arrow-right"></i></button>
             </div>
@@ -302,7 +308,7 @@
             <div id="step2" class="step-content">
                 <i class="fas fa-id-card step-icon"></i>
                 <h3 style="color: var(--color-acento-oscuro);">Paso 1: Verificación de Hermano</h3>
-                <p>Por favor, ingrese su **Número de DNI** para verificar su registro en la Hermandad.</p>
+                <p>Por favor, ingrese su **Número de DNI** para verificar su registro.</p>
                 
                 <div class="input-group">
                     <label for="dniInput">Número de DNI (8 dígitos)</label>
@@ -321,30 +327,55 @@
                 <h3 style="color: var(--color-exito);">¡Hermano Verificado con Éxito!</h3>
                 
                 <div id="hermano-info">
-                    <p style="font-size: 1.2em; font-weight: 600;">Bienvenido, Hermano(a):</p>
+                    <p style="font-size: 1.2em; font-weight: 600;">Bienvenido(a):</p>
                     <h4 id="hermanoNombre"></h4>
-                    <p>Su Código QR personal está listo para ser generado.</p>
+                    <p>Su Código QR personal está listo para ser generado y descargado en formato **PDF**.</p>
                 </div>
                 
                 <div id="qr-placeholder" style="margin: 20px auto; border: 4px solid var(--color-acento-base); border-radius: 8px; padding: 10px;">
                     <img src="https://placehold.co/150x150/A0522D/FFF8E1?text=QR+LISTO" alt="Código QR Personal" id="qrImage">
                 </div>
 
-                <button class="btn-download" onclick="downloadQR()">
-                    <i class="fas fa-download"></i> Descargar mi Código QR
-                </button>
-                <button class="btn-download" style="background-color: #999; margin-left: 10px;" onclick="nextStep(1)">
-                    <i class="fas fa-redo"></i> Volver a Empezar
-                </button>
+                <div style="display: flex; margin-top: 15px;">
+                    <button class="btn-main" onclick="downloadPDF()">
+                        <i class="fas fa-file-pdf"></i> Descargar Tarjeta QR (PDF)
+                    </button>
+                    <button class="btn-secondary" onclick="nextStep(1)">
+                        <i class="fas fa-redo"></i> Volver a Empezar
+                    </button>
+                </div>
             </div>
 
         </div>
+        <div id="qrCardFormat">
+            <div class="card-header">
+                <img src="https://14CuadrillaHSVCL.github.io/Proceso/14c.png" alt="Logo Cuadrilla 14" class="card-logo">
+                <h4>Décima Cuarta Cuadrilla HSVCL</h4>
+                <p style="font-size: 0.8em; color: var(--color-acento-base); font-weight: 600;">Código de Asistencia Personal e Intransferible</p>
+            </div>
+            
+            <div class="card-info">
+                <p>Hermano(a):</p>
+                <h5 id="pdfHermanoNombre"></h5>
+            </div>
+            
+            <div class="card-qr-container">
+                <img src="" alt="Código QR para PDF" id="pdfQrImage">
+            </div>
+
+            <p style="font-size: 0.7em; margin-top: 15px; color: #666;">Presente este documento para registrar su asistencia.</p>
+        </div>
         <div class="pie-pagina">
-            <p style="font-size: 0.85em; color: var(--color-acento-oscuro);">Décima Cuarta Cuadrilla HSVCL | Sistema de Gestión de Asistencia</p>
+            <p style="font-size: 0.85em; color: var(--color-acento-oscuro);">Desarrollado para la Décima Cuarta Cuadrilla HSVCL</p>
         </div>
     </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
 <script>
+    const { jsPDF } = window.jspdf;
+
     // ==========================================================
     // Datos de Prueba (Simulación de Base de Datos de Hermanos)
     // ==========================================================
@@ -374,29 +405,38 @@
     let currentStep = 1;
 
     function nextStep(stepNumber) {
+        if (stepNumber === currentStep) return;
+        
         const currentContent = document.getElementById(`step${currentStep}`);
         const nextContent = document.getElementById(`step${stepNumber}`);
 
         if (!currentContent || !nextContent) return;
 
-        // Ocultar la fase actual con animación de salida
+        // Determinar la dirección de la transición
+        const exitClass = stepNumber > currentStep ? 'exit-left' : 'exit-right';
+        const enterClass = stepNumber > currentStep ? 'enter-right' : 'enter-left';
+
         currentContent.classList.remove('active');
-        currentContent.classList.add('exit-left');
+        currentContent.classList.add(exitClass);
         
-        // La siguiente fase entra inmediatamente, pero oculta hasta que la anterior salga
-        nextContent.classList.add('enter-right');
+        nextContent.classList.add(enterClass);
         
         // Timeout para esperar la animación de salida (500ms)
         setTimeout(() => {
-            currentContent.classList.remove('exit-left');
+            currentContent.classList.remove(exitClass);
+            currentContent.classList.remove('enter-left');
             
-            // Reajustar el contenedor de la siguiente fase
-            nextContent.classList.remove('enter-right');
+            nextContent.classList.remove(enterClass);
             nextContent.classList.add('active');
             
-            // Actualizar la fase actual
             currentStep = stepNumber;
-        }, 500); // 500ms coincide con la duración de la transición CSS
+
+            // Limpiar el input si vuelve al paso 1
+            if (stepNumber === 1) {
+                document.getElementById('dniInput').value = '';
+                document.getElementById('error-message').style.display = 'none';
+            }
+        }, 500);
     }
 
     // ==========================================================
@@ -418,53 +458,90 @@
 
         const btnSearch = document.querySelector('#step2 .btn-main');
         
-        // 1. Efecto de Carga en el Botón y en el Input
         btnSearch.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Verificando...';
         btnSearch.disabled = true;
         dniInput.disabled = true;
 
-        // 2. Simulación de búsqueda en el servidor (3 segundos)
         setTimeout(() => {
             const hermanoName = BROTHER_DATABASE[dni];
             
             if (hermanoName) {
-                // ÉXITO: Pasar al Paso 3
+                // Generar URL del QR
+                const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${dni}`;
+
+                // Seteo de datos en la FASE VISIBLE
                 document.getElementById('hermanoNombre').textContent = hermanoName;
-                
-                // Usando un servicio de QR, codificando el DNI
-                document.getElementById('qrImage').src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${dni}`;
+                document.getElementById('qrImage').src = qrUrl;
+
+                // Seteo de datos en el FORMATO OCULTO DEL PDF
+                document.getElementById('pdfHermanoNombre').textContent = hermanoName;
+                document.getElementById('pdfQrImage').src = qrUrl;
+
+                // ÉXITO
                 nextStep(3);
                 
             } else {
-                // ERROR: No encontrado
-                errorMessage.textContent = `🚫 Hermano con DNI ${dni} no encontrado. Verifique el número o contacte a la Cuadrilla.`;
+                // ERROR
+                errorMessage.textContent = `🚫 Hermano con DNI ${dni} no encontrado. Verifique el número.`;
                 errorMessage.style.display = 'block';
             }
             
-            // 3. Restaurar el Botón y el Input
+            // Restaurar el Botón y el Input
             btnSearch.innerHTML = '<i class="fas fa-search"></i> Buscar Hermano';
             btnSearch.disabled = false;
             dniInput.disabled = false;
             
-        }, 3000); // Simulación de retraso de 3 segundos
+        }, 3000); 
     }
 
     // ==========================================================
-    // Lógica de Descarga (Paso 3)
+    // Lógica de GENERACIÓN Y DESCARGA DE PDF (Paso 3)
     // ==========================================================
-    function downloadQR() {
+    async function downloadPDF() {
         const dni = document.getElementById('dniInput').value.trim();
         const hermanoName = document.getElementById('hermanoNombre').textContent;
-        const qrImageUrl = document.getElementById('qrImage').src;
+        const inputElement = document.getElementById('qrCardFormat');
         
-        // Crear un enlace temporal para la descarga
-        const a = document.createElement('a');
-        a.href = qrImageUrl;
-        // Nombre de archivo amigable
-        a.download = `QR_Asistencia_${hermanoName.replace(/\s/g, '_')}_${dni}.png`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
+        const downloadButton = document.querySelector('#step3 .btn-main');
+        downloadButton.innerHTML = '<i class="fas fa-file-export fa-spin"></i> Generando PDF...';
+        downloadButton.disabled = true;
+
+        try {
+            // 1. Capturar el contenido HTML del formato oculto
+            const canvas = await html2canvas(inputElement, { 
+                scale: 3, 
+                useCORS: true
+            });
+
+            const imgData = canvas.toDataURL('image/png');
+
+            // 2. Crear el documento PDF con tamaño de tarjeta (A7)
+            const doc = new jsPDF({
+                orientation: 'portrait',
+                unit: 'mm',
+                format: [74, 105] // Tamaño similar a A7 (Tarjeta de identidad)
+            });
+
+            // Tamaño para que la imagen ocupe casi todo el ancho del PDF (74mm - 5mm*2 margen = 64mm)
+            const imgWidth = 64; 
+            const imgHeight = (canvas.height * imgWidth) / canvas.width;
+            
+            // Añadir la imagen al PDF con 5mm de margen
+            doc.addImage(imgData, 'PNG', 5, 5, imgWidth, imgHeight); 
+
+            // 3. Descargar el archivo
+            doc.save(`Tarjeta_QR_${hermanoName.replace(/\s/g, '_')}_${dni}.pdf`);
+            
+            alert(`✅ Tarjeta QR de ${hermanoName} generada y descargada con éxito.`);
+
+        } catch (error) {
+            console.error('Error al generar el PDF:', error);
+            alert('🚫 Ocurrió un error al generar el PDF. Asegúrese de que las imágenes (logos y QR) se cargaron correctamente.');
+        } finally {
+            // 4. Restaurar el botón
+            downloadButton.innerHTML = '<i class="fas fa-file-pdf"></i> Descargar Tarjeta QR (PDF)';
+            downloadButton.disabled = false;
+        }
     }
     
     // Limitar el input DNI a solo números
@@ -472,7 +549,6 @@
         const dniInput = document.getElementById('dniInput');
         if (dniInput) {
             dniInput.addEventListener('input', function(e) {
-                // Mantener solo dígitos y limitar a 8
                 e.target.value = e.target.value.replace(/[^0-9]/g, '').slice(0, 8);
             });
         }
