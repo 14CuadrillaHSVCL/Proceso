@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Elecciones Generales - Hermandad HSVCL</title>
-    
-    <link rel="preload" as="image" href="https://14CuadrillaHSVCL.github.io/Proceso/14c.png">
-    
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Georgia:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     
 <style>
+    /* ========================================================== */
+    /* Estilos CSS Dinámicos y Profesionales (Mantenidos) */
+    /* ========================================================== */
+
     :root {
         --color-primario-fondo: #FFF8E1;
         --color-secundario-fondo: #FEFBEA;
@@ -20,7 +21,7 @@
         --color-activo-claro: #A0522D;
         --color-activo-oscuro: #6D4C41; 
         --color-pendiente: #D2B48C;
-        --sombra-elegante: 0 10px 20px rgba(0, 0, 0, 0.15);
+        --sombra-elegante: 0 10px 20px rgba(0, 0, 0, 0.15), 0 4px 8px rgba(0, 0, 0, 0.1);
         --degradado-acento: linear-gradient(135deg, var(--color-activo-claro) 0%, var(--color-activo-oscuro) 100%); 
         --degradado-fondo-pagina: linear-gradient(180deg, #FAF0E6 0%, #FFFDE7 100%);
     }
@@ -32,287 +33,591 @@
         background: var(--degradado-fondo-pagina);
         color: var(--color-texto-oscuro);
         line-height: 1.6;
+        min-height: 100vh;
     }
-
-    /* Preloader */
+    
     #preloader {
         position: fixed;
-        top: 0; left: 0; width: 100%; height: 100%;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
         background-color: var(--color-primario-fondo);
         z-index: 9999;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        transition: opacity 0.5s;
+        transition: opacity 1s ease-out, visibility 1s ease-out; 
     }
+
     #preloader.hidden { opacity: 0; visibility: hidden; }
 
     .loader {
-        width: 60px; height: 60px;
-        border: 6px solid #eee;
-        border-top: 6px solid var(--color-acento-base);
+        width: 120px;
+        height: 120px;
+        border: 10px solid var(--color-secundario-fondo);
+        border-top: 10px solid var(--color-acento-base);
         border-radius: 50%;
-        animation: spin 1s linear infinite;
-    }
-    @keyframes spin { 100% { transform: rotate(360deg); } }
-
-    /* Contenedor Principal */
-    .contenedor {
-        width: 92%;
-        max-width: 1100px;
-        margin: 20px auto;
-        background: #fff;
+        animation: spin 1.2s linear infinite;
+        margin-bottom: 20px;
         box-shadow: var(--sombra-elegante);
-        border-radius: 15px;
-        padding: 20px;
-        box-sizing: border-box;
+    }
+    
+    .loader-text {
+        color: var(--color-acento-oscuro);
+        font-size: 1.2em;
+        font-weight: 600;
+        letter-spacing: 1px;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+    
+    .contenedor {
+        width: 95%;
+        max-width: 1100px;
+        margin: 30px auto;
+        background: linear-gradient(to right, #FFF8E1 0%, #FEFBEA 100%);
+        box-shadow: var(--sombra-elegante);
+        border-radius: 20px;
+        padding: 30px;
         opacity: 0;
         transform: translateY(20px);
-        transition: all 0.8s ease-out;
+        transition: opacity 1s ease-in-out 1s, transform 1s ease-in-out 1s; 
     }
+
     .contenedor.visible { opacity: 1; transform: translateY(0); }
 
-    /* Header Responsivo */
+    .main-header {
+        text-align: center;
+        padding-bottom: 25px;
+        border-bottom: 3px double var(--color-acento-base);
+        margin-bottom: 30px;
+    }
+
     .header-logo-container {
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
-        flex-wrap: wrap; /* Permite que bajen en móvil */
-        gap: 15px;
-        text-align: center;
+        margin-bottom: 15px;
+        flex-wrap: wrap; /* Ajuste para celular */
     }
 
     .logo-header {
-        flex: 1;
-        min-width: 80px;
-        max-width: 120px;
+        width: 180px; 
+        height: 180px;
+        margin: 10px 20px;
+        display: flex; 
+        justify-content: center;
+        align-items: center;
     }
 
-    .logo-header img { width: 100%; height: auto; }
+    .logo-header img { max-width: 100%; max-height: 100%; object-fit: contain; }
 
-    .header-texto {
-        flex: 2;
-        min-width: 280px;
-    }
-
-    .header-texto h1 { 
-        font-family: 'Georgia', serif; 
-        font-size: 1.5rem; 
+    .header-texto h1 {
         color: var(--color-acento-oscuro);
+        font-family: 'Georgia', serif;
+        font-size: 2.2em;
+        margin-bottom: 5px;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+    }
+
+    .header-texto h2 {
+        font-size: 1.4em;
         margin: 0;
+        color: var(--color-acento-base);
+        font-weight: 500;
     }
 
-    /* Comite Electoral Grid Responsivo */
+    .seccion {
+        margin-bottom: 35px;
+        padding: 20px;
+        background-color: var(--color-secundario-fondo);
+        border-radius: 12px;
+        border: 1px solid #E0E0E0;
+    }
+
+    .seccion h3 {
+        color: var(--color-acento-oscuro);
+        font-size: 1.6em;
+        border-bottom: 2px solid var(--color-acento-base);
+        padding-bottom: 5px;
+        margin-top: 0;
+    }
+
+    .comite-electoral-container { display: flex; justify-content: center; }
+
     .comite-grid {
+        width: 100%;
+        max-width: 750px;
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        gap: 10px;
+        grid-template-columns: 1.2fr 2fr 1.5fr;
+        gap: 10px 15px; 
         margin-top: 15px;
-        background: rgba(160, 82, 45, 0.05);
-        padding: 15px;
-        border-radius: 10px;
+        padding: 15px 20px;
         border: 1px dashed var(--color-acento-base);
+        border-radius: 8px;
+        background-color: rgba(160, 82, 45, 0.05);
     }
 
-    .comite-header { font-weight: bold; font-size: 0.8rem; border-bottom: 1px solid var(--color-acento-base); text-align: center;}
-    .comite-cargo, .comite-hermano, .comite-cuadrilla { font-size: 0.85rem; padding: 5px 0; }
-    .comite-cargo { color: var(--color-acento-base); font-weight: 600; }
+    .comite-header {
+        font-weight: 700;
+        color: var(--color-acento-oscuro);
+        border-bottom: 2px solid var(--color-acento-base);
+        font-size: 0.85em;
+        text-align: center;
+    }
 
-    /* Timeline Responsivo */
+    .comite-cargo { font-weight: 600; color: var(--color-acento-base); text-align: center; }
+    .comite-hermano { font-weight: 500; text-align: left; }
+
     .timeline {
-        position: relative;
-        margin: 40px 0;
         display: flex;
         justify-content: space-between;
+        width: 100%;
+        position: relative;
+        margin: 20px 0;
     }
 
     .timeline-line {
         position: absolute;
-        top: 15px; left: 0; right: 0;
-        height: 4px; background: var(--color-pendiente);
+        top: 25px; 
+        left: 5%;
+        right: 5%;
+        height: 5px;
+        background: var(--color-pendiente); 
         z-index: 1;
     }
 
     .timeline-progress {
         position: absolute;
-        top: 15px; left: 0;
-        height: 4px; background: var(--color-completo);
-        z-index: 2; transition: width 1s;
+        top: 25px; 
+        left: 5%;
+        width: 0%; 
+        height: 5px;
+        background: var(--color-completo); 
+        z-index: 2;
+        transition: width 1s ease-out;
     }
 
     .timeline-item {
-        position: relative;
-        z-index: 3;
         flex: 1;
         text-align: center;
-        padding-top: 35px;
-        font-size: 0.8rem;
+        position: relative;
+        z-index: 3;
+        padding-top: 55px;
     }
 
     .timeline-point {
-        position: absolute;
-        top: 8px; left: 50%;
-        transform: translateX(-50%);
-        width: 16px; height: 16px;
+        width: 20px;
+        height: 20px;
         background: var(--color-pendiente);
         border-radius: 50%;
-        border: 3px solid white;
+        position: absolute;
+        top: 17px;
+        left: 50%;
+        transform: translateX(-50%);
+        border: 4px solid var(--color-secundario-fondo); 
     }
 
     .timeline-item.completed .timeline-point { background: var(--color-completo); }
-    .timeline-item.active .timeline-point { background: var(--color-activo-claro); transform: translateX(-50%) scale(1.3); }
-
-    /* Botones y Secciones */
-    .seccion { margin-bottom: 25px; }
-    .btn-main {
-        display: inline-block;
-        background: var(--degradado-acento);
-        color: white;
-        padding: 12px 25px;
-        border-radius: 30px;
-        text-decoration: none;
-        font-weight: 600;
-        font-size: 0.9rem;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    .timeline-item.active .timeline-point {
+        background: var(--color-activo-claro); 
+        box-shadow: 0 0 15px var(--color-activo-claro);
+        transform: translateX(-50%) scale(1.3);
+        animation: pulse 1.5s infinite alternate;
     }
 
-    /* === MEDIA QUERIES PARA MÓVIL === */
-    @media (max-width: 600px) {
-        .header-logo-container { flex-direction: column; }
-        .logo-header { max-width: 80px; order: 1; }
-        .header-texto { order: 2; }
-        .header-texto h1 { font-size: 1.2rem; }
+    @keyframes pulse {
+        from { box-shadow: 0 0 0 4px var(--color-activo-claro); }
+        to { box-shadow: 0 0 0 8px rgba(160, 82, 45, 0.3); }
+    }
+
+    .btn-main {
+        background: var(--degradado-acento);
+        color: white;
+        padding: 15px 35px;
+        text-decoration: none;
+        border-radius: 50px;
+        font-weight: 700;
+        display: inline-block;
+        transition: all 0.3s ease;
+    }
+
+    .btn-main:hover { transform: translateY(-3px); box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); }
+
+    /* ========================================================== */
+    /* AJUSTES RESPONSIVE PARA CELULAR */
+    /* ========================================================== */
+    @media (max-width: 768px) {
+        .contenedor { padding: 15px; width: 92%; }
+        .header-texto h1 { font-size: 1.5em; }
+        .header-texto h2 { font-size: 1.1em; }
+        .logo-header { width: 140px; height: 140px; margin: 10px auto; }
         
-        .comite-grid {
-            grid-template-columns: 1fr; /* Una sola columna en móvil */
+        /* Jurado en celular: una sola columna */
+        .comite-grid { 
+            grid-template-columns: 1fr; 
             text-align: center;
         }
-        .comite-header { display: none; } /* Ocultar cabeceras en móvil para ahorrar espacio */
-        .comite-hermano { font-weight: bold; }
-        .comite-cuadrilla { font-size: 0.75rem; color: #777; margin-bottom: 10px; border-bottom: 1px solid #eee; }
+        .comite-header { display: none; } /* Ocultar cabeceras repetitivas */
+        .comite-hermano { text-align: center; margin-bottom: 10px; border-bottom: 1px solid rgba(160,82,45,0.1); padding-bottom: 5px; }
 
-        .timeline {
-            flex-direction: column;
-            padding-left: 40px;
-        }
-        .timeline-line {
-            width: 4px; height: 100%;
-            left: 20px; top: 0;
-        }
-        .timeline-progress {
-            width: 4px; left: 20px;
-        }
-        .timeline-item {
-            text-align: left;
-            padding: 10px 0 20px 0;
-        }
-        .timeline-point {
-            left: -20px;
-            top: 12px;
-        }
+        /* Timeline en celular: vertical */
+        .timeline { flex-direction: column; padding-left: 30px; align-items: flex-start; }
+        .timeline-line, .timeline-progress { left: 10px; width: 5px; height: 100%; top: 0; }
+        .timeline-item { padding: 15px 0 15px 25px; text-align: left; width: 100%; }
+        .timeline-point { top: 25px; left: -20px; transform: none; }
+        
+        /* Popups en celular */
+        [id^="popup"] > div { width: 95% !important; padding: 15px !important; }
     }
 </style>
 </head>
 <body>
-
+    
     <div id="preloader">
         <div class="loader"></div>
-        <div class="loader-text" style="margin-top:15px;">Cargando...</div>
+        <div class="loader-text">Cargando Elecciones de Cuadrilla y Grupos 2026-2028...</div>
     </div>
 
     <div class="contenedor" id="mainContainer">
         <div class="main-header">
             <div class="header-logo-container">
                 <div class="logo-header">
-                    <img src="https://edwinhsvcl14-maker.github.io/asistencias/logo_hermandad.png" alt="Logo">
+                    <img src="https://edwinhsvcl14-maker.github.io/asistencias/logo_hermandad.png" alt="Logo de la Hermandad">
                 </div>
                 <div class="header-texto">
-                    <h1>DÉCIMA CUARTA CUADRILLA</h1>
-                    <h2 style="font-size: 1rem; color: var(--color-acento-base);">Elecciones 2026-2028</h2>
+                    <h1>DÉCIMA CUARTA CUADRILLA HSVCL</h1>
+                    <h2>Elecciones de Cuadrilla y Grupos Trienio 2026-2028</h2>
                 </div>
                 <div class="logo-header">
-                    <img src="https://14CuadrillaHSVCL.github.io/Proceso/14c.png" alt="Logo 14">
+                    <img src="https://14CuadrillaHSVCL.github.io/Proceso/14c.png" alt="Logo Cuadrilla">
                 </div>
-            </div>
-        </div>
-
-        <div class="seccion" style="border-top: 2px solid var(--color-acento-base); padding-top: 20px;">
-            <h3 style="font-family: 'Georgia', serif; color: var(--color-acento-oscuro);">Jurado Electoral</h3>
-            <div class="comite-grid">
-                <div class="comite-header">Cargo</div>
-                <div class="comite-header">Nombre</div>
-                <div class="comite-header">Cuadrilla</div>
-
-                <div class="comite-cargo">Presidente</div>
-                <div class="comite-hermano">Fidel Ambrosio Pareja</div>
-                <div class="comite-cuadrilla">2da Cuadrilla</div>
-
-                <div class="comite-cargo">Secretario</div>
-                <div class="comite-hermano">Cesar Peña Angeles</div>
-                <div class="comite-cuadrilla">5ta Cuadrilla</div>
-
-                <div class="comite-cargo">Vocal</div>
-                <div class="comite-hermano">Oswaldo Peralta Murillo</div>
-                <div class="comite-cuadrilla">6ta Cuadrilla</div>
             </div>
         </div>
 
         <div class="seccion">
-            <h3 style="font-family: 'Georgia', serif; color: var(--color-acento-oscuro);">Cronograma del Proceso</h3>
+            <h3>Finalidad del Proceso</h3>
+            <p>El presente reglamento norma el proceso electoral para elegir a los dirigentes de cuadrillas y grupos para el periodo 2026-2028, basado en el Estatuto Institucional y el Código Canónico.</p>
+        </div>
+        
+        <div class="seccion">
+            <h3>Jurado de Elecciones Generales</h3>
+            <p style="font-style: italic; text-align: center;">Responsables de la autonomía y objetividad del proceso:</p>
+            <div class="comite-electoral-container">
+                <div class="comite-grid">
+                    <span class="comite-header">Cargo</span>
+                    <span class="comite-header">Nombre del Hermano</span>
+                    <span class="comite-header">Cuadrilla</span>
+                    
+                    <span class="comite-cargo">Presidente</span>
+                    <span class="comite-hermano">Fidel Ambrosio Pareja</span>
+                    <span style="font-size: 0.8em; color: #888;">Segunda Cuadrilla</span>
+                    
+                    <span class="comite-cargo">Secretario</span>
+                    <span class="comite-hermano">Cesar Peña Angeles</span>
+                    <span style="font-size: 0.8em; color: #888;">Quinta Cuadrilla</span>
+                    
+                    <span class="comite-cargo">Vocal</span>
+                    <span class="comite-hermano">Oswaldo Peralta Murillo</span>
+                    <span style="font-size: 0.8em; color: #888;">Sexta Cuadrilla</span>
+
+                    <span class="comite-cargo">Vocal</span>
+                    <span class="comite-hermano">Juan Medina Torales</span>
+                    <span style="font-size: 0.8em; color: #888;">Décima Tercera Cuadrilla</span>
+
+                    <span class="comite-cargo">Vocal</span>
+                    <span class="comite-hermano">Walter Fernandez Rubina</span>
+                    <span style="font-size: 0.8em; color: #888;">Quinta Cuadrilla</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="seccion">
+            <h3>Requisitos para Postular</h3>
+            <ul>
+                <li>
+                    <strong>Capataz y Sub-Capataz:</strong> 
+                    <button type="button" onclick="abrirPopupCapataz()" style="background: none; border: none; color: #B22222; text-decoration: underline; cursor: pointer; font-family: inherit; font-size: inherit; font-weight: bold; padding: 0;">
+                        Ver Requisitos
+                    </button>
+                </li>
+                <li>
+                    <strong>Otros Cargos:</strong> 
+                    <button type="button" onclick="abrirPopupOtros()" style="background: none; border: none; color: #B22222; text-decoration: underline; cursor: pointer; font-family: inherit; font-size: inherit; font-weight: bold; padding: 0;">
+                        Ver Requisitos
+                    </button>
+                </li>
+              
+                <li><strong>Económico:</strong> Estar al día en cotizaciones anuales de Hermandad y Cuadrilla.</li>
+                <li><strong>Fecha Límite:</strong> Entrega de documentos hasta el <strong>20 de febrero a las 10:00 P.M.</strong></li>
+            </ul>
+        </div>
+
+        <div class="seccion">
+            <h3 style="color: #5D4037; border-bottom: 2px solid #A0522D; padding-bottom: 10px; margin-top: 0; font-family: 'Georgia', serif; text-transform: uppercase;">
+                De los impedimentos para ser dirigente
+            </h3>
+            <p style="font-weight: bold; margin-bottom: 15px;">
+                ARTÍCULO 10º: Serán considerados impedimentos para ser candidato a dirigente de cuadrilla o grupo las siguientes causales:
+            </p>
+            
+            <ul class="lista-causales" style="list-style: none; padding: 0;">
+                <li style="margin-bottom: 15px; padding-left: 35px; position: relative; text-align: justify;">
+                    <span style="position: absolute; left: 10px; color: #B22222; font-weight: bold;">✕</span>
+                    <strong>A)</strong> Los hermanos que se hallen ligados dentro del cuarto grado de consanguinidad, ni segundo de afinidad. (Título VII de la Administración Art. 25 Inc. C, Capítulo VI Disposiciones Generales Art. 32)
+                </li>
+                <li style="margin-bottom: 15px; padding-left: 35px; position: relative; text-align: justify;">
+                    <span style="position: absolute; left: 10px; color: #B22222; font-weight: bold;">✕</span>
+                    <strong>B)</strong> Haber sido sometido o estar sometido al Consejo de Disciplina por proceso disciplinario y/o haber sido subrogado de su cargo (Capítulo VII Disposiciones Generales Art. 47 Inc. A y B, Capítulo VI Disposiciones Generales Art. 31)
+                </li>
+                <li style="margin-bottom: 15px; padding-left: 35px; position: relative; text-align: justify;">
+                    <span style="position: absolute; left: 10px; color: #B22222; font-weight: bold;">✕</span>
+                    <strong>C)</strong> Haber sido sancionado, castigado y expulsado en nuestra institución debido a procesos disciplinarios y administrativos.
+                </li>
+                <li style="margin-bottom: 15px; padding-left: 35px; position: relative; text-align: justify;">
+                    <span style="position: absolute; left: 10px; color: #B22222; font-weight: bold;">✕</span>
+                    <strong>D)</strong> Haber sido sancionado, castigado y expulsado en otras instituciones (Hermandades, Cofradías, Archicofradías, Asociaciones).
+                </li>
+                <li style="margin-bottom: 15px; padding-left: 35px; position: relative; text-align: justify;">
+                    <span style="position: absolute; left: 10px; color: #B22222; font-weight: bold;">✕</span>
+                    <strong>E)</strong> Estar conviviendo o que tengan una relación fuera del matrimonio religioso, al igual de los hermanos que estén llevando una vida inapropiada ante la Iglesia.
+                </li>
+                <li style="margin-bottom: 15px; padding-left: 35px; position: relative; text-align: justify;">
+                    <span style="position: absolute; left: 10px; color: #B22222; font-weight: bold;">✕</span>
+                    <strong>F)</strong> Tener cargo honorífico dentro de su cuadrilla. (Capítulo VII Disposiciones Generales Art. 44)
+                </li>
+            </ul>
+        </div>
+
+        <div class="seccion">
+            <h3 style="text-align: center;">🗓️ Cronograma de Asambleas y Tareas</h3>
             <div class="timeline">
                 <div class="timeline-line"></div>
                 <div class="timeline-progress" id="timelineProgress"></div>
 
                 <div class="timeline-item" data-date="2026-02-09">
                     <span class="timeline-point"></span>
-                    <strong>09 Feb</strong><br>Asambleas
+                    <span class="timeline-date" style="display: block;">09 Feb</span>
+                    <span class="timeline-label" style="display: block;">Inicio de Asambleas Electorales</span>
                 </div>
                 <div class="timeline-item" data-date="2026-02-18">
                     <span class="timeline-point"></span>
-                    <strong>18 Feb</strong><br>Tachas
+                    <span class="timeline-date" style="display: block;">18 Feb</span>
+                    <span class="timeline-label" style="display: block;">Presentación de Tachas</span>
                 </div>
                 <div class="timeline-item" data-date="2026-02-20">
                     <span class="timeline-point"></span>
-                    <strong>20 Feb</strong><br>Cierre Doc.
+                    <span class="timeline-date" style="display: block;">20 Feb</span>
+                    <span class="timeline-label" style="display: block;">Límite Entrega Documentos</span>
+                </div>
+                <div class="timeline-item" data-date="2026-02-24">
+                    <span class="timeline-point"></span>
+                    <span class="timeline-date" style="display: block;">24 Feb</span>
+                    <span class="timeline-label" style="display: block;">Resolución de Tachas</span>
                 </div>
                 <div class="timeline-item" data-date="2026-02-27">
                     <span class="timeline-point"></span>
-                    <strong>27 Feb</strong><br>Resultados
+                    <span class="timeline-date" style="display: block;">27 Feb</span>
+                    <span class="timeline-label" style="display: block;">Publicación de Aptos para juramentar</span>
                 </div>
             </div>
         </div>
 
-        <div style="text-align: center; margin: 30px 0;">
-            <a href="https://14cuadrillahsvcl.github.io/Proceso/Elecciones_Candidatos.html" class="btn-main">Ver Cronograma Completo</a>
+        <div class="btn-container" style="text-align: center; margin-top: 20px;">
+            <a href="https://14cuadrillahsvcl.github.io/Proceso/Elecciones_Candidatos.html" class="btn-main">Cronograma de Asambleas de Cuadrillas y Grupos</a>
         </div>
 
-        <footer style="text-align: center; font-size: 0.75rem; color: #888; border-top: 1px solid #eee; padding-top: 15px;">
-            <p>Décima Cuarta Cuadrilla HSVCL | Periodo 2026-2028</p>
-        </footer>
+        <div class="pie-pagina" style="text-align: center; margin-top: 20px; padding: 10px;">
+            <p style="font-size: 0.85em; color: var(--color-acento-oscuro); margin: 0;">
+                Décima Cuarta Cuadrilla de la Hermandad de la Santísima Virgen del Carmen de Lima | Periodo 2026-2028 
+            </p>
+        </div>
+    </div> 
+    
+    <div id="popupCapataz" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(62, 39, 35, 0.9); z-index: 10000; justify-content: center; align-items: center; backdrop-filter: blur(6px);">
+    <div style="background: #FEFBEA; border: 1px solid #A0522D; border-radius: 16px; width: 95%; max-width: 550px; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.5); font-family: 'Poppins', sans-serif; color: #3E2723; max-height: 85vh; display: flex; flex-direction: column; overflow: hidden;">
+        <div style="padding: 25px 20px; border-bottom: 3px double #A0522D; background: #FFF8E1; text-align: center;">
+            <h3 style="margin: 0; font-family: 'Georgia', serif; color: #5D4037; text-transform: uppercase; font-size: 1.2rem; letter-spacing: 2px; font-weight: 700;">Requisitos de Postulación</h3>
+            <div style="font-size: 0.75rem; color: #A0522D; margin-top: 5px; font-weight: 600; letter-spacing: 1px;">CAPATAZ Y SUB-CAPATAZ</div>
+        </div>
+        <div style="padding: 30px; overflow-y: auto; font-size: 0.9rem; line-height: 1.6; background: linear-gradient(180deg, #FEFBEA 0%, #FFFDF0 100%);">
+            <div style="margin-bottom: 25px;">
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                    <div style="display: flex; align-items: flex-start; gap: 10px; border-bottom: 1px solid rgba(160, 82, 45, 0.1); padding-bottom: 8px;">
+                        <span style="color: #A0522D; font-weight: bold;">01.</span>
+                        <span>COPIA DE DNI <strong style="color: #B22222; font-size: 0.75rem;">(OBLIGATORIO)</strong></span>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 10px; border-bottom: 1px solid rgba(160, 82, 45, 0.1); padding-bottom: 8px;">
+                        <span style="color: #A0522D; font-weight: bold;">02.</span>
+                        <span>ANTECEDENTES POLICIALES, JUDICIALES Y PENALES <strong style="color: #B22222; font-size: 0.75rem;">(OBLIGATORIO)</strong></span>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 10px; border-bottom: 1px solid rgba(160, 82, 45, 0.1); padding-bottom: 8px;">
+                        <span style="color: #A0522D; font-weight: bold;">03.</span>
+                        <span>CERTIFICADO DE SALUD</span>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 10px; border-bottom: 1px solid rgba(160, 82, 45, 0.1); padding-bottom: 8px;">
+                        <span style="color: #A0522D; font-weight: bold;">04.</span>
+                        <span>HOJA DE VIDA Y CV PROFESIONAL / PASTORAL <strong style="color: #B22222; font-size: 0.75rem;">(OBLIGATORIO)</strong></span>
+                    </div>
+                </div>
+            </div>
+            <div style="background: rgba(160, 82, 45, 0.07); border-left: 4px solid #A0522D; padding: 15px; margin-bottom: 25px; font-style: italic;">
+                <span style="font-weight: 600; color: #5D4037;">Requisito de Permanencia:</span> Deberá contar con una antigüedad mínima de tres (03) años dentro de la Hermandad.
+            </div>
+            <div style="display: grid; gap: 20px;">
+                <div style="background: #FFF8E1; padding: 15px; border-radius: 8px; border: 1px solid rgba(160, 82, 45, 0.2);">
+                    <div style="color: #5D4037; font-weight: bold; font-family: 'Georgia', serif; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+                        <span style="width: 20px; height: 1px; background: #A0522D;"></span> PERSONAS CASADAS
+                    </div>
+                    <ul style="padding-left: 15px; margin: 0; font-size: 0.85rem; list-style-type: square; color: #5D4037;">
+                        <li style="margin-bottom: 5px;">Partida de Matrimonio Religioso visada.</li>
+                        <li>Declaración Jurada de vida familiar estable.</li>
+                    </ul>
+                </div>
+                <div style="background: #FFF8E1; padding: 15px; border-radius: 8px; border: 1px solid rgba(160, 82, 45, 0.2);">
+                    <div style="color: #5D4037; font-weight: bold; font-family: 'Georgia', serif; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+                        <span style="width: 20px; height: 1px; background: #A0522D;"></span> PERSONAS SOLTERAS
+                    </div>
+                    <ul style="padding-left: 15px; margin: 0; font-size: 0.85rem; list-style-type: square; color: #5D4037;">
+                        <li style="margin-bottom: 5px;">Declaración de no convivencia / Divorciado civil.</li>
+                        <li>Partida de Bautizo y Último Sacramento visada.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div style="padding: 20px; background: #FFF8E1; text-align: center; border-top: 1px solid rgba(160, 82, 45, 0.2);">
+            <button onclick="cerrarPopupCapataz()" style="background: linear-gradient(135deg, #A0522D 0%, #5D4037 100%); color: white; border: none; padding: 12px 50px; border-radius: 50px; cursor: pointer; font-weight: 700; text-transform: uppercase; font-family: 'Poppins', sans-serif; font-size: 0.75rem; letter-spacing: 1px; box-shadow: 0 4px 15px rgba(93, 64, 55, 0.3);">Cerrar Documento</button>
+        </div>
     </div>
+</div>
+
+<div id="popupOtros" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(62, 39, 35, 0.9); z-index: 10000; justify-content: center; align-items: center; backdrop-filter: blur(6px);">
+    <div style="background: #FEFBEA; border: 1px solid #A0522D; border-radius: 16px; width: 95%; max-width: 550px; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.5); font-family: 'Poppins', sans-serif; color: #3E2723; max-height: 85vh; display: flex; flex-direction: column; overflow: hidden;">
+        <div style="padding: 25px 20px; border-bottom: 3px double #A0522D; background: #FFF8E1; text-align: center;">
+            <h3 style="margin: 0; font-family: 'Georgia', serif; color: #5D4037; text-transform: uppercase; font-size: 1.2rem; letter-spacing: 2px; font-weight: 700;">Requisitos de Postulación</h3>
+            <div style="font-size: 0.75rem; color: #A0522D; margin-top: 5px; font-weight: 600; letter-spacing: 1px;">OTROS CARGOS DIRIGENCIALES</div>
+        </div>
+        <div style="padding: 30px; overflow-y: auto; font-size: 0.9rem; line-height: 1.6; background: linear-gradient(180deg, #FEFBEA 0%, #FFFDF0 100%);">
+            <div style="margin-bottom: 25px;">
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                    <div style="display: flex; align-items: flex-start; gap: 10px; border-bottom: 1px solid rgba(160, 82, 45, 0.1); padding-bottom: 8px;">
+                        <span style="color: #A0522D; font-weight: bold;">01.</span>
+                        <span>COPIA DE DNI <strong style="color: #B22222; font-size: 0.75rem;">(OBLIGATORIO)</strong></span>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 10px; border-bottom: 1px solid rgba(160, 82, 45, 0.1); padding-bottom: 8px;">
+                        <span style="color: #A0522D; font-weight: bold;">02.</span>
+                        <span>CERTIFICADO ÚNICO LABORAL</span>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 10px; border-bottom: 1px solid rgba(160, 82, 45, 0.1); padding-bottom: 8px;">
+                        <span style="color: #A0522D; font-weight: bold;">03.</span>
+                        <span>REPORTE DE CENTRALES DE RIESGO <strong style="color: #B22222; font-size: 0.75rem;">(OBLIGATORIO)</strong></span>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 10px; border-bottom: 1px solid rgba(160, 82, 45, 0.1); padding-bottom: 8px;">
+                        <span style="color: #A0522D; font-weight: bold;">04.</span>
+                        <span>HOJA DE VIDA Y CV PROFESIONAL / PASTORAL <strong style="color: #B22222; font-size: 0.75rem;">(OBLIGATORIO)</strong></span>
+                    </div>
+                </div>
+            </div>
+            <div style="background: rgba(160, 82, 45, 0.07); border-left: 4px solid #A0522D; padding: 15px; margin-bottom: 25px; font-style: italic;">
+                <span style="font-weight: 600; color: #5D4037;">Requisito de Permanencia:</span> Deberá contar con una antigüedad mínima de dos (02) años dentro de la Hermandad.
+            </div>
+            <div style="display: grid; gap: 20px;">
+                <div style="background: #FFF8E1; padding: 15px; border-radius: 8px; border: 1px solid rgba(160, 82, 45, 0.2);">
+                    <div style="color: #5D4037; font-weight: bold; font-family: 'Georgia', serif; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+                        <span style="width: 20px; height: 1px; background: #A0522D;"></span> PERSONAS CASADAS
+                    </div>
+                    <ul style="padding-left: 15px; margin: 0; font-size: 0.85rem; list-style-type: square; color: #5D4037;">
+                        <li style="margin-bottom: 5px;">Partida de Matrimonio Religioso visado por Arzobispado (Obligatorio).</li>
+                        <li>Declaración Jurada de vida matrimonial y familiar estable (Obligatorio).</li>
+                    </ul>
+                </div>
+                <div style="background: #FFF8E1; padding: 15px; border-radius: 8px; border: 1px solid rgba(160, 82, 45, 0.2);">
+                    <div style="color: #5D4037; font-weight: bold; font-family: 'Georgia', serif; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+                        <span style="width: 20px; height: 1px; background: #A0522D;"></span> PERSONAS SOLTERAS
+                    </div>
+                    <ul style="padding-left: 15px; margin: 0; font-size: 0.85rem; list-style-type: square; color: #5D4037;">
+                        <li style="margin-bottom: 5px;">Declaración Jurada de no convivencia / Divorciado civil (Obligatorio).</li>
+                        <li>Partida de Bautizo y Último Sacramento visada (Obligatorio).</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div style="padding: 20px; background: #FFF8E1; text-align: center; border-top: 1px solid rgba(160, 82, 45, 0.2);">
+            <button onclick="cerrarPopupOtros()" style="background: linear-gradient(135deg, #A0522D 0%, #5D4037 100%); color: white; border: none; padding: 12px 50px; border-radius: 50px; cursor: pointer; font-weight: 700; text-transform: uppercase; font-family: 'Poppins', sans-serif; font-size: 0.75rem; letter-spacing: 1px; box-shadow: 0 4px 15px rgba(93, 64, 55, 0.3);">Cerrar Documento</button>
+        </div>
+    </div>
+</div>
 
 <script>
-    // Lógica de carga y progreso
+    const TODAY = new Date(); 
+    
+    const milestones = [
+        { start: new Date('2026-02-13T20:00:00'), end: new Date('2026-02-13T23:59:59') },
+        { start: new Date('2026-02-18T18:00:00'), end: new Date('2026-02-18T23:00:00') },
+        { start: new Date('2026-02-20T08:00:00'), end: new Date('2026-02-20T22:00:00') },
+        { start: new Date('2026-02-24T18:00:00'), end: new Date('2026-02-24T22:00:00') },
+        { start: new Date('2026-02-27T22:00:00'), end: new Date('2026-02-27T23:00:00') }
+    ];
+
+    function updateTimeline() {
+        const items = document.querySelectorAll('.timeline-item');
+        const bar = document.getElementById('timelineProgress');
+        let completedIdx = -1;
+
+        items.forEach((item, i) => {
+            const m = milestones[i];
+            item.classList.remove('completed', 'active');
+            if (TODAY > m.end) {
+                item.classList.add('completed');
+                completedIdx = i;
+            } else if (TODAY >= m.start && TODAY <= m.end) {
+                item.classList.add('active');
+            }
+        });
+
+        const progress = ((completedIdx + 1) / items.length) * 100;
+        if (window.innerWidth <= 768) {
+            bar.style.height = progress + '%';
+            bar.style.width = '5px';
+        } else {
+            bar.style.width = progress + '%';
+            bar.style.height = '5px';
+        }
+    }
+
     window.addEventListener('load', () => {
         const preloader = document.getElementById('preloader');
-        const container = document.getElementById('mainContainer');
-        const bar = document.getElementById('timelineProgress');
-        
+        const main = document.getElementById('mainContainer');
+        updateTimeline();
         preloader.classList.add('hidden');
-        container.classList.add('visible');
-
-        // Simulación de progreso (puedes ajustar el % según la fecha actual)
-        setTimeout(() => {
-            const isMobile = window.innerWidth <= 600;
-            if(isMobile) {
-                bar.style.height = "25%"; // Ajustar según fecha
-                bar.style.width = "4px";
-            } else {
-                bar.style.width = "25%"; // Ajustar según fecha
-            }
-        }, 1200);
+        setTimeout(() => { main.classList.add('visible'); }, 1000);
     });
+
+    function abrirPopupCapataz() {
+        document.getElementById('popupCapataz').style.display = 'flex';
+        document.body.style.overflow = 'hidden'; 
+    }
+
+    function cerrarPopupCapataz() {
+        document.getElementById('popupCapataz').style.display = 'none';
+        document.body.style.overflow = 'auto'; 
+    }
+
+    function abrirPopupOtros() {
+        document.getElementById('popupOtros').style.display = 'flex';
+        document.body.style.overflow = 'hidden'; 
+    }
+
+    function cerrarPopupOtros() {
+        document.getElementById('popupOtros').style.display = 'none';
+        document.body.style.overflow = 'auto'; 
+    }
 </script>
 </body>
 </html>
