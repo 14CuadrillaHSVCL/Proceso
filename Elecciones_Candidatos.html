@@ -15,6 +15,8 @@
         --color-texto-oscuro: #3E2723;
         --color-borde: #D2B48C;
         --sombra-profunda: 0 12px 24px rgba(0, 0, 0, 0.15);
+        /* CORRECCIÓN: Definición de la variable para el botón */
+        --degradado-acento: linear-gradient(135deg, #A0522D 0%, #5D2E17 100%);
     }
 
     body {
@@ -93,7 +95,9 @@
     .fecha-col { font-weight: 700; color: var(--color-acento); width: 110px; }
     
     .nombre-cuadrilla { font-weight: 600; text-align: left; }
- .btn-main {
+
+    /* CORRECCIÓN: Estilo del botón btn-main mejorado */
+    .btn-main {
         background: var(--degradado-acento);
         color: white;
         padding: 15px 35px;
@@ -102,9 +106,16 @@
         font-weight: 700;
         display: inline-block;
         transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.2);
     }
 
-    .btn-main:hover { transform: translateY(-3px); box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); }
+    .btn-main:hover { 
+        transform: translateY(-3px); 
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); 
+    }
+
     .ubicacion-tag {
         background: #f0f0f0;
         padding: 4px 8px;
@@ -117,12 +128,11 @@
     tr:nth-child(even) { background-color: #fcf9f5; }
     tr:hover { background-color: #f5ece2; }
 
-    /* Resalte especial para la 14 */
     .highlight-14 { background-color: #fff9e6 !important; border-left: 5px solid gold; } 
-  
 
     @media (max-width: 768px) {
         th, td { padding: 8px 5px; font-size: 0.8rem; }
+        .btn-main { padding: 12px 25px; font-size: 0.9rem; }
     }
 </style>
 </head>
@@ -303,11 +313,11 @@
                 </tbody>
             </table>
         </div>
-    </div>
-    
- <div class="btn-container" style="text-align: center; margin-top: 20px;">
+
+        <div class="btn-container" style="text-align: center; margin-top: 20px;">
             <a href="https://14cuadrillahsvcl.github.io/Proceso/index_elecciones.html" class="btn-main">Regresar a la Pagina Principal</a>
         </div>
+    </div>
 
 </body>
 </html>
