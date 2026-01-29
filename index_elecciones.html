@@ -8,30 +8,24 @@
     
 <style>
     /* ========================================================== */
-    /* Estilos CSS Dinámicos y Profesionales (FINAL) */
+    /* Estilos CSS Dinámicos y Profesionales (Mantenidos) */
     /* ========================================================== */
 
-    /* Variables de Color Actualizadas con un Toque más Suave/Degradado */
     :root {
-        --color-primario-fondo: #FFF8E1; /* Light Yellowish Cream (Base clara) */
-        --color-secundario-fondo: #FEFBEA; /* Off-White/Very Light Cream (Fondo de secciones) */
-        --color-acento-base: #A0522D; /* Sienna (Marrón medio) */
-        --color-acento-oscuro: #5D4037; /* Marrón más oscuro (Texto principal/Degradado) */
-        --color-texto-oscuro: #3E2723; /* Marrón oscuro para texto */
-        
-        /* Colores de estado para la barra */
-        --color-completo: #7CB342; /* Verde Oliva suave (Completado) */
-        --color-activo-claro: #A0522D; /* Sienna (Activo) - Punto parpadeante */
+        --color-primario-fondo: #FFF8E1;
+        --color-secundario-fondo: #FEFBEA;
+        --color-acento-base: #A0522D;
+        --color-acento-oscuro: #5D4037;
+        --color-texto-oscuro: #3E2723;
+        --color-completo: #7CB342;
+        --color-activo-claro: #A0522D;
         --color-activo-oscuro: #6D4C41; 
-        --color-pendiente: #D2B48C; /* Tan (Pendiente) */
-
-        /* Degradados y Sombras */
+        --color-pendiente: #D2B48C;
         --sombra-elegante: 0 10px 20px rgba(0, 0, 0, 0.15), 0 4px 8px rgba(0, 0, 0, 0.1);
         --degradado-acento: linear-gradient(135deg, var(--color-activo-claro) 0%, var(--color-activo-oscuro) 100%); 
-        --degradado-fondo-pagina: linear-gradient(180deg, #FAF0E6 0%, #FFFDE7 100%); /* Degradado suave de fondo */
+        --degradado-fondo-pagina: linear-gradient(180deg, #FAF0E6 0%, #FFFDE7 100%);
     }
 
-    /* Fondo de la página con degradado bidireccional */
     body {
         font-family: 'Poppins', sans-serif;
         margin: 0;
@@ -42,39 +36,28 @@
         min-height: 100vh;
     }
     
-    /* ---------------------------------------------------------- */
-    /* ESTILOS DE CARGA (PRELOADER) */
-    /* ---------------------------------------------------------- */
     #preloader {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: var(--color-primario-fondo); /* Cream base */
+        background-color: var(--color-primario-fondo);
         z-index: 9999;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        opacity: 1;
-        visibility: visible;
-        /* DURACIÓN DE TRANSICIÓN DEL PRELOADER A 1 SEGUNDO (MODIFICADO) */
         transition: opacity 1s ease-out, visibility 1s ease-out; 
     }
 
-    /* Estado de preloader oculto */
-    #preloader.hidden {
-        opacity: 0;
-        visibility: hidden;
-    }
+    #preloader.hidden { opacity: 0; visibility: hidden; }
 
-    /* Estilo del GIF/Icono de carga */
     .loader {
         width: 120px;
         height: 120px;
         border: 10px solid var(--color-secundario-fondo);
-        border-top: 10px solid var(--color-acento-base); /* Color de acento para la animación */
+        border-top: 10px solid var(--color-acento-base);
         border-radius: 50%;
         animation: spin 1.2s linear infinite;
         margin-bottom: 20px;
@@ -93,7 +76,6 @@
         100% { transform: rotate(360deg); }
     }
     
-    /* Efecto de aparición del Contenido */
     .contenedor {
         width: 95%;
         max-width: 1100px;
@@ -102,29 +84,13 @@
         box-shadow: var(--sombra-elegante);
         border-radius: 20px;
         padding: 30px;
-        transition: all 0.3s ease;
-        
-        /* ESTADO INICIAL OCULTO CON TRANSICIÓN */
         opacity: 0;
         transform: translateY(20px);
-        /* RETRASO DE 1 SEGUNDO PARA QUE EL PRELOADER SE VAYA COMPLETAMENTE (MODIFICADO) */
         transition: opacity 1s ease-in-out 1s, transform 1s ease-in-out 1s; 
     }
 
-    /* ESTADO FINAL VISIBLE */
-    .contenedor.visible {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    .contenedor.visible { opacity: 1; transform: translateY(0); }
 
-    /* ---------------------------------------------------------- */
-    /* Resto de Estilos (Mantenidos) */
-    /* ---------------------------------------------------------- */
-    
-    /* Contenedor principal con degradado y sombra */
-    /* .contenedor está redefinido arriba para el efecto de carga */
-
-    /* Encabezado Principal */
     .main-header {
         text-align: center;
         padding-bottom: 25px;
@@ -139,7 +105,6 @@
         margin-bottom: 15px;
     }
 
-    /* Logos más grandes */
     .logo-header {
         width: 200px; 
         height: 200px;
@@ -149,11 +114,7 @@
         align-items: center;
     }
 
-    .logo-header img {
-        max-width: 100%;
-        max-height: 100%;
-        object-fit: contain;
-    }
+    .logo-header img { max-width: 100%; max-height: 100%; object-fit: contain; }
 
     .header-texto h1 {
         color: var(--color-acento-oscuro);
@@ -162,7 +123,6 @@
         margin-bottom: 5px;
         text-transform: uppercase;
         letter-spacing: 1.5px;
-        text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
     }
 
     .header-texto h2 {
@@ -172,15 +132,12 @@
         font-weight: 500;
     }
 
-
-    /* Secciones de Contenido */
     .seccion {
         margin-bottom: 35px;
         padding: 20px;
         background-color: var(--color-secundario-fondo);
         border-radius: 12px;
         border: 1px solid #E0E0E0;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     }
 
     .seccion h3 {
@@ -189,20 +146,15 @@
         border-bottom: 2px solid var(--color-acento-base);
         padding-bottom: 5px;
         margin-top: 0;
-        font-weight: 600;
     }
 
-    /* Estilos del Comité Electoral (Centrado y Compactado) */
-    .comite-electoral-container {
-        display: flex;
-        justify-content: center; 
-    }
+    .comite-electoral-container { display: flex; justify-content: center; }
 
     .comite-grid {
         width: 100%;
-        max-width: 700px; /* Ancho más compacto */
+        max-width: 750px;
         display: grid;
-        grid-template-columns: 1fr 2.5fr 1fr; /* Ajuste de columnas */
+        grid-template-columns: 1.2fr 2fr 1.5fr;
         gap: 10px 15px; 
         margin-top: 15px;
         padding: 15px 20px;
@@ -214,58 +166,20 @@
     .comite-header {
         font-weight: 700;
         color: var(--color-acento-oscuro);
-        padding-bottom: 5px;
         border-bottom: 2px solid var(--color-acento-base);
-        text-transform: uppercase;
         font-size: 0.85em;
-        text-align: center; /* Centrado de títulos de columna */
-    }
-    .comite-header.comite-cuadrilla {
-        text-align: center !important;
-    }
-
-    .comite-cargo {
-        font-weight: 600;
-        color: var(--color-acento-base);
-        font-size: 0.9em;
-        text-align: center; /* Centrado del cargo */
-    }
-    .comite-hermano {
-        font-weight: 500;
-        font-size: 0.9em;
-        text-align: left; /* Alineación del nombre */
-    }
-    .comite-cuadrilla {
-        text-align: center; /* Centrado de la pertenencia */
-        font-size: 0.85em;
-        font-style: italic;
-        color: #666;
-    }
-
-    /* Barra de Progreso - Estilos y Animaciones */
-    .progress-title {
-        color: var(--color-acento-oscuro);
-        font-size: 1.4em;
-        font-weight: 700;
-        margin-bottom: 20px;
-        text-transform: uppercase;
         text-align: center;
     }
 
-    .progress-bar-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
+    .comite-cargo { font-weight: 600; color: var(--color-acento-base); text-align: center; }
+    .comite-hermano { font-weight: 500; text-align: left; }
 
     .timeline {
         display: flex;
         justify-content: space-between;
         width: 100%;
-        max-width: 1000px;
         position: relative;
         margin: 20px 0;
-        padding-bottom: 10px;
     }
 
     .timeline-line {
@@ -276,7 +190,6 @@
         height: 5px;
         background: var(--color-pendiente); 
         z-index: 1;
-        border-radius: 2px;
     }
 
     .timeline-progress {
@@ -287,7 +200,6 @@
         height: 5px;
         background: var(--color-completo); 
         z-index: 2;
-        border-radius: 2px;
         transition: width 1s ease-out;
     }
 
@@ -297,19 +209,6 @@
         position: relative;
         z-index: 3;
         padding-top: 55px;
-        border-radius: 8px;
-        padding-bottom: 10px; 
-        margin: 0 5px;
-        transition: background-color 0.5s ease;
-    }
-
-    /* Fondo para etapas (separación visual) */
-    .timeline-item.completed {
-        background-color: rgba(124, 179, 66, 0.05); /* Verde suave */
-    }
-
-    .timeline-item.active {
-        background-color: rgba(160, 82, 45, 0.1); /* Marrón suave */
     }
 
     .timeline-point {
@@ -321,86 +220,20 @@
         top: 17px;
         left: 50%;
         transform: translateX(-50%);
-        transition: all 0.5s ease;
         border: 4px solid var(--color-secundario-fondo); 
-        box-shadow: 0 0 0 2px var(--color-pendiente);
     }
 
-    /* ESTADO 1: Completado */
-    .timeline-item.completed .timeline-point {
-        background: var(--color-completo); 
-        box-shadow: 0 0 0 2px var(--color-completo);
-    }
-
-    /* ESTADO 2: Activo (Activo con efecto de pulso) */
+    .timeline-item.completed .timeline-point { background: var(--color-completo); }
     .timeline-item.active .timeline-point {
         background: var(--color-activo-claro); 
-        box-shadow: 0 0 0 4px var(--color-activo-claro), 0 0 15px var(--color-activo-claro);
+        box-shadow: 0 0 15px var(--color-activo-claro);
         transform: translateX(-50%) scale(1.3);
-        
-        /* Animación de Parpadeo/Pulso */
         animation: pulse 1.5s infinite alternate;
     }
 
     @keyframes pulse {
-        from {
-            box-shadow: 0 0 0 4px var(--color-activo-claro), 0 0 10px rgba(160, 82, 45, 0.5);
-        }
-        to {
-            box-shadow: 0 0 0 8px rgba(160, 82, 45, 0.3), 0 0 20px var(--color-activo-claro);
-        }
-    }
-
-    .timeline-date {
-        font-size: 0.9em;
-        font-weight: 700;
-        color: var(--color-acento-base);
-        display: block;
-        margin-bottom: 5px;
-    }
-
-    .timeline-label {
-        font-size: 0.95em;
-        font-weight: 500;
-        color: var(--color-texto-oscuro);
-        line-height: 1.2;
-    }
-
-    /* Leyenda de Estados */
-    .legend {
-        display: flex;
-        justify-content: center;
-        gap: 30px;
-        margin-top: 10px;
-        padding: 10px 0;
-        border-top: 1px dashed #DDD;
-        font-size: 0.9em;
-    }
-    .legend-item {
-        display: flex;
-        align-items: center;
-        font-weight: 500;
-    }
-    .legend-color {
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        margin-right: 8px;
-        border: 1px solid #AAA;
-    }
-    .legend-color.completed { background-color: var(--color-completo); border-color: var(--color-completo); }
-    .legend-color.active { 
-        background-color: var(--color-activo-claro); 
-        box-shadow: 0 0 5px rgba(160, 82, 45, 0.5);
-        border-color: var(--color-activo-claro);
-    }
-    .legend-color.pending { background-color: var(--color-pendiente); }
-
-
-    /* Botón de Acción Principal y Pie de Página */
-    .btn-container {
-        text-align: center;
-        margin-top: 40px;
+        from { box-shadow: 0 0 0 4px var(--color-activo-claro); }
+        to { box-shadow: 0 0 0 8px rgba(160, 82, 45, 0.3); }
     }
 
     .btn-main {
@@ -409,134 +242,19 @@
         padding: 15px 35px;
         text-decoration: none;
         border-radius: 50px;
-        font-size: 1.2em;
         font-weight: 700;
-        letter-spacing: 1px;
-        transition: all 0.3s ease;
-        border: none;
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
         display: inline-block;
-        text-transform: uppercase;
+        transition: all 0.3s ease;
     }
 
-    .btn-main:hover {
-        background: linear-gradient(135deg, var(--color-activo-oscuro) 0%, var(--color-activo-claro) 100%);
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
-        transform: translateY(-3px) scale(1.02);
-    }
+    .btn-main:hover { transform: translateY(-3px); box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); }
 
-    .pie-pagina {
-        text-align: center;
-        margin-top: 30px;
-        padding-top: 15px;
-        border-top: 1px dashed var(--color-acento-base);
-    }
-
-    /* ---------------------------------------------------------- */
-    /* Responsive Design (Media Queries) */
-    /* ---------------------------------------------------------- */
-    @media (max-width: 900px) {
-        .logo-header {
-            width: 150px;
-            height: 150px;
-        }
-        .header-texto h1 { font-size: 2em; }
-        .header-texto h2 { font-size: 1.3em; }
-    }
-
+    /* Responsive Design (Mantenido) */
     @media (max-width: 768px) {
-        /* Barra de Progreso Vertical en Móviles */
-        .timeline {
-            flex-direction: column;
-            align-items: flex-start;
-            padding-left: 30px; 
-            width: 90%;
-            margin: 20px auto;
-        }
-
-        .timeline-line, .timeline-progress {
-            top: 0;
-            bottom: 0;
-            left: 10px;
-            width: 5px;
-            height: 100%; 
-            right: auto;
-        }
-
-        .timeline-progress {
-            height: 0%; 
-            width: 5px;
-        }
-
-        .timeline-item {
-            padding: 15px 0 15px 25px; 
-            width: 100%;
-            margin: 5px 0;
-            text-align: left;
-        }
-
-        .timeline-point {
-            top: 25px; 
-            left: -20px; 
-            transform: none; 
-        }
-        
-        .timeline-item.active .timeline-point {
-             transform: scale(1.3);
-        }
-    }
-
-    @media (max-width: 600px) {
-        /* OCULTAR LOGOS LATERALES Y CENTRAR EL TEXTO EN MÓVILES PEQUEÑOS */
-        .logo-header {
-            display: none; /* Oculta ambos logos en el header-logo-container */
-        }
-
-        .header-logo-container {
-            justify-content: center; /* Asegura que el texto se centre */
-            margin-bottom: 10px;
-        }
-        
-        .header-texto {
-            text-align: center; /* Asegura el centrado del texto */
-        }
-        
-        .header-texto h1 { 
-            font-size: 1.8em; /* Reducir ligeramente el tamaño del título principal */
-            margin-bottom: 0px;
-        }
-
-        .header-texto h2 {
-            font-size: 1.1em; /* Reducir el subtítulo para mejor ajuste */
-            padding: 0 10px; /* Pequeño padding para evitar que toque el borde */
-        }
-        
-        /* Comité Electoral Apilado en Móviles */
-        .comite-grid {
-            max-width: 100%;
-            grid-template-columns: 1fr;
-            gap: 5px;
-            padding: 10px;
-        }
-        .comite-header, .comite-cuadrilla {
-            display: none;
-        }
-        .comite-cargo, .comite-hermano, .comite-cuadrilla {
-            text-align: left !important;
-        }
-        .comite-cargo {
-            font-size: 1em;
-            font-weight: 700;
-            color: var(--color-acento-oscuro);
-            margin-top: 10px;
-        }
-        
-        .legend {
-            flex-direction: column;
-            gap: 10px;
-            align-items: flex-start;
-            padding-left: 10px;
-        }
+        .timeline { flex-direction: column; padding-left: 30px; }
+        .timeline-line, .timeline-progress { left: 10px; width: 5px; height: 100%; top: 0; }
+        .timeline-item { padding: 15px 0 15px 25px; text-align: left; }
+        .timeline-point { top: 25px; left: -20px; transform: none; }
     }
 </style>
 </head>
@@ -544,8 +262,9 @@
     
     <div id="preloader">
         <div class="loader"></div>
-        <div class="loader-text">Cargando Proceso Electoral...</div>
+        <div class="loader-text">Cargando Reglamento 2026-2028...</div>
     </div>
+
     <div class="contenedor" id="mainContainer">
         <div class="main-header">
             <div class="header-logo-container">
@@ -554,251 +273,356 @@
                 </div>
                 <div class="header-texto">
                     <h1>DÉCIMA CUARTA CUADRILLA HSVCL</h1>
-                    <h2>Elecciones Generales Trienio 2026-2028: Proceso en Curso</h2>
+                    <h2>Elecciones Generales Trienio 2026-2028</h2>
                 </div>
                 <div class="logo-header">
-                    <img src="https://14CuadrillaHSVCL.github.io/Proceso/14c.png" alt="Logo de la Hermandad">
+                    <img src="https://14CuadrillaHSVCL.github.io/Proceso/14c.png" alt="Logo Cuadrilla">
                 </div>
             </div>
         </div>
 
         <div class="seccion">
-            <h3>Llamado a la Participación</h3>
-            <p>La Décima Cuarta Cuadrilla HSVCL da a conocer a nuestros hermanos sobre el 
-<strong>Proceso de Elecciones Generales</strong>. 
-Este ejercicio de transparencia y participación es fundamental para asegurar una gestión 
-comprometida con nuestra Institucion y por el servicio a nuestra Santísima Virgen del Carmen de Lima. 
-Exhortamos a todos nuestros hermanos a informarse, participar activamente y ejercer su derecho al voto 
-con discernimiento.</p>
+            <h3>Finalidad del Proceso</h3>
+            <p>El presente reglamento norma el proceso electoral para elegir a los dirigentes de cuadrillas y grupos para el periodo 2026-2028, basado en el Estatuto Institucional y el Código Canónico[cite: 5].</p>
         </div>
         
         <div class="seccion">
-            <h3>Conformación del Comité Eectoral (2026-2028)</h3>
-            <p style="font-style: italic; font-size: 0.95em; color: var(--color-acento-oscuro); text-align: center;">Conforme al Decreto N° 027–2025-P-VDS-HSVCL, se ha designado a los hermanos que integran este comité para la conducción transparente del proceso:</p>
-            
+            <h3>Jurado de Elecciones Generales</h3>
+            <p style="font-style: italic; text-align: center;">Responsables de la autonomía y objetividad del proceso[cite: 16, 128]:</p>
             <div class="comite-electoral-container">
                 <div class="comite-grid">
                     <span class="comite-header">Cargo</span>
-                    <span class="comite-header">Hermano</span>
-                    <span class="comite-header comite-cuadrilla">Pertenencia</span>
+                    <span class="comite-header">Nombre del Hermano</span>
+                    <span class="comite-header">Cuadrilla</span>
                     
                     <span class="comite-cargo">Presidente</span>
-                    <span class="comite-hermano">Hno. Alberto Martín De la Cruz Risco</span>
-                    <span class="comite-cuadrilla">Capataz de la Décimo Quinta Cuadrilla</span>
+                    <span class="comite-hermano">Fidel Ambrosio Pareja</span>
+                    <span style="font-size: 0.8em; color: #888;">Segunda Cuadrilla</span>
                     
                     <span class="comite-cargo">Secretario</span>
-                    <span class="comite-hermano">Hno. Richard Alex Paco Jerí</span>
-                    <span class="comite-cuadrilla">Secretario de la Quinta Cuadrilla</span>
+                    <span class="comite-hermano">Cesar Peña Angeles</span>
+                    <span style="font-size: 0.8em; color: #888;">Quinta Cuadrilla</span>
                     
                     <span class="comite-cargo">Vocal</span>
-                    <span class="comite-hermano">Hno. Juan Daniel Urbina Yarupetán</span>
-                    <span class="comite-cuadrilla">Sub-Capataz de la Décima Sexta Cuadrilla</span>
-                    
+                    <span class="comite-hermano">Oswaldo Peralta Murillo</span>
+                    <span style="font-size: 0.8em; color: #888;">Sexta Cuadrilla</span>
+
                     <span class="comite-cargo">Vocal</span>
-                    <span class="comite-hermano">Hno. Luis Alberto Suárez Sandoval</span>
-                    <span class="comite-cuadrilla">Secretario de la Décima Segunda Cuadrilla</span>
+                    <span class="comite-hermano">Juan Medina Torales</span>
+                    <span style="font-size: 0.8em; color: #888;">Décima Tercera Cuadrilla</span>
+
+                    <span class="comite-cargo">Vocal</span>
+                    <span class="comite-hermano">Walter Fernandez Rubina</span>
+                    <span style="font-size: 0.8em; color: #888;">Quinta Cuadrilla</span>
                 </div>
             </div>
         </div>
 
         <div class="seccion">
-            <h3>Listas de Candidatos y Propuestas</h3>
-            <p>Se han presentado oficialmente la <strong>Lista N° 01</strong> y la <strong>Lista N° 02</strong>. Ambas planchas han cumplido con los requisitos iniciales y presentan visiones sólidas para el futuro de nuestra Hermandad. A continuación, le ofrecemos una visualización clara del cronograma electoral y un acceso directo a los planes de trabajo y perfiles de cada candidato.</p>
+            <h3>Requisitos para Postular</h3>
+            <ul>
+                <li>
+    <strong>Capataz y Sub-Capataz:</strong> 
+    <button type="button" onclick="abrirPopupCapataz()" style="background: none; border: none; color: #B22222; text-decoration: underline; cursor: pointer; font-family: inherit; font-size: inherit; font-weight: bold; padding: 0;">
+        Ver Requisitos
+    </button>
+</li>
+<li>
+    <strong>Otros Cargos:</strong> 
+    <button type="button" onclick="abrirPopupOtros()" style="background: none; border: none; color: #B22222; text-decoration: underline; cursor: pointer; font-family: inherit; font-size: inherit; font-weight: bold; padding: 0;">
+        Ver Requisitos
+    </button>
+</li>
+              
+<li>
+   
+</li>
+                <li><strong>Económico:</strong> Estar al día en cotizaciones anuales de Hermandad y Cuadrilla.</li>
+                <li><strong>Fecha Límite:</strong> Entrega de documentos hasta el <strong>20 de febrero a las 10:00 P.M.</strong></li>
+            </ul>
         </div>
 
-        <div class="seccion progress-section">
-            <div class="progress-title">🗓️ Cronograma del Proceso Electoral 2025</div>
-            
-            <div class="legend">
-                <div class="legend-item">
-                    <span class="legend-color completed"></span>
-                    <span>Etapa Completada</span>
-                </div>
-                <div class="legend-item">
-                    <span class="legend-color active"></span>
-                    <span>Etapa **Activa** (En Curso)</span>
-                </div>
-                <div class="legend-item">
-                    <span class="legend-color pending"></span>
-                    <span>Etapa Pendiente</span>
-                </div>
-            </div>
-            <div class="progress-bar-container">
-                <div class="timeline">
-                    <div class="timeline-line"></div>
-                    <div class="timeline-progress" id="timelineProgress"></div>
+<div class="seccion">
+    <h3 style="color: #5D4037; border-bottom: 2px solid #A0522D; padding-bottom: 10px; margin-top: 0; font-family: 'Georgia', serif; text-transform: uppercase;">
+        De los impedimentos para ser dirigente
+    </h3>
+    <p style="font-weight: bold; margin-bottom: 15px;">
+        ARTÍCULO 10º: Serán considerados impedimentos para ser candidato a dirigente de cuadrilla o grupo las siguientes causales:
+    </p>
+    
+    <ul class="lista-causales" style="list-style: none; padding: 0;">
+        <li style="margin-bottom: 15px; padding-left: 35px; position: relative; text-align: justify;">
+            <span style="position: absolute; left: 10px; color: #B22222; font-weight: bold;">✕</span>
+            <strong>A)</strong> Los hermanos que se hallen ligados dentro del cuarto grado de consanguinidad, ni segundo de afinidad. (Título VII de la Administración Art. 25 Inc. C, Capítulo VI Disposiciones Generales Art. 32)
+        </li>
+        <li style="margin-bottom: 15px; padding-left: 35px; position: relative; text-align: justify;">
+            <span style="position: absolute; left: 10px; color: #B22222; font-weight: bold;">✕</span>
+            <strong>B)</strong> Haber sido sometido o estar sometido al Consejo de Disciplina por proceso disciplinario y/o haber sido subrogado de su cargo (Capítulo VII Disposiciones Generales Art. 47 Inc. A y B, Capítulo VI Disposiciones Generales Art. 31)
+        </li>
+        <li style="margin-bottom: 15px; padding-left: 35px; position: relative; text-align: justify;">
+            <span style="position: absolute; left: 10px; color: #B22222; font-weight: bold;">✕</span>
+            <strong>C)</strong> Haber sido sancionado, castigado y expulsado en nuestra institución debido a procesos disciplinarios y administrativos.
+        </li>
+        <li style="margin-bottom: 15px; padding-left: 35px; position: relative; text-align: justify;">
+            <span style="position: absolute; left: 10px; color: #B22222; font-weight: bold;">✕</span>
+            <strong>D)</strong> Haber sido sancionado, castigado y expulsado en otras instituciones (Hermandades, Cofradías, Archicofradías, Asociaciones).
+        </li>
+        <li style="margin-bottom: 15px; padding-left: 35px; position: relative; text-align: justify;">
+            <span style="position: absolute; left: 10px; color: #B22222; font-weight: bold;">✕</span>
+            <strong>E)</strong> Estar conviviendo o que tengan una relación fuera del matrimonio religioso, al igual de los hermanos que estén llevando una vida inapropiada ante la Iglesia.
+        </li>
+        <li style="margin-bottom: 15px; padding-left: 35px; position: relative; text-align: justify;">
+            <span style="position: absolute; left: 10px; color: #B22222; font-weight: bold;">✕</span>
+            <strong>F)</strong> Tener cargo honorífico dentro de su cuadrilla. (Capítulo VII Disposiciones Generales Art. 44)
+        </li>
+    </ul>
+</div>
 
-                    <div class="timeline-item" data-index="0" data-date="2025-10-27">
-                        <span class="timeline-point"></span>
-                        <span class="timeline-date">Oct 23 - 27</span>
-                        <span class="timeline-label">Inscripción de Listas</span>
-                    </div>
-                    <div class="timeline-item" data-index="1" data-date="2025-11-03">
-                        <span class="timeline-point"></span>
-                        <span class="timeline-date">Oct 29 - Nov 03</span>
-                        <span class="timeline-label">Revisión de Documentos</span>
-                    </div>
-                    <div class="timeline-item" data-index="2" data-date="2025-11-10">
-                        <span class="timeline-point"></span>
-                        <span class="timeline-date">Nov 05 - 10</span>
-                        <span class="timeline-label">Presentación de Tachas / Impugnaciones</span>
-                    </div>
-                    <div class="timeline-item" data-index="3" data-date="2025-11-17">
-                        <span class="timeline-point"></span>
-                        <span class="timeline-date">Nov 12 - 17</span>
-                        <span class="timeline-label">Subsanación de Postulantes</span>
-                    </div>
-                    <div class="timeline-item" data-index="4" data-date="2025-11-19">
-                        <span class="timeline-point"></span>
-                        <span class="timeline-date">Nov 18 - 19</span>
-                        <span class="timeline-label">Confirmación de Listas Aptas</span>
-                    </div>
-                    <div class="timeline-item" data-index="5" data-date="2025-11-23">
-                        <span class="timeline-point"></span>
-                        <span class="timeline-date">Nov 23</span>
-                        <span class="timeline-label">Elección del Directorio General</span>
-                    </div>
-                    
+    </div>
+        <div class="seccion">
+            <h3 style="text-align: center;">🗓️ Cronograma de Asambleas y Tareas</h3>
+            <div class="timeline">
+                <div class="timeline-line"></div>
+                <div class="timeline-progress" id="timelineProgress"></div>
+
+                <div class="timeline-item" data-date="2026-02-09">
+                    <span class="timeline-point"></span>
+                    <span class="timeline-date" style="display: block;">09 Feb</span>
+                    <span class="timeline-label" style="display: block;">Inicio de Asambleas Electorales</span>
+                </div>
+                <div class="timeline-item" data-date="2026-02-18">
+                    <span class="timeline-point"></span>
+                    <span class="timeline-date"style="display: block;">18 Feb</span>
+                    <span class="timeline-label"style="display: block;">Presentación de Tachas</span>
+                </div>
+                <div class="timeline-item" data-date="2026-02-20">
+                    <span class="timeline-point"></span>
+                    <span class="timeline-date"style="display: block;">20 Feb</span>
+                    <span class="timeline-label"style="display: block;">Límite Entrega Documentos</span>
+                </div>
+                <div class="timeline-item" data-date="2026-02-24">
+                    <span class="timeline-point"></span>
+                    <span class="timeline-date"style="display: block;">24 Feb</span>
+                    <span class="timeline-label"style="display: block;">Resolución de Tachas</span>
+                </div>
+                <div class="timeline-item" data-date="2026-02-27">
+                    <span class="timeline-point"></span>
+                    <span class="timeline-date"style="display: block;">27 Feb</span>
+                    <span class="timeline-label"style="display: block;">Publicación de Aptos para juramentar</span>
                 </div>
             </div>
         </div>
-        <div class="btn-container">
-            <a href="https://14cuadrillahsvcl.github.io/Proceso/Elecciones_Candidatos.html" class="btn-main">Ver Listas y Planes de Trabajo</a>
+
+        <div class="btn-container" style="text-align: center; margin-top: 20px;">
+            <a href="#" class="btn-main">Cronograma de Asambleas de Cuadrillas y Grupos</a>
         </div>
 
         <div class="pie-pagina">
-            <p style="font-size: 0.85em; color: var(--color-acento-oscuro);">Décima Cuarta Cuadrilla HSVCL | Proceso Electoral General Trienio 2026-2028</p>
+            <p style="font-size: 0.85em; color: var(--color-acento-oscuro);">Hermandad de la Santísima Virgen del Carmen de Lima | Periodo 2026-2028 [cite: 1]</p>
         </div>
     </div>
 
+<div id="popupCapataz" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(62, 39, 35, 0.9); z-index: 10000; justify-content: center; align-items: center; backdrop-filter: blur(6px);">
+    
+    <div style="background: #FEFBEA; border: 1px solid #A0522D; border-radius: 16px; width: 95%; max-width: 550px; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.5); font-family: 'Poppins', sans-serif; color: #3E2723; max-height: 85vh; display: flex; flex-direction: column; overflow: hidden;">
+        
+        <div style="padding: 25px 20px; border-bottom: 3px double #A0522D; background: #FFF8E1; text-align: center;">
+            <h3 style="margin: 0; font-family: 'Georgia', serif; color: #5D4037; text-transform: uppercase; font-size: 1.2rem; letter-spacing: 2px; font-weight: 700;">
+                Expediente de Postulación
+            </h3>
+            <div style="font-size: 0.75rem; color: #A0522D; margin-top: 5px; font-weight: 600; letter-spacing: 1px;">CAPATAZ Y SUB-CAPATAZ</div>
+        </div>
+
+        <div style="padding: 30px; overflow-y: auto; font-size: 0.9rem; line-height: 1.6; background: linear-gradient(180deg, #FEFBEA 0%, #FFFDF0 100%);">
+            
+            <div style="margin-bottom: 25px;">
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                    <div style="display: flex; align-items: flex-start; gap: 10px; border-bottom: 1px solid rgba(160, 82, 45, 0.1); padding-bottom: 8px;">
+                        <span style="color: #A0522D; font-weight: bold;">01.</span>
+                        <span>COPIA DE DNI <strong style="color: #B22222; font-size: 0.75rem;">(OBLIGATORIO)</strong></span>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 10px; border-bottom: 1px solid rgba(160, 82, 45, 0.1); padding-bottom: 8px;">
+                        <span style="color: #A0522D; font-weight: bold;">02.</span>
+                        <span>ANTECEDENTES POLICIALES, JUDICIALES Y PENALES <strong style="color: #B22222; font-size: 0.75rem;">(OBLIGATORIO)</strong></span>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 10px; border-bottom: 1px solid rgba(160, 82, 45, 0.1); padding-bottom: 8px;">
+                        <span style="color: #A0522D; font-weight: bold;">03.</span>
+                        <span>CERTIFICADO DE SALUD</span>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 10px; border-bottom: 1px solid rgba(160, 82, 45, 0.1); padding-bottom: 8px;">
+                        <span style="color: #A0522D; font-weight: bold;">04.</span>
+                        <span>HOJA DE VIDA Y CV PROFESIONAL / PASTORAL <strong style="color: #B22222; font-size: 0.75rem;">(OBLIGATORIO)</strong></span>
+                    </div>
+                </div>
+            </div>
+
+            <div style="background: rgba(160, 82, 45, 0.07); border-left: 4px solid #A0522D; padding: 15px; margin-bottom: 25px; font-style: italic;">
+                <span style="font-weight: 600; color: #5D4037;">Requisito de Permanencia:</span> Deberá contar con una antigüedad mínima de tres (03) años dentro de la Hermandad.
+            </div>
+
+            <div style="display: grid; gap: 20px;">
+                <div style="background: #FFF8E1; padding: 15px; border-radius: 8px; border: 1px solid rgba(160, 82, 45, 0.2);">
+                    <div style="color: #5D4037; font-weight: bold; font-family: 'Georgia', serif; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+                        <span style="width: 20px; height: 1px; background: #A0522D;"></span> PERSONAS CASADAS
+                    </div>
+                    <ul style="padding-left: 15px; margin: 0; font-size: 0.85rem; list-style-type: square; color: #5D4037;">
+                        <li style="margin-bottom: 5px;">Partida de Matrimonio Religioso visada.</li>
+                        <li>Declaración Jurada de vida familiar estable.</li>
+                    </ul>
+                </div>
+
+                <div style="background: #FFF8E1; padding: 15px; border-radius: 8px; border: 1px solid rgba(160, 82, 45, 0.2);">
+                    <div style="color: #5D4037; font-weight: bold; font-family: 'Georgia', serif; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+                        <span style="width: 20px; height: 1px; background: #A0522D;"></span> PERSONAS SOLTERAS
+                    </div>
+                    <ul style="padding-left: 15px; margin: 0; font-size: 0.85rem; list-style-type: square; color: #5D4037;">
+                        <li style="margin-bottom: 5px;">Declaración de no convivencia / Divorciado civil.</li>
+                        <li>Partida de Bautizo y Último Sacramento visada.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div style="padding: 20px; background: #FFF8E1; text-align: center; border-top: 1px solid rgba(160, 82, 45, 0.2);">
+            <button onclick="cerrarPopupCapataz()" style="background: linear-gradient(135deg, #A0522D 0%, #5D4037 100%); color: white; border: none; padding: 12px 50px; border-radius: 50px; cursor: pointer; font-weight: 700; text-transform: uppercase; font-family: 'Poppins', sans-serif; font-size: 0.75rem; letter-spacing: 1px; box-shadow: 0 4px 15px rgba(93, 64, 55, 0.3); transition: all 0.3s ease;">
+                Cerrar Documento
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<div id="popupOtros" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(62, 39, 35, 0.9); z-index: 10000; justify-content: center; align-items: center; backdrop-filter: blur(6px);">
+    
+    <div style="background: #FEFBEA; border: 1px solid #A0522D; border-radius: 16px; width: 95%; max-width: 550px; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.5); font-family: 'Poppins', sans-serif; color: #3E2723; max-height: 85vh; display: flex; flex-direction: column; overflow: hidden;">
+        
+        <div style="padding: 25px 20px; border-bottom: 3px double #A0522D; background: #FFF8E1; text-align: center;">
+            <h3 style="margin: 0; font-family: 'Georgia', serif; color: #5D4037; text-transform: uppercase; font-size: 1.2rem; letter-spacing: 2px; font-weight: 700;">
+                Expediente de Postulación
+            </h3>
+            <div style="font-size: 0.75rem; color: #A0522D; margin-top: 5px; font-weight: 600; letter-spacing: 1px;">CARGOS DIRIGENCIALES Y VOCALÍAS</div>
+        </div>
+
+        <div style="padding: 30px; overflow-y: auto; font-size: 0.9rem; line-height: 1.6; background: linear-gradient(180deg, #FEFBEA 0%, #FFFDF0 100%);">
+            
+            <div style="margin-bottom: 25px;">
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                    <div style="display: flex; align-items: flex-start; gap: 10px; border-bottom: 1px solid rgba(160, 82, 45, 0.1); padding-bottom: 8px;">
+                        <span style="color: #A0522D; font-weight: bold;">01.</span>
+                        <span>COPIA DE DNI <strong style="color: #B22222; font-size: 0.75rem;">(OBLIGATORIO)</strong></span>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 10px; border-bottom: 1px solid rgba(160, 82, 45, 0.1); padding-bottom: 8px;">
+                        <span style="color: #A0522D; font-weight: bold;">02.</span>
+                        <span>CERTIFICADO ÚNICO LABORAL</span>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 10px; border-bottom: 1px solid rgba(160, 82, 45, 0.1); padding-bottom: 8px;">
+                        <span style="color: #A0522D; font-weight: bold;">03.</span>
+                        <span>REPORTE DE CENTRALES DE RIESGO <strong style="color: #B22222; font-size: 0.75rem;">(OBLIGATORIO)</strong></span>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 10px; border-bottom: 1px solid rgba(160, 82, 45, 0.1); padding-bottom: 8px;">
+                        <span style="color: #A0522D; font-weight: bold;">04.</span>
+                        <span>HOJA DE VIDA Y CV PROFESIONAL / PASTORAL <strong style="color: #B22222; font-size: 0.75rem;">(OBLIGATORIO)</strong></span>
+                    </div>
+                </div>
+            </div>
+
+            <div style="background: rgba(160, 82, 45, 0.07); border-left: 4px solid #A0522D; padding: 15px; margin-bottom: 25px; font-style: italic;">
+                <span style="font-weight: 600; color: #5D4037;">Requisito de Permanencia:</span> Deberá contar con una antigüedad mínima de dos (02) años dentro de la Hermandad.
+            </div>
+
+            <div style="display: grid; gap: 20px;">
+                <div style="background: #FFF8E1; padding: 15px; border-radius: 8px; border: 1px solid rgba(160, 82, 45, 0.2);">
+                    <div style="color: #5D4037; font-weight: bold; font-family: 'Georgia', serif; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+                        <span style="width: 20px; height: 1px; background: #A0522D;"></span> PERSONAS CASADAS
+                    </div>
+                    <ul style="padding-left: 15px; margin: 0; font-size: 0.85rem; list-style-type: square; color: #5D4037;">
+                        <li style="margin-bottom: 5px;">Partida de Matrimonio Religioso visado por Arzobispado (Obligatorio).</li>
+                        <li>Declaración Jurada de vida matrimonial y familiar estable (Obligatorio).</li>
+                    </ul>
+                </div>
+
+                <div style="background: #FFF8E1; padding: 15px; border-radius: 8px; border: 1px solid rgba(160, 82, 45, 0.2);">
+                    <div style="color: #5D4037; font-weight: bold; font-family: 'Georgia', serif; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+                        <span style="width: 20px; height: 1px; background: #A0522D;"></span> PERSONAS SOLTERAS
+                    </div>
+                    <ul style="padding-left: 15px; margin: 0; font-size: 0.85rem; list-style-type: square; color: #5D4037;">
+                        <li style="margin-bottom: 5px;">Declaración Jurada de no convivencia / Divorciado civil (Obligatorio).</li>
+                        <li>Partida de Bautizo y Último Sacramento visada (Obligatorio).</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div style="padding: 20px; background: #FFF8E1; text-align: center; border-top: 1px solid rgba(160, 82, 45, 0.2);">
+            <button onclick="cerrarPopupOtros()" style="background: linear-gradient(135deg, #A0522D 0%, #5D4037 100%); color: white; border: none; padding: 12px 50px; border-radius: 50px; cursor: pointer; font-weight: 700; text-transform: uppercase; font-family: 'Poppins', sans-serif; font-size: 0.75rem; letter-spacing: 1px; box-shadow: 0 4px 15px rgba(93, 64, 55, 0.3); transition: all 0.3s ease;">
+                Cerrar Documento
+            </button>
+        </div>
+    </div>
+</div>
 <script>
-    // ==========================================================
-    // Lógica para la Barra de Progreso del Cronograma (Arreglada)
-    // ==========================================================
+    const TODAY = new Date(); // Usará la fecha real del sistema para marcar el progreso
     
-    // La fecha actual para testing es: Lunes, 10 de noviembre de 2025
-    // ¡Ojo! He actualizado la fecha de prueba a la fecha de hoy para una mejor visualización.
-     // ==========================================================
-    // Lógica para la Barra de Progreso del Cronograma (CORREGIDA)
-    // ==========================================================
-    
-    // La fecha actual para testing es: Miércoles, 19 de noviembre de 2025 6:24 PM
-    // (Usando la hora actual de tu ubicación)
-    const TODAY = new Date('November 19, 2025 18:24:20');
-    
-    // Fechas de inicio/fin de cada hito (SIN CAMBIOS)
     const milestones = [
-        { name: "Inscripción", start: new Date('October 23, 2025 00:00:00'), end: new Date('October 27, 2025 23:59:59') }, 
-        { name: "Revisión", start: new Date('October 29, 2025 00:00:00'), end: new Date('November 3, 2025 23:59:59') }, 
-        { name: "Tachas", start: new Date('November 5, 2025 00:00:00'), end: new Date('November 10, 2025 23:59:59') }, 
-        { name: "Subsanación", start: new Date('November 12, 2025 00:00:00'), end: new Date('November 17, 2025 23:59:59') },
-        { name: "Confirmación", start: new Date('November 18, 2025 00:00:00'), end: new Date('November 19, 2025 23:59:59') },
-        { name: "Elección", start: new Date('November 23, 2025 00:00:00'), end: new Date('November 23, 2025 23:59:59') } 
+        { start: new Date('2026-02-13T20:00:00'), end: new Date('2026-02-13T23:59:59') },
+        { start: new Date('2026-02-18T18:00:00'), end: new Date('2026-02-18T23:00:00') },
+        { start: new Date('2026-02-20T08:00:00'), end: new Date('2026-02-20T22:00:00') },
+        { start: new Date('2026-02-24T18:00:00'), end: new Date('2026-02-24T22:00:00') },
+        { start: new Date('2026-02-27T22:00:00'), end: new Date('2026-02-27T23:00:00') }
     ];
 
-    const PROGRESS_BAR = document.getElementById('timelineProgress');
-    const TIMELINE_ITEMS = document.querySelectorAll('.timeline-item');
-    const totalItems = milestones.length;
-
     function updateTimeline() {
-        let activeIndex = -1;
-        
-        // 1. Determinar estados (Completed, Active, Pending)
-        TIMELINE_ITEMS.forEach((item, i) => {
-            const milestone = milestones[i];
+        const items = document.querySelectorAll('.timeline-item');
+        const bar = document.getElementById('timelineProgress');
+        let completedIdx = -1;
+
+        items.forEach((item, i) => {
+            const m = milestones[i];
             item.classList.remove('completed', 'active');
-            
-            // Si la fecha actual es posterior al fin de la etapa
-            if (TODAY > milestone.end) {
+            if (TODAY > m.end) {
                 item.classList.add('completed');
-            // Si la fecha actual está dentro del rango de la etapa
-            } else if (TODAY >= milestone.start && TODAY <= milestone.end) {
+                completedIdx = i;
+            } else if (TODAY >= m.start && TODAY <= m.end) {
                 item.classList.add('active');
-                activeIndex = i;
-            } else {
-                // Etapa Pendiente (no se agrega ninguna clase especial)
             }
         });
-        
-        // 2. Calcular y actualizar el progreso de la barra
-        let totalProgress = 0;
-        const segmentShare = 100 / (totalItems - 1); // El progreso se calcula entre los espacios (totalItems - 1)
 
-        // Contar etapas completadas ANTES del hito activo/actual
-        let completedCount = 0;
-        milestones.forEach(m => { 
-            if (TODAY > m.end) completedCount++; 
-        });
-
-        // El progreso base es el total de segmentos completados
-        totalProgress = completedCount * segmentShare;
-
-        if (activeIndex !== -1) {
-            // Caso: Hay una etapa activa
-            const activeMilestone = milestones[activeIndex];
-            
-            // Calcular el progreso dentro de la duración de la etapa activa (0 a 1)
-            const totalDuration = activeMilestone.end.getTime() - activeMilestone.start.getTime();
-            const elapsedDuration = TODAY.getTime() - activeMilestone.start.getTime();
-            
-            // Aseguramos que el progreso esté entre 0 y 1
-            let currentSegmentProgress = Math.min(1, Math.max(0, elapsedDuration / totalDuration));
-            
-            // El progreso total ahora incluye el porcentaje de avance dentro del segmento activo
-            totalProgress = (activeIndex * segmentShare) + (currentSegmentProgress * segmentShare);
-        
-        } else if (TODAY > milestones[totalItems - 1].end) {
-            // Caso: Todas las etapas han terminado (incluida la última)
-            totalProgress = 100;
-        }
-
-        // 3. Aplicar progreso a la barra
-        const progressValue = Math.min(100, totalProgress);
-        
-        if (PROGRESS_BAR) {
-             if (window.innerWidth <= 768) {
-                // Móvil (Vertical)
-                const timelineElement = document.querySelector('.timeline');
-                if(timelineElement) {
-                    // Calculamos la altura total de la línea (o el contenedor)
-                    const totalVerticalHeight = timelineElement.offsetHeight;
-                    const progressHeight = (progressValue / 100) * totalVerticalHeight;
-                    PROGRESS_BAR.style.height = `${progressHeight}px`; 
-                }
-            } else {
-                // Escritorio (Horizontal)
-                PROGRESS_BAR.style.width = `${progressValue}%`; 
-            }
+        const progress = ((completedIdx + 1) / items.length) * 100;
+        if (window.innerWidth <= 768) {
+            bar.style.height = progress + '%';
+            bar.style.width = '5px';
+        } else {
+            bar.style.width = progress + '%';
         }
     }
-    
-    // Llamar a la función una vez al inicio y luego cada segundo (si es necesario)
-    updateTimeline(); 
-    // setInterval(updateTimeline, 1000); // Descomenta si quieres que la barra se actualice en tiempo real
 
-    // ==========================================================
-    // NUEVA LÓGICA: Control de Preloader y Carga del Contenido
-    // ==========================================================
-    
     window.addEventListener('load', () => {
         const preloader = document.getElementById('preloader');
-        const mainContainer = document.getElementById('mainContainer');
-        
-        // Ejecutar la lógica del cronograma primero
+        const main = document.getElementById('mainContainer');
         updateTimeline();
-        window.addEventListener('resize', updateTimeline);
-        
-        // 1. Ocultar el preloader con transición de 1 segundo (MODIFICADO)
         preloader.classList.add('hidden');
-        
-        // 2. Mostrar el contenido con efecto fade-in después de que el preloader haya desaparecido
-        // Usamos setTimeout para que coincida con el tiempo de transición de CSS del preloader (1 segundo)
-        setTimeout(() => {
-            mainContainer.classList.add('visible');
-        }, 1000); // <-- MODIFICADO: 1000 milisegundos = 1 segundo
+        setTimeout(() => { main.classList.add('visible'); }, 1000);
     });
-    
-</script>
 
+function abrirPopupCapataz() {
+        document.getElementById('popupCapataz').style.display = 'flex';
+        document.body.style.overflow = 'hidden'; 
+    }
+
+    function cerrarPopupCapataz() {
+        document.getElementById('popupCapataz').style.display = 'none';
+        document.body.style.overflow = 'auto'; 
+    }
+
+function abrirPopupOtros() {
+        document.getElementById('popupOtros').style.display = 'flex';
+        document.body.style.overflow = 'hidden'; 
+    }
+
+    function cerrarPopupOtros() {
+        document.getElementById('popupOtros').style.display = 'none';
+        document.body.style.overflow = 'auto'; 
+    }
+</script>
 </body>
 </html>
