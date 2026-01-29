@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cronograma de Elecciones - Hermandad Virgen del Carmen</title>
+    
+    <link rel="preload" as="image" href="https://14CuadrillaHSVCL.github.io/Proceso/14c.png">
+    
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Georgia:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
@@ -15,7 +18,6 @@
         --color-texto-oscuro: #3E2723;
         --color-borde: #D2B48C;
         --sombra-profunda: 0 12px 24px rgba(0, 0, 0, 0.15);
-        /* CORRECCIÓN: Definición de la variable para el botón */
         --degradado-acento: linear-gradient(135deg, #A0522D 0%, #5D2E17 100%);
     }
 
@@ -24,7 +26,7 @@
         margin: 0;
         background-color: var(--color-secundario);
         color: var(--color-texto-oscuro);
-        padding: 20px;
+        padding: 10px;
     }
 
     .contenedor {
@@ -34,35 +36,36 @@
         background-color: var(--color-principal);
         box-shadow: var(--sombra-profunda);
         border-radius: 12px;
-        padding: 30px;
+        padding: 20px;
         border: 1px solid var(--color-borde);
+        box-sizing: border-box;
     }
 
     .header-texto {
         text-align: center;
         border-bottom: 3px double var(--color-acento);
-        margin-bottom: 30px;
-        padding-bottom: 20px;
+        margin-bottom: 25px;
+        padding-bottom: 15px;
     }
 
     .header-texto h1 {
         font-family: 'Georgia', serif;
         color: var(--color-acento);
-        font-size: 2.2rem;
+        font-size: 1.8rem;
         margin: 0;
         text-transform: uppercase;
     }
 
     .tabla-container {
         overflow-x: auto;
+        border-radius: 8px;
     }
 
     table {
         width: 100%;
         border-collapse: collapse;
         background-color: white;
-        border-radius: 8px;
-        overflow: hidden;
+        min-width: 600px;
     }
 
     thead {
@@ -71,68 +74,76 @@
     }
 
     th {
-        padding: 15px;
+        padding: 12px;
         text-align: center;
         font-weight: 600;
         text-transform: uppercase;
-        font-size: 0.85rem;
+        font-size: 0.8rem;
     }
 
     td {
-        padding: 12px 10px;
+        padding: 10px;
         border-bottom: 1px solid #eee;
-        font-size: 0.9rem;
-        text-align: center;
+        font-size: 0.85rem;
+        text-align: center; /* Centrado general */
         vertical-align: middle;
     }
 
     .logo-cuadrilla {
-        width: 45px;
-        height: 45px;
+        width: 40px;
+        height: 40px;
         object-fit: contain;
     }
 
-    .fecha-col { font-weight: 700; color: var(--color-acento); width: 110px; }
-    
-    .nombre-cuadrilla { font-weight: 600; text-align: left; }
+    /* CAMBIO AQUÍ: Centrado del nombre de la cuadrilla */
+    .nombre-cuadrilla { 
+        font-weight: 600; 
+        text-align: center; 
+        color: var(--color-texto-oscuro); 
+    }
 
-    /* CORRECCIÓN: Estilo del botón btn-main mejorado */
+    .fecha-col { font-weight: 700; color: var(--color-acento); }
+
+    .ubicacion-tag {
+        background: #f0f0f0;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 0.75rem;
+        font-weight: 600;
+    }
+
     .btn-main {
         background: var(--degradado-acento);
         color: white;
-        padding: 15px 35px;
+        padding: 14px 30px;
         text-decoration: none;
         border-radius: 50px;
         font-weight: 700;
         display: inline-block;
         transition: all 0.3s ease;
         border: none;
-        cursor: pointer;
         box-shadow: 0 4px 6px rgba(0,0,0,0.2);
     }
 
     .btn-main:hover { 
-        transform: translateY(-3px); 
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); 
-    }
-
-    .ubicacion-tag {
-        background: #f0f0f0;
-        padding: 4px 8px;
-        border-radius: 4px;
-        font-size: 0.8rem;
-        font-weight: 600;
-        display: inline-block;
+        transform: translateY(-2px); 
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); 
     }
 
     tr:nth-child(even) { background-color: #fcf9f5; }
-    tr:hover { background-color: #f5ece2; }
+    .highlight-14 { background-color: #fff9e6 !important; border-left: 5px solid gold; }
 
-    .highlight-14 { background-color: #fff9e6 !important; border-left: 5px solid gold; } 
+    .pie-pagina {
+        text-align: center;
+        margin-top: 25px;
+        padding: 15px;
+    }
 
     @media (max-width: 768px) {
-        th, td { padding: 8px 5px; font-size: 0.8rem; }
-        .btn-main { padding: 12px 25px; font-size: 0.9rem; }
+        .header-texto h1 { font-size: 1.4rem; }
+        .contenedor { padding: 15px; }
+        th, td { padding: 8px 5px; font-size: 0.75rem; }
+        .logo-cuadrilla { width: 35px; height: 35px; }
     }
 </style>
 </head>
@@ -148,165 +159,165 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Logo</th>
-                        <th>Fecha y Hora</th>
                         <th>Cuadrilla o Grupo</th>
+                        <th>Escudo</th>
+                        <th>Fecha y Hora</th>
                         <th>Ubicación</th>
                         <th>Miembro del Directorio</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
+                        <td class="nombre-cuadrilla">Grupo de Cantoras</td>
                         <td><img src="https://edwinhsvcl14-maker.github.io/asistencias/gc_.png" alt="Cantoras" class="logo-cuadrilla"></td>
                         <td class="fecha-col">09/02/2026<br><small>20:00</small></td>
-                        <td class="nombre-cuadrilla">Grupo de Cantoras</td>
                         <td><span class="ubicacion-tag">Salón Principal</span></td>
                         <td>Tesorero de Egresos</td>
                     </tr>
                     <tr>
+                        <td class="nombre-cuadrilla">Primera Cuadrilla</td>
                         <td><img src="https://edwinhsvcl14-maker.github.io/asistencias/1__.png" alt="1C" class="logo-cuadrilla"></td>
                         <td class="fecha-col">09/02/2026<br><small>20:00</small></td>
-                        <td class="nombre-cuadrilla">Primera Cuadrilla</td>
                         <td><span class="ubicacion-tag">Salón Principal</span></td>
                         <td>Primer secretario</td>
                     </tr>
                     <tr>
+                        <td class="nombre-cuadrilla">Segunda Cuadrilla</td>
                         <td><img src="https://edwinhsvcl14-maker.github.io/asistencias/2_.png" alt="2C" class="logo-cuadrilla"></td>
                         <td class="fecha-col">09/02/2026<br><small>20:00</small></td>
-                        <td class="nombre-cuadrilla">Segunda Cuadrilla</td>
                         <td><span class="ubicacion-tag">Salón Carrasco</span></td>
                         <td>Sub Capataz General</td>
                     </tr>
                     <tr>
+                        <td class="nombre-cuadrilla">Tercera Cuadrilla</td>
                         <td><img src="https://edwinhsvcl14-maker.github.io/asistencias/3_.png" alt="3C" class="logo-cuadrilla"></td>
                         <td class="fecha-col">10/02/2026<br><small>20:00</small></td>
-                        <td class="nombre-cuadrilla">Tercera Cuadrilla</td>
                         <td><span class="ubicacion-tag">Salón Principal</span></td>
                         <td>Capataz General</td>
                     </tr>
                     <tr>
+                        <td class="nombre-cuadrilla">Cuarta Cuadrilla</td>
                         <td><img src="https://edwinhsvcl14-maker.github.io/asistencias/4_.png" alt="4C" class="logo-cuadrilla"></td>
                         <td class="fecha-col">10/02/2026<br><small>20:00</small></td>
-                        <td class="nombre-cuadrilla">Cuarta Cuadrilla</td>
                         <td><span class="ubicacion-tag">Salón Principal</span></td>
                         <td>Presidente Consejo Disciplina</td>
                     </tr>
                     <tr>
+                        <td class="nombre-cuadrilla">Quinta Cuadrilla</td>
                         <td><img src="https://edwinhsvcl14-maker.github.io/asistencias/5_.png" alt="5C" class="logo-cuadrilla"></td>
                         <td class="fecha-col">10/02/2026<br><small>20:00</small></td>
-                        <td class="nombre-cuadrilla">Quinta Cuadrilla</td>
                         <td><span class="ubicacion-tag">Salón Carrasco</span></td>
                         <td>Tesorero de Ingresos</td>
                     </tr>
                     <tr>
+                        <td class="nombre-cuadrilla">Sexta Cuadrilla</td>
                         <td><img src="https://edwinhsvcl14-maker.github.io/asistencias/6_.png" alt="6C" class="logo-cuadrilla"></td>
                         <td class="fecha-col">11/02/2026<br><small>20:00</small></td>
-                        <td class="nombre-cuadrilla">Sexta Cuadrilla</td>
                         <td><span class="ubicacion-tag">Salón Principal</span></td>
                         <td>Tesorero General</td>
                     </tr>
                     <tr>
+                        <td class="nombre-cuadrilla">Séptima Cuadrilla</td>
                         <td><img src="https://edwinhsvcl14-maker.github.io/asistencias/7_.png" alt="7C" class="logo-cuadrilla"></td>
                         <td class="fecha-col">11/02/2026<br><small>20:00</small></td>
-                        <td class="nombre-cuadrilla">Séptima Cuadrilla</td>
                         <td><span class="ubicacion-tag">Salón Principal</span></td>
                         <td>Secretario General</td>
                     </tr>
                     <tr>
+                        <td class="nombre-cuadrilla">Octava Cuadrilla</td>
                         <td><img src="https://edwinhsvcl14-maker.github.io/asistencias/8_.png" alt="8C" class="logo-cuadrilla"></td>
                         <td class="fecha-col">11/02/2026<br><small>20:00</small></td>
-                        <td class="nombre-cuadrilla">Octava Cuadrilla</td>
                         <td><span class="ubicacion-tag">Salón Carrasco</span></td>
                         <td>Capataz General</td>
                     </tr>
                     <tr>
+                        <td class="nombre-cuadrilla">Novena Cuadrilla</td>
                         <td><img src="https://edwinhsvcl14-maker.github.io/asistencias/9_.png" alt="9C" class="logo-cuadrilla"></td>
                         <td class="fecha-col">12/02/2026<br><small>20:00</small></td>
-                        <td class="nombre-cuadrilla">Novena Cuadrilla</td>
                         <td><span class="ubicacion-tag">Salón Principal</span></td>
                         <td>Presidente Consejo de Disciplina</td>
                     </tr>
                     <tr>
+                        <td class="nombre-cuadrilla">Décima Cuadrilla</td>
                         <td><img src="https://edwinhsvcl14-maker.github.io/asistencias/10_.png" alt="10C" class="logo-cuadrilla"></td>
                         <td class="fecha-col">12/02/2026<br><small>20:00</small></td>
-                        <td class="nombre-cuadrilla">Décima Cuadrilla</td>
                         <td><span class="ubicacion-tag">Salón Principal</span></td>
                         <td>Fiscal General</td>
                     </tr>
                     <tr>
+                        <td class="nombre-cuadrilla">Décima Primera Cuadrilla</td>
                         <td><img src="https://edwinhsvcl14-maker.github.io/asistencias/11_.png" alt="11C" class="logo-cuadrilla"></td>
                         <td class="fecha-col">12/02/2026<br><small>20:00</small></td>
-                        <td class="nombre-cuadrilla">Décima Primera Cuadrilla</td>
                         <td><span class="ubicacion-tag">Salón Carrasco</span></td>
                         <td>Tesorero General</td>
                     </tr>
                     <tr>
+                        <td class="nombre-cuadrilla">Décima Segunda Cuadrilla</td>
                         <td><img src="https://edwinhsvcl14-maker.github.io/asistencias/12_.png" alt="12C" class="logo-cuadrilla"></td>
                         <td class="fecha-col">13/02/2026<br><small>20:00</small></td>
-                        <td class="nombre-cuadrilla">Décima Segunda Cuadrilla</td>
                         <td><span class="ubicacion-tag">Salón Principal</span></td>
                         <td>Secretario General</td>
                     </tr>
                     <tr>
+                        <td class="nombre-cuadrilla">Décima Tercera Cuadrilla</td>
                         <td><img src="https://edwinhsvcl14-maker.github.io/asistencias/13_.png" alt="13C" class="logo-cuadrilla"></td>
                         <td class="fecha-col">13/02/2026<br><small>20:00</small></td>
-                        <td class="nombre-cuadrilla">Décima Tercera Cuadrilla</td>
                         <td><span class="ubicacion-tag">Salón Principal</span></td>
                         <td>Fiscal General</td>
                     </tr>
                     <tr class="highlight-14">
+                        <td class="nombre-cuadrilla">Décima Cuarta Cuadrilla</td>
                         <td><img src="https://14CuadrillaHSVCL.github.io/Proceso/14c.png" alt="14C" class="logo-cuadrilla"></td>
                         <td class="fecha-col">13/02/2026<br><small>20:00</small></td>
-                        <td class="nombre-cuadrilla">Décima Cuarta Cuadrilla</td>
                         <td><span class="ubicacion-tag">Salón Carrasco</span></td>
                         <td>Capataz General</td>
                     </tr>
                     <tr>
+                        <td class="nombre-cuadrilla">Décima Quinta Cuadrilla</td>
                         <td><img src="https://edwinhsvcl14-maker.github.io/asistencias/15_.png" alt="15C" class="logo-cuadrilla"></td>
                         <td class="fecha-col">15/02/2026<br><small>10:00</small></td>
-                        <td class="nombre-cuadrilla">Décima Quinta Cuadrilla</td>
                         <td><span class="ubicacion-tag">Salón Principal</span></td>
                         <td>Primer secretario</td>
                     </tr>
                     <tr>
+                        <td class="nombre-cuadrilla">Décima Sexta Cuadrilla</td>
                         <td><img src="https://edwinhsvcl14-maker.github.io/asistencias/16_.png" alt="16C" class="logo-cuadrilla"></td>
                         <td class="fecha-col">15/02/2026<br><small>10:00</small></td>
-                        <td class="nombre-cuadrilla">Décima Sexta Cuadrilla</td>
                         <td><span class="ubicacion-tag">Salón Principal</span></td>
                         <td>Tesorero de Egresos</td>
                     </tr>
                     <tr>
+                        <td class="nombre-cuadrilla">Décima Séptima Cuadrilla</td>
                         <td><img src="https://edwinhsvcl14-maker.github.io/asistencias/17_.png" alt="17C" class="logo-cuadrilla"></td>
                         <td class="fecha-col">15/02/2026<br><small>10:00</small></td>
-                        <td class="nombre-cuadrilla">Décima Séptima Cuadrilla</td>
                         <td><span class="ubicacion-tag">Salón Carrasco</span></td>
                         <td>Sub Capataz General</td>
                     </tr>
                     <tr>
+                        <td class="nombre-cuadrilla">Décimo Octava Cuadrilla</td>
                         <td><img src="https://edwinhsvcl14-maker.github.io/asistencias/18_.png" alt="18C" class="logo-cuadrilla"></td>
                         <td class="fecha-col">16/02/2026<br><small>20:00</small></td>
-                        <td class="nombre-cuadrilla">Décimo Octava Cuadrilla</td>
                         <td><span class="ubicacion-tag">Salón Principal</span></td>
                         <td>Tesorero de Ingresos</td>
                     </tr>
                     <tr>
+                        <td class="nombre-cuadrilla">Décima Novena Cuadrilla</td>
                         <td><img src="https://edwinhsvcl14-maker.github.io/asistencias/19_.png" alt="19C" class="logo-cuadrilla"></td>
                         <td class="fecha-col">16/02/2026<br><small>20:00</small></td>
-                        <td class="nombre-cuadrilla">Décima Novena Cuadrilla</td>
                         <td><span class="ubicacion-tag">Salón Principal</span></td>
                         <td>Sub Capataz General</td>
                     </tr>
                     <tr>
+                        <td class="nombre-cuadrilla">Vigésima Cuadrilla</td>
                         <td><img src="https://edwinhsvcl14-maker.github.io/asistencias/20_.png" alt="20C" class="logo-cuadrilla"></td>
                         <td class="fecha-col">16/02/2026<br><small>20:00</small></td>
-                        <td class="nombre-cuadrilla">Vigésima Cuadrilla</td>
                         <td><span class="ubicacion-tag">Salón Carrasco</span></td>
                         <td>Secretario General</td>
                     </tr>
                     <tr>
+                        <td class="nombre-cuadrilla">Grupo de Sahumadoras</td>
                         <td><img src="https://edwinhsvcl14-maker.github.io/asistencias/gs_.png" alt="Sahumadoras" class="logo-cuadrilla"></td>
                         <td class="fecha-col">17/02/2026<br><small>20:00</small></td>
-                        <td class="nombre-cuadrilla">Grupo de Sahumadoras</td>
                         <td><span class="ubicacion-tag">Salón Principal</span></td>
                         <td>Secretario General</td>
                     </tr>
@@ -314,8 +325,14 @@
             </table>
         </div>
 
-        <div class="btn-container" style="text-align: center; margin-top: 20px;">
+        <div style="text-align: center; margin-top: 25px;">
             <a href="https://14cuadrillahsvcl.github.io/Proceso/index_elecciones.html" class="btn-main">Regresar a la Pagina Principal</a>
+        </div>
+
+        <div class="pie-pagina">
+            <p style="font-size: 0.85em; color: var(--color-acento); margin: 0;">
+                Décima Cuarta Cuadrilla de la Hermandad de la Santísima Virgen del Carmen de Lima | Periodo 2026-2028 
+            </p>
         </div>
     </div>
 
